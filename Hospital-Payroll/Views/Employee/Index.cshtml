@@ -1,0 +1,367 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "Form_panel";
+    var Empid = TempData["Empid"] as Hospital_Payroll.Models.Employee_M;
+}
+
+<div class="page-header">
+    <h3 class="page-title"> Employee </h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Employee</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">PERSONAL DETAIL</h4>
+                <form class="forms-sample">
+
+                    <div class="form-group Name">
+                        <label for="Name">Name</label>
+                        <input type="text" class="form-control" id="Name" placeholder="Name" maxlength="50">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Name</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Date_of_Birth">Date of Birth</label>
+                        <input type="date" class="form-control" id="Date_of_Birth" placeholder="DateofBirth">
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Gender</label>
+                        <div class="col-sm-4">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input Gender" name="Gender" id="Male" value="M" checked> Male
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input Gender" name="Gender" id="Female" value="F"> Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group Phone">
+                        <label for="Phone">Phone</label>
+                        <input type="number" class="form-control" id="Phone" placeholder="Phone" maxlength="15">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Phone</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="Address" maxlength="200">
+                    </div>
+
+
+                    <div class="form-group Email">
+                        <label for="Email">Email</label>
+                        <input type="email" class="form-control" id="Email" placeholder="Email" maxlength="50">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the E-mail</span>
+                        <span class="valid"><span class="mdi mdi-alert-circle"></span> Enter the Valid E-mail</span>
+                    </div>
+
+                    <div class="form-group Password">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control" id="Password" placeholder="Password" maxlength="50">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Password</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">COMPANY DETAIL</h4>
+                <form class="forms-sample">
+
+                    <div class="form-group">
+                        <label for="Employee_ID">Employee ID</label>
+                        <input type="text" class="form-control" disabled id="Employee_ID" placeholder="Employee_ID" maxlength="10" value="@TempData["Empid"]">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Branch">Branch</label>
+                        <input type="text" class="form-control" id="Branch" placeholder="Branch" maxlength="3">
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="Department">Department</label>
+                        <input type="text" class="form-control" id="Department" placeholder="Department" maxlength="3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Designation">Designation</label>
+                        <input type="text" class="form-control" id="Designation" placeholder="Designation" maxlength="5">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="Company_date_of_joining">Company Date Of Joining</label>
+                        <input type="date" class="form-control" id="Company_date_of_joining" placeholder="Company Date Of Joining">
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    @*<div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">DOCUMENTS</h4>
+                    <form class="forms-sample">
+
+                        <div class="form-group Certificate">
+                            <label for="Certificate">Certificate</label>
+                            <input type="file" class="form-control" id="Certificate" placeholder="Certificate">
+                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Certificate</span>
+                        </div>
+
+                        <div class="form-group Resume">
+                            <label for="Resume">Resume</label>
+                            <input type="file" class="form-control" id="Resume" placeholder="Resume">
+                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Resume</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Photo">Photo</label>
+                            <input type="file" class="form-control" id="Photo" placeholder="Photo">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">BANK ACCOUNT DETAIL</h4>
+                <form class="forms-sample">
+
+                    <div class="form-group">
+                        <label for="Account_holder_name">Account Holder Name</label>
+                        <input type="text" class="form-control" id="Account_holder_name" placeholder="Account Holder Name" maxlength="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="account_number">Account Number</label>
+                        <input type="text" class="form-control" id="account_number" placeholder="Account Number" maxlength="50">
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="Bank_Name">Bank Name</label>
+                        <input type="text" class="form-control" id="Bank_Name" placeholder="Bank Name" maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Bank_Identifier_Code">Bank Identifier Code</label>
+                        <input type="text" class="form-control" id="Bank_Identifier_Code" placeholder="Bank Identifier Code" maxlength="50">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="Branch_location">Branch Location</label>
+                        <input type="text" class="form-control" id="Branch_location" placeholder="Branch Location" maxlength="50">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Tax_Payer_id">Tax Payer Id</label>
+                        <input type="text" class="form-control" id="Tax_Payer_id" placeholder="Tax Payer Id" maxlength="50">
+                    </div>
+
+
+                    <button type="button" id="Save" class="btn btn-gradient-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                    <span class="text-success message">Record Saved Successfully...!</span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .error {
+        color: red;
+        font-size: 10px;
+        display: none;
+    }
+
+    .valid {
+        color: red;
+        font-size: 10px;
+        display: none;
+    }
+
+    .message {
+        font-size: 10px;
+        display: none;
+    }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        $("#Save").click(function () {
+            var isAllValid = true;
+
+            if (!($('#Name').val().trim() != '')) {
+                isAllValid = false;
+                $('.Name .error').css('display', 'block');
+            }
+            else {
+                $('.Name .error').css('display', 'none');
+            }
+
+            if (!($('#Phone').val().trim() != '')) {
+                isAllValid = false;
+                $('.Phone .error').css('display', 'block');
+            }
+            else {
+                $('.Phone .error').css('display', 'none');
+            }
+
+            if (!($('#Email').val().trim() != '')) {
+                isAllValid = false;
+                $('.Email .error').css('display', 'block');
+                $('.valid').css('display', 'none');
+            }
+            else {
+                $('.Email .error').css('display', 'none');
+
+
+                var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+                var emailval = $('#Email').val();
+
+                if (emailReg.test(emailval)) {
+
+                    $('.valid').css('display', 'none');
+
+                }
+
+                else {
+                    isAllValid = false;
+                    $('.valid').css('display', 'block');
+                }
+
+
+            }
+
+            if (!($('#Password').val().trim() != '')) {
+                isAllValid = false;
+                $('.Password .error').css('display', 'block');
+            }
+            else {
+                $('.Password .error').css('display', 'none');
+            }
+
+            if ($('.Gender').is(":checked")) {
+                $('.Gender').val();
+            }
+
+
+
+
+            if (isAllValid) {
+
+                var data = {
+                    Emp_id: $('#Employee_ID').val(),
+                    Name: $('#Name').val(),
+                    Date_of_Birth: $('#Date_of_Birth').val(),
+                    Gender: $('input[name="Gender"]:checked').val(),
+                    Phone: $('#Phone').val(),
+                    address: $('#address').val(),
+                    Email: $('#Email').val(),
+                    Password: $('#Password').val(),
+                    Branch: $('#Branch').val(),
+                    Department: $('#Department').val(),
+                    Designation: $('#Designation').val(),
+                    Company_Date_of_joining: $('#Company_date_of_joining').val(),
+                    Account_holder_name: $('#Account_holder_name').val(),
+                    Account_number: $('#account_number').val(),
+                    Bank_Name: $('#Bank_Name').val(),
+                    Bank_Identifier_Code: $('#Bank_Identifier_Code').val(),
+                    Branch_location: $('#Branch_location').val(),
+                    Tax_Payer_id: $('#Tax_Payer_id').val(),
+
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Employee/Index',
+                    data: {
+                        'Emp_id': data.Emp_id,
+                        'Name': data.Name,
+                        'Date_of_Birth': data.Date_of_Birth,
+                        'Gender': data.Gender,
+                        'Phone': data.Phone,
+                        'address': data.address,
+                        'Email': data.Email,
+                        'Password': data.Password,
+                        'Branch': data.Branch,
+                        'Department': data.Department,
+                        'Designation': data.Designation,
+                        'Company_Date_of_joining': data.Company_Date_of_joining,
+                        'Account_holder_name': data.Account_holder_name,
+                        'Account_number': data.Account_number,
+                        'Bank_Name': data.Bank_Name,
+                        'Bank_Identifier_Code': data.Bank_Identifier_Code,
+                        'Branch_location': data.Branch_location,
+                        'Tax_Payer_id': data.Tax_Payer_id,
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('.message').delay(300).fadeIn();
+                            $('.message').delay(200).fadeOut();
+
+                            setTimeout(function () {
+                                getid();
+                            }, 2000);
+                        }
+                    }
+
+                });
+            }
+
+
+
+            function getid() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Employee/GetData',
+                    data: { Item_category_id: 1 },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#Employee_ID').val(response.fetchdata);
+                            $('#Name,	#Date_of_Birth,	#Phone,	#address,	#Email,	#Password,	#Branch,	#Department,	#Designation,	#Company_Date_of_joining,	#Account_holder_name,	#Account_number,	#Bank_Name,	#Bank_Identifier_Code,	#Branch_location,	#Tax_Payer_id').val(null);
+                            $('#Male').prop('checked', true);
+                        }
+                    }
+                });
+            }
+
+            });
+
+
+    });
+</script>
