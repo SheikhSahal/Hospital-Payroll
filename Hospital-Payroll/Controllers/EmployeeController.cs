@@ -36,11 +36,48 @@ namespace Hospital_Payroll.Controllers
         {
             bool status = false;
 
+            if(e.Monday_WD == null)
+            {
+                e.Monday_WD = "N";
+            }
+
+            if (e.Tuesday_WD == null)
+            {
+                e.Tuesday_WD = "N";
+            }
+
+            if (e.Wednesday_WD == null)
+            {
+                e.Wednesday_WD = "N";
+            }
+
+            if (e.Thursday_WD == null)
+            {
+                e.Thursday_WD = "N";
+            }
+
+            if (e.Friday_WD == null)
+            {
+                e.Friday_WD = "N";
+            }
+
+            if (e.Saturday_WD == null)
+            {
+                e.Saturday_WD = "N";
+            }
+
+            if (e.Sunday_WD == null)
+            {
+                e.Sunday_WD = "N";
+            }
+
+
+
             //Max id POST
             Employee_M empid = db.Emp_id_Generate();
             e.Emp_id = empid.Emp_id;
 
-            if (e.Name is null || e.Phone is null || e.Email is null || e.Password is null)
+            if (e.Name is null || e.Phone is null || e.Email is null)
             {
                 status = false;
             }

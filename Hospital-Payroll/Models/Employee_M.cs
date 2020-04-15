@@ -10,27 +10,28 @@ namespace Hospital_Payroll.Models
     {
         public int Emp_id { get; set; }
         public string Name { get; set; }
-
-        
+        public string Father_Name { get; set; }
         public string Date_of_Birth { get; set; }
-        public string Gender { get; set; }
-        public string Phone { get; set; }
+        public string CNIC { get; set; }
         public string address { get; set; }
+        public string Phone { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-        public string Branch { get; set; }
-        public string Department { get; set; }
+        public string Gender { get; set; }
         public string Designation { get; set; }
-        public string Company_Date_of_joining { get; set; }
-        public string certificates { get; set; }
-        public string resume { get; set; }
-        public string Photo { get; set; }
-        public string Account_holder_name { get; set; }
-        public string Account_number { get; set; }
-        public string Bank_Name { get; set; }
-        public string Bank_Identifier_Code { get; set; }
-        public string Branch_location { get; set; }
-        public string Tax_Payer_id { get; set; }
+        public string Gross_Salary { get; set; }
+        public string Time_In { get; set; }
+        public string Time_Out { get; set; }
+        public string Grace_Time_IN { get; set; }
+        public string Grace_Time_Out { get; set; }
+        public string Overtime_Rate { get; set; }
+        public string Monday_WD { get; set; }
+        public string Tuesday_WD { get; set; }
+        public string Wednesday_WD { get; set; }
+        public string Thursday_WD { get; set; }
+        public string Friday_WD { get; set; }
+        public string Saturday_WD { get; set; }
+        public string Sunday_WD { get; set; }
+
 
     }
 }

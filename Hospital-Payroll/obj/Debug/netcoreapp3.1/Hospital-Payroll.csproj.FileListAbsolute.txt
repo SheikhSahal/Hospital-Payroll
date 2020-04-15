@@ -122,4 +122,3 @@ C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Ho
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.genruntimeconfig.cache
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Dashboard.cshtml.g.cs
-C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.csprojAssemblyReference.cache

@@ -17,7 +17,7 @@ namespace Hospital_Payroll.Controllers
             string sessionlogin = HttpContext.Session.GetString("_login");
 
             if (sessionlogin == "true")
-            {
+            { 
                 Employee_M Emplist = db.EMPdetailbyid(id);
                 TempData["Empdata"] = Emplist;
                 TempData["Empid"] = id;

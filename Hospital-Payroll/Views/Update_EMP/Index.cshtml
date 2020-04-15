@@ -13,26 +13,39 @@
             <li class="breadcrumb-item active" aria-current="page">Create</li>
         </ol>
     </nav>
-</div>
-<div class="row">
+</div><div class="row">
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">PERSONAL DETAIL</h4>
                 <form class="forms-sample">
 
+
+                    <div class="form-group">
+                        <label for="Employee_ID">Employee ID</label>
+                        <input type="text" class="form-control" disabled id="Employee_ID" placeholder="Employee_ID" maxlength="10" value="@EMPData.Emp_id">
+                    </div>
+
+
                     <div class="form-group Name">
                         <label for="Name">Name</label>
                         <input type="text" class="form-control" id="Name" placeholder="Name" maxlength="50" value="@EMPData.Name">
                         <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Name</span>
                     </div>
+
+
+                    <div class="form-group Father_Name">
+                        <label for="Name">Father Name</label>
+                        <input type="text" class="form-control" id="Father_Name" placeholder="Father Name" maxlength="50" value="@EMPData.Father_Name">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Father Name</span>
+                    </div>
+
+
                     <div class="form-group">
                         <label for="Date_of_Birth">Date of Birth</label>
                         <input type="date" class="form-control" id="Date_of_Birth" placeholder="DateofBirth" value="@EMPData.Date_of_Birth">
                     </div>
 
-
-                    <input type="hidden" value="@EMPData.Gender" id="Gender" />
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Gender</label>
                         <div class="col-sm-4">
@@ -50,6 +63,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group CNIC">
+                        <label for="CNIC">CNIC</label>
+                        <input type="number" class="form-control" id="CNIC" placeholder="CNIC" maxlength="15" value="@EMPData.CNIC">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the CNIC</span>
+                    </div>
+
 
                     <div class="form-group Phone">
                         <label for="Phone">Phone</label>
@@ -70,11 +90,7 @@
                         <span class="valid"><span class="mdi mdi-alert-circle"></span> Enter the Valid E-mail</span>
                     </div>
 
-                    <div class="form-group Password">
-                        <label for="Password">Password</label>
-                        <input type="password" class="form-control" id="Password" placeholder="Password" maxlength="50" value="@EMPData.Password">
-                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Password</span>
-                    </div>
+
                 </form>
             </div>
         </div>
@@ -86,120 +102,110 @@
                 <h4 class="card-title">COMPANY DETAIL</h4>
                 <form class="forms-sample">
 
-                    <div class="form-group">
-                        <label for="Employee_ID">Employee ID</label>
-                        <input type="text" class="form-control" disabled id="Employee_ID" placeholder="Employee_ID" maxlength="10" value="@EMPData.Emp_id">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Branch">Branch</label>
-                        <input type="text" class="form-control" id="Branch" placeholder="Branch" maxlength="3" value="@EMPData.Branch">
-                    </div>
 
 
-
-                    <div class="form-group">
-                        <label for="Department">Department</label>
-                        <input type="text" class="form-control" id="Department" placeholder="Department" maxlength="3" value="@EMPData.Department">
-                    </div>
-
-                    <div class="form-group">
+                    <div class="form-group Designation">
                         <label for="Designation">Designation</label>
-                        <input type="text" class="form-control" id="Designation" placeholder="Designation" maxlength="5" value="@EMPData.Designation">
+                        <input type="text" class="form-control" id="Designation" placeholder="Designation" maxlength="15" value="@EMPData.Designation">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Designation</span>
                     </div>
 
 
-                    <div class="form-group">
-                        <label for="Company_date_of_joining">Company Date Of Joining</label>
-                        <input type="date" class="form-control" id="Company_date_of_joining" placeholder="Company Date Of Joining" value="@EMPData.Company_Date_of_joining">
+                    <div class="form-group Gross_Salary">
+                        <label for="Gross_Salary">Gross Salary</label>
+                        <input type="number" class="form-control" id="Gross_Salary" placeholder="Gross Salary" maxlength="15" value="@EMPData.Gross_Salary">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Gross Salary</span>
                     </div>
 
 
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    @*<div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">DOCUMENTS</h4>
-                    <form class="forms-sample">
-
-                        <div class="form-group Certificate">
-                            <label for="Certificate">Certificate</label>
-                            <input type="file" class="form-control" id="Certificate" placeholder="Certificate">
-                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Certificate</span>
-                        </div>
-
-                        <div class="form-group Resume">
-                            <label for="Resume">Resume</label>
-                            <input type="file" class="form-control" id="Resume" placeholder="Resume">
-                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Resume</span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Photo">Photo</label>
-                            <input type="file" class="form-control" id="Photo" placeholder="Photo">
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>*@
-
-    <div class="col-md-6 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">BANK ACCOUNT DETAIL</h4>
-                <form class="forms-sample">
-
-                    <div class="form-group">
-                        <label for="Account_holder_name">Account Holder Name</label>
-                        <input type="text" class="form-control" id="Account_holder_name" placeholder="Account Holder Name" maxlength="50" value="@EMPData.Account_holder_name">
+                    <div class="form-group Time_In">
+                        <label for="Time_In">Time In</label>
+                        <input type="time" class="form-control" id="Time_In" placeholder="Time_In" maxlength="15" value="@EMPData.Time_In">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Time In</span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="account_number">Account Number</label>
-                        <input type="text" class="form-control" id="account_number" placeholder="Account Number" maxlength="50" value="@EMPData.Account_number">
+
+                    <div class="form-group Grace_Time_IN">
+                        <label for="Grace_Time_IN">Grace Time IN</label>
+                        <input type="time" class="form-control" id="Grace_Time_IN" placeholder="Grace Time IN" value="@EMPData.Grace_Time_IN">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Grace Time In</span>
                     </div>
 
 
 
-                    <div class="form-group">
-                        <label for="Bank_Name">Bank Name</label>
-                        <input type="text" class="form-control" id="Bank_Name" placeholder="Bank Name" maxlength="100" value="@EMPData.Bank_Name">
+                    <div class="form-group Time_Out">
+                        <label for="Time_Out">Time Out</label>
+                        <input type="time" class="form-control" id="Time_Out" placeholder="Time_Out" value="@EMPData.Time_Out">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Time Out</span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="Bank_Identifier_Code">Bank Identifier Code</label>
-                        <input type="text" class="form-control" id="Bank_Identifier_Code" placeholder="Bank Identifier Code" maxlength="50" value="@EMPData.Bank_Identifier_Code">
+                    <div class="form-group Grace_Time_Out">
+                        <label for="Grace_Time_Out">Grace Time Out</label>
+                        <input type="time" class="form-control" id="Grace_Time_Out" placeholder="Grace Time Out" value="@EMPData.Grace_Time_Out">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Grace Time Out</span>
                     </div>
 
 
-                    <div class="form-group">
-                        <label for="Branch_location">Branch Location</label>
-                        <input type="text" class="form-control" id="Branch_location" placeholder="Branch Location" maxlength="50" value="@EMPData.Branch_location">
+
+
+                    <div class="form-group Overtime_Rate">
+                        <label for="Overtime_Rate">Overtime Rate</label>
+                        <input type="number" class="form-control" id="Overtime_Rate" placeholder="Overtime Rate" value="@EMPData.Overtime_Rate">
+                        <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Overtime Rate</span>
                     </div>
 
-                    <div class="form-group">
-                        <label for="Tax_Payer_id">Tax Payer Id</label>
-                        <input type="text" class="form-control" id="Tax_Payer_id" placeholder="Tax Payer Id" maxlength="50" value="@EMPData.Tax_Payer_id">
+                    <div class="form-check form-check-primary">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="Monday_WD" class="form-check-input" value="N"> Monday
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-primary">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="Tuesday_WD" class="form-check-input" value="N"> Tuesday
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-primary">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="Wednesday_WD" class="form-check-input" value="N"> Wednesday
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-primary">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="Thursday_WD" class="form-check-input" value="N"> Thursday
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-primary">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="Friday_WD" class="form-check-input" value="N"> Friday
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-primary">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="Saturday_WD" class="form-check-input" value="N"> Saturday
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-primary">
+                        <label class="form-check-label">
+                            <input type="checkbox" id="Sunday_WD" class="form-check-input" value="N"> Sunday
+                        </label>
                     </div>
 
 
                     <button type="button" id="Save" class="btn btn-gradient-primary mr-2">Submit</button>
                     <button class="btn btn-light">Cancel</button>
                     <span class="text-success message">Record Saved Successfully...!</span>
+
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-
 <style>
     .error {
         color: red;
@@ -223,6 +229,57 @@
 <script>
     $(document).ready(function () {
 
+
+        var check_monday = "@Html.Raw(@EMPData.Monday_WD)";
+
+        if (check_monday == "Y") {
+            $("#Monday_WD").prop("checked", true);
+        }
+
+
+         var check_tuesday = "@Html.Raw(@EMPData.Tuesday_WD)";
+
+        if (check_tuesday == "Y") {
+            $("#Tuesday_WD").prop("checked", true);
+        }
+
+
+        var check_wednesday = "@Html.Raw(@EMPData.Wednesday_WD)";
+
+        if (check_wednesday == "Y") {
+            $("#Wednesday_WD").prop("checked", true);
+        }
+
+
+        var check_thursday = "@Html.Raw(@EMPData.Thursday_WD)";
+
+        if (check_thursday == "Y") {
+            $("#Thursday_WD").prop("checked", true);
+        }
+
+
+        var check_friday = "@Html.Raw(@EMPData.Friday_WD)";
+
+        if (check_friday == "Y") {
+            $("#Friday_WD").prop("checked", true);
+        }
+
+
+        var check_saturday = "@Html.Raw(@EMPData.Saturday_WD)";
+
+        if (check_saturday == "Y") {
+            $("#Saturday_WD").prop("checked", true);
+        }
+
+
+        var check_sunday = "@Html.Raw(@EMPData.Sunday_WD)";
+
+        if (check_sunday == "Y") {
+            $("#Sunday_WD").prop("checked", true);
+        }
+
+
+
         var s = $('#Gender').val();
 
         if (s == "M") {
@@ -231,6 +288,12 @@
         else {
             $("#Female").prop("checked", true);
         }
+
+
+        
+
+
+      
 
 
         $("#Save").click(function () {
@@ -278,19 +341,72 @@
 
             }
 
-            if (!($('#Password').val().trim() != '')) {
-                isAllValid = false;
-                $('.Password .error').css('display', 'block');
-            }
-            else {
-                $('.Password .error').css('display', 'none');
-            }
 
-            if ($('.Gender').is(":checked")) {
-                $('.Gender').val();
-            }
+            var monday = '';
+            if ($("#Monday_WD").is(
+                ":checked")) {
+                monday = "Y";
+            } else {
+                monday = "N";
+            } 
 
 
+
+            var tuesday = '';
+            if ($("#Tuesday_WD").is(
+                ":checked")) {
+                tuesday = "Y";
+            } else {
+                tuesday = "N";
+            } 
+
+
+            var wednesday = '';
+            if ($("#Wednesday_WD").is(
+                ":checked")) {
+                wednesday = "Y";
+            } else {
+                wednesday = "N";
+            } 
+
+
+
+            var thursday = '';
+            if ($("#Thursday_WD").is(
+                ":checked")) {
+                thursday = "Y";
+            } else {
+                thursday = "N";
+            } 
+
+
+            var friday = '';
+            if ($("#Friday_WD").is(
+                ":checked")) {
+                friday = "Y";
+            } else {
+                friday = "N";
+            } 
+
+
+
+            var saturday = '';
+            if ($("#Saturday_WD").is(
+                ":checked")) {
+                saturday = "Y";
+            } else {
+                saturday = "N";
+            } 
+
+
+
+            var sunday = '';
+            if ($("#Sunday_WD").is(
+                ":checked")) {
+                sunday = "Y";
+            } else {
+                sunday = "N";
+            } 
 
 
             if (isAllValid) {
@@ -298,22 +414,27 @@
                 var data = {
                     Emp_id: $('#Employee_ID').val(),
                     Name: $('#Name').val(),
+                    Father_Name: $('#Father_Name').val(),
                     Date_of_Birth: $('#Date_of_Birth').val(),
-                    Gender: $('input[name="Gender"]:checked').val(),
-                    Phone: $('#Phone').val(),
+                    CNIC: $('#CNIC').val(),
                     address: $('#address').val(),
+                    Phone: $('#Phone').val(),
                     Email: $('#Email').val(),
-                    Password: $('#Password').val(),
-                    Branch: $('#Branch').val(),
-                    Department: $('#Department').val(),
+                    Gender: $('input[name="Gender"]:checked').val(),
                     Designation: $('#Designation').val(),
-                    Company_Date_of_joining: $('#Company_date_of_joining').val(),
-                    Account_holder_name: $('#Account_holder_name').val(),
-                    Account_number: $('#account_number').val(),
-                    Bank_Name: $('#Bank_Name').val(),
-                    Bank_Identifier_Code: $('#Bank_Identifier_Code').val(),
-                    Branch_location: $('#Branch_location').val(),
-                    Tax_Payer_id: $('#Tax_Payer_id').val(),
+                    Gross_Salary: $('#Gross_Salary').val(),
+                    Time_In: $('#Time_In').val(),
+                    Time_Out: $('#Time_Out').val(),
+                    Grace_Time_IN: $('#Grace_Time_IN').val(),
+                    Grace_Time_Out: $('#Grace_Time_Out').val(),
+                    Overtime_Rate: $('#Overtime_Rate').val(),
+                    Monday_WD: monday,
+                    Tuesday_WD: tuesday,
+                    Wednesday_WD: wednesday,
+                    Thursday_WD: thursday,
+                    Friday_WD: friday,
+                    Saturday_WD: saturday,
+                    Sunday_WD: sunday,
 
                 }
 
@@ -323,22 +444,27 @@
                     data: {
                         'Emp_id': data.Emp_id,
                         'Name': data.Name,
+                        'Father_Name': data.Father_Name,
                         'Date_of_Birth': data.Date_of_Birth,
-                        'Gender': data.Gender,
-                        'Phone': data.Phone,
+                        'CNIC': data.CNIC,
                         'address': data.address,
+                        'Phone': data.Phone,
                         'Email': data.Email,
-                        'Password': data.Password,
-                        'Branch': data.Branch,
-                        'Department': data.Department,
+                        'Gender': data.Gender,
                         'Designation': data.Designation,
-                        'Company_Date_of_joining': data.Company_Date_of_joining,
-                        'Account_holder_name': data.Account_holder_name,
-                        'Account_number': data.Account_number,
-                        'Bank_Name': data.Bank_Name,
-                        'Bank_Identifier_Code': data.Bank_Identifier_Code,
-                        'Branch_location': data.Branch_location,
-                        'Tax_Payer_id': data.Tax_Payer_id,
+                        'Gross_Salary': data.Gross_Salary,
+                        'Time_In': data.Time_In,
+                        'Time_Out': data.Time_Out,
+                        'Grace_Time_IN': data.Grace_Time_IN,
+                        'Grace_Time_Out': data.Grace_Time_Out,
+                        'Overtime_Rate': data.Overtime_Rate,
+                        'Monday_WD': data.Monday_WD,
+                        'Tuesday_WD': data.Tuesday_WD,
+                        'Wednesday_WD': data.Wednesday_WD,
+                        'Thursday_WD': data.Thursday_WD,
+                        'Friday_WD': data.Friday_WD,
+                        'Saturday_WD': data.Saturday_WD,
+                        'Sunday_WD': data.Sunday_WD
                     },
                     success: function (response) {
                         if (response.success) {
