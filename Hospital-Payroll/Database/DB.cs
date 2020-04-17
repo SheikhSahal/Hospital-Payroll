@@ -264,5 +264,173 @@ namespace Hospital_Payroll.Database
         }
 
 
+        public void InsertLeaveDeduction(LeaveDeduction ld)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("insert into Leave_Deduction (Emp_id,	Leave_Days,	From_Date,	To_Date,	Leave_Deduction,	Total_Leave_Deduction) values (@Emp_id,	@Leave_Days,	@From_Date,	@To_Date,	@Leave_Deduction,	@Total_Leave_Deduction)", conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@Emp_id", ld.Emp_id);
+                    cmd.Parameters.AddWithValue("@Leave_Days ", ld.Leave_Days);
+                    cmd.Parameters.AddWithValue("@From_Date", ld.From_Date);
+                    cmd.Parameters.AddWithValue("@To_Date", ld.To_Date);
+                    cmd.Parameters.AddWithValue("@Leave_Deduction", ld.Leave_Deduction);
+                    cmd.Parameters.AddWithValue("@Total_Leave_Deduction", ld.Total_Leave_Deduction);
+
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+        public List<Employee_M> Leave_Deduction_id_Name()
+        {
+            List<Employee_M> DBase = new List<Employee_M>();
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT e.Emp_id,UPPER( e.Name)Name FROM Employee e", conn))
+                {
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Employee_M awm = new Employee_M();
+
+                        awm.Emp_id = Convert.ToInt32(reader["Emp_id"]);
+                        awm.Name = Convert.ToString(reader["Name"]);
+
+
+                        DBase.Add(awm);
+                    }
+                }
+            }
+            return DBase;
+        }
+
+
+        public void InsertHoliday(Holidays h)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("insert into Holiday (H_Date, H_Reason) values (@H_Date,	@H_Reason)", conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@H_Date", h.H_Date);
+                    cmd.Parameters.AddWithValue("@H_Reason ", h.H_Reason);
+
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+
+        public List<LeaveDeduction> Leave_Deduction_List()
+        {
+            List<LeaveDeduction> DBase = new List<LeaveDeduction>();
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("select ld.Emp_id, e.Name,ld.Leave_Days,ld.from_date, ld.to_Date, ld.Leave_Deduction from Leave_Deduction ld , Employee e where ld.Emp_id = e.Emp_id", conn))
+                {
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        LeaveDeduction awm = new LeaveDeduction();
+
+                        awm.Emp_id = Convert.ToInt32(reader["Emp_id"]);
+                        awm.Name = Convert.ToString(reader["Name"]);
+                        awm.Leave_Days = Convert.ToString(reader["Leave_Days"]);
+                        awm.From_Date = Convert.ToDateTime(reader["From_Date"]).ToString("yyyy-MM-dd");
+                        awm.To_Date = Convert.ToDateTime(reader["To_Date"]).ToString("yyyy-MM-dd");
+                        awm.Leave_Deduction = Convert.ToString(reader["Leave_Deduction"]);
+
+
+
+                        DBase.Add(awm);
+                    }
+                }
+            }
+            return DBase;
+        }
+
+
+
+        public LeaveDeduction leaveDeductiondetailbyid(int id)
+        {
+            LeaveDeduction updateLeaveDetail = new LeaveDeduction();
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("select * from Leave_Deduction where Emp_id = @Emp_id", conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@Emp_id", id);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    reader.Read();
+
+                    updateLeaveDetail.Emp_id = Convert.ToInt32(reader["Emp_id"]);
+
+                    if (reader["Leave_Days"] != DBNull.Value) { updateLeaveDetail.Leave_Days = reader["Leave_Days"].ToString(); }
+                    if (reader["From_Date"] != DBNull.Value) 
+                    { 
+                        updateLeaveDetail.From_Date = Convert.ToDateTime(reader["From_Date"]).ToString("yyyy-MM-dd");
+                        
+                    }
+                    if (reader["To_Date"] != DBNull.Value) 
+                    { 
+                        updateLeaveDetail.To_Date = Convert.ToDateTime(reader["To_Date"]).ToString("yyyy-MM-dd");
+                    }
+                    if (reader["Leave_Deduction"] != DBNull.Value) { updateLeaveDetail.Leave_Deduction = reader["Leave_Deduction"].ToString(); }
+                    if (reader["Total_Leave_Deduction"] != DBNull.Value) { updateLeaveDetail.Total_Leave_Deduction = reader["Total_Leave_Deduction"].ToString(); }
+
+                }
+            }
+            return updateLeaveDetail;
+        }
+
+
+
+        public void Update_LeaveDeduction(LeaveDeduction e)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("update Leave_Deduction  set Leave_Days =@Leave_Days,	From_Date =@From_Date,	To_Date =@To_Date,	Leave_Deduction =@Leave_Deduction,	Total_Leave_Deduction =@Total_Leave_Deduction where Emp_id = @Emp_id;", conn))
+                {
+
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@Emp_id", e.Emp_id);
+
+                    if (string.IsNullOrEmpty(e.Leave_Days)) { cmd.Parameters.AddWithValue("@Leave_Days", DBNull.Value); } else { cmd.Parameters.AddWithValue("@Leave_Days", e.Leave_Days); }
+                    if (string.IsNullOrEmpty(e.From_Date)) { cmd.Parameters.AddWithValue("@From_Date", DBNull.Value); } else { cmd.Parameters.AddWithValue("@From_Date", e.From_Date); }
+                    if (string.IsNullOrEmpty(e.To_Date)) { cmd.Parameters.AddWithValue("@To_Date", DBNull.Value); } else { cmd.Parameters.AddWithValue("@To_Date", e.To_Date); }
+                    if (string.IsNullOrEmpty(e.Leave_Deduction)) { cmd.Parameters.AddWithValue("@Leave_Deduction", DBNull.Value); } else { cmd.Parameters.AddWithValue("@Leave_Deduction", e.Leave_Deduction); }
+                    if (string.IsNullOrEmpty(e.Total_Leave_Deduction)) { cmd.Parameters.AddWithValue("@Total_Leave_Deduction", DBNull.Value); } else { cmd.Parameters.AddWithValue("@Total_Leave_Deduction", e.Total_Leave_Deduction); }
+
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

@@ -60,7 +60,7 @@ namespace Hospital_Payroll
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+                    pattern: "{controller=LeaveDeduction_List}/{action=Index}/{id?}");
             });
         }
     }

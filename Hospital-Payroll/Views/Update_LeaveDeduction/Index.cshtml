@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    var lve_ded_Data = TempData["lve_deddata"] as Hospital_Payroll.Models.LeaveDeduction;
+    Layout = "Form_panel";
+}
+<div class="page-header">
+    <h3 class="page-title"> LEAVE DEDUCTION </h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Leave Deduction</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample">
+
+                    <div class="col-md-6 form-center">
+
+                        <div class="form-group Emp_id">
+                            <label for="Emp_id">Employee</label>
+
+                            <select class="form-control" id="Emp_id">
+                                @foreach (var Name in ViewBag.Emp_id_Name as List<Hospital_Payroll.Models.Employee_M>)
+                                {
+                                    <option value="@Name.Emp_id">@Name.Name</option>
+                                }
+
+                            </select>
+                        </div>
+
+
+                        <div class="form-group Leave_Days">
+                            <label for="Leave_Days">Leave Days</label>
+                            <input type="text" class="form-control" id="Leave_Days" placeholder="Leave Days" maxlength="50" value="@lve_ded_Data.Leave_Days">
+                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Leave Days</span>
+                        </div>
+
+                        <div class="form-group Date_From">
+                            <label for="Date_From">From Date</label>
+                            <input type="date" class="form-control" id="Date_From" placeholder="Date_From" maxlength="50" value="@lve_ded_Data.From_Date">
+                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Date From</span>
+                        </div>
+
+                        <div class="form-group Date_To">
+                            <label for="Date_To">To Date</label>
+                            <input type="date" class="form-control" id="Date_To" placeholder="Date To" maxlength="50" value="@lve_ded_Data.To_Date">
+                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the To_Date</span>
+                        </div>
+
+                        <div class="form-group Leave_Deduction">
+                            <label for="Leave_Deduction">Leave Deduction</label>
+                            <input type="text" class="form-control" id="Leave_Deduction" placeholder="Leave Deduction" maxlength="50" value="@lve_ded_Data.Leave_Deduction">
+                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Leave Deduction</span>
+                        </div>
+
+                        <div class="form-group Total_Leave_Deduction">
+                            <label for="Total_Leave_Deduction">Total Leave Deduction</label>
+                            <input type="text" class="form-control" id="Total_Leave_Deduction" placeholder="Total Leave Deduction" maxlength="50" value="@lve_ded_Data.Total_Leave_Deduction">
+                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Total Leave Deduction</span>
+                        </div>
+
+
+
+                        <button type="button" id="Save" class="btn btn-gradient-primary mr-2">Submit</button>
+                        <span class="text-success message">Record Saved Successfully...!</span>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .error {
+        color: red;
+        font-size: 10px;
+        display: none;
+    }
+
+    .valid {
+        color: red;
+        font-size: 10px;
+        display: none;
+    }
+
+    .message {
+        font-size: 10px;
+        display: none;
+    }
+
+    .form-center {
+        margin-left: 30%;
+    }
+
+    @@media only screen and (max-width: 600px) {
+        .form-center {
+            margin-left: 0;
+        }
+    }
+</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+
+
+    $(document).ready(function () {
+
+
+        var leave_dud = "@Html.Raw(@lve_ded_Data.Emp_id)";
+
+        $('#Emp_id').val(leave_dud);
+
+        $('select').select2();
+
+        $("#Save").click(function () {
+            var isAllValid = true;
+
+            if (!($('#Emp_id').val().trim() != '')) {
+                isAllValid = false;
+                $('.Emp_id .error').css('display', 'block');
+            }
+            else {
+                $('.Emp_id .error').css('display', 'none');
+            }
+
+            if (!($('#Leave_Days').val().trim() != '')) {
+                isAllValid = false;
+                $('.Leave_Days .error').css('display', 'block');
+            }
+            else {
+                $('.Leave_Days .error').css('display', 'none');
+            }
+
+            if (!($('#Date_From').val().trim() != '')) {
+                isAllValid = false;
+                $('.Date_From .error').css('display', 'block');
+            }
+            else {
+                $('.Date_From .error').css('display', 'none');
+            }
+
+            if (!($('#Date_To').val().trim() != '')) {
+                isAllValid = false;
+                $('.Date_To .error').css('display', 'block');
+            }
+            else {
+                $('.Date_To .error').css('display', 'none');
+            }
+
+            if (!($('#Leave_Deduction').val().trim() != '')) {
+                isAllValid = false;
+                $('.Leave_Deduction .error').css('display', 'block');
+            }
+            else {
+                $('.Leave_Deduction .error').css('display', 'none');
+            }
+
+
+            if (!($('#Total_Leave_Deduction').val().trim() != '')) {
+                isAllValid = false;
+                $('.Total_Leave_Deduction .error').css('display', 'block');
+            }
+            else {
+                $('.Total_Leave_Deduction .error').css('display', 'none');
+            }
+
+
+            if (isAllValid) {
+
+                var data = {
+                    Emp_id: $('#Emp_id').val(),
+                    Leave_Days: $('#Leave_Days').val(),
+                    Date_From: $('#Date_From').val(),
+                    Date_To: $('#Date_To').val(),
+                    Leave_Deduction: $('#Leave_Deduction').val(),
+                    Total_Leave_Deduction: $('#Total_Leave_Deduction').val()
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Update_LeaveDeduction/Index',
+                    data: {
+                        'Emp_id': data.Emp_id,
+                        'Leave_Days': data.Leave_Days,
+                        'From_Date': data.Date_From,
+                        'To_Date': data.Date_To,
+                        'Leave_Deduction': data.Leave_Deduction,
+                        'Total_Leave_Deduction': data.Total_Leave_Deduction
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('.message').delay(300).fadeIn();
+                            $('.message').delay(200).fadeOut();
+
+
+                             setTimeout(function () {
+                                var baseUrl="@Url.Action("Index", "LeaveDeduction_List")";
+                            window.location.href=baseUrl;
+                            }, 2000);
+                        }
+                    }
+
+                });
+            }
+
+        });
+
+
+    });
+</script>

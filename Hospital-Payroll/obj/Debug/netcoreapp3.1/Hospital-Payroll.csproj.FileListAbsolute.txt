@@ -97,11 +97,16 @@ C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Ho
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.TagHelpers.input.cache
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.TagHelpers.output.cache
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.RazorCoreGenerate.cache
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\EMP_List\Index.cshtml.g.cs
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Holiday\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\LeaveDeduction\Index.cshtml.g.cs
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\LeaveDeduction_List\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Dashboard.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\EMP_Table_List.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Form_panel.cshtml.g.cs
@@ -109,6 +114,7 @@ C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Ra
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Update_EMP\Index.cshtml.g.cs
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Update_LeaveDeduction\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.RazorTargetAssemblyInfo.cache
@@ -120,5 +126,3 @@ C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\st
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.dll
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.pdb
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.genruntimeconfig.cache
-C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
-C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Dashboard.cshtml.g.cs

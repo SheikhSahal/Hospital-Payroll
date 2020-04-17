@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "Form_panel";
+}
+
+<div class="page-header">
+    <h3 class="page-title">
+        HOLIDAYS
+    </h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">HOLIDAYS</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample">
+
+
+                    <div class="col-md-6 form-center">
+
+
+
+                        <div class="form-group H_Date">
+                            <label for="H_Date">Date</label>
+                            <input type="date" class="form-control" id="H_Date" placeholder="Date" maxlength="50">
+                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Date</span>
+                        </div>
+
+
+                        <div class="form-group H_Reason">
+                            <label for="H_Reason">Reason</label>
+                            <input type="text" class="form-control" id="H_Reason" placeholder="Reason" maxlength="100">
+                            <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Reason</span>
+                        </div>
+
+                        <button type="button" id="Save" class="btn btn-gradient-primary mr-2">Submit</button>
+                        <span class="text-success message">Record Saved Successfully...!</span>
+
+                    </div>
+
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .error {
+        color: red;
+        font-size: 10px;
+        display: none;
+    }
+
+    .valid {
+        color: red;
+        font-size: 10px;
+        display: none;
+    }
+
+    .message {
+        font-size: 10px;
+        display: none;
+    }
+
+    .form-center {
+        margin-left: 30%;
+    }
+
+    @@media only screen and (max-width: 600px) {
+        .form-center {
+            margin-left: 0;
+        }
+    }
+</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+
+
+    $(document).ready(function () {
+
+
+        $("#Save").click(function () {
+            var isAllValid = true;
+
+            if (!($('#H_Date').val().trim() != '')) {
+                isAllValid = false;
+                $('.H_Date .error').css('display', 'block');
+            }
+            else {
+                $('.H_Date .error').css('display', 'none');
+            }
+
+            if (!($('#H_Reason').val().trim() != '')) {
+                isAllValid = false;
+                $('.H_Reason .error').css('display', 'block');
+            }
+            else {
+                $('.H_Reason .error').css('display', 'none');
+            }
+
+          
+
+            if (isAllValid) {
+
+                var data = {
+                    H_Date: $('#H_Date').val(),
+                    H_Reason: $('#H_Reason').val(),
+   
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Holiday/Index',
+                    data: {
+                        'H_Date': data.H_Date,
+                        'H_Reason': data.H_Reason
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('.message').delay(300).fadeIn();
+                            $('.message').delay(200).fadeOut();
+
+                            $('#H_Date, #H_Reason').val('');
+                        }
+                    }
+
+                });
+            }
+
+        });
+
+
+    });
+</script>
+
