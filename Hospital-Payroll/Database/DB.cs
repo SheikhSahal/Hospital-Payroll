@@ -270,7 +270,7 @@ namespace Hospital_Payroll.Database
             using (SqlConnection conn = new SqlConnection(connectString))
             {
 
-                using (SqlCommand cmd = new SqlCommand("insert into Leave_Deduction (Emp_id,	Leave_Days,	From_Date,	To_Date,	Leave_Deduction,	Total_Leave_Deduction) values (@Emp_id,	@Leave_Days,	@From_Date,	@To_Date,	@Leave_Deduction,	@Total_Leave_Deduction)", conn))
+                using (SqlCommand cmd = new SqlCommand("insert into Leave_Deduction (Emp_id,	Leave_Days,	From_Date,	To_Date,	Leave_Deduction,	Total_Leave_Deduction, Cancel_YN) values (@Emp_id,	@Leave_Days,	@From_Date,	@To_Date,	@Leave_Deduction,	@Total_Leave_Deduction,'N')", conn))
                 {
                     conn.Open();
 
@@ -343,7 +343,7 @@ namespace Hospital_Payroll.Database
 
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("select ld.Emp_id, e.Name,ld.Leave_Days,ld.from_date, ld.to_Date, ld.Leave_Deduction from Leave_Deduction ld , Employee e where ld.Emp_id = e.Emp_id", conn))
+                using (SqlCommand cmd = new SqlCommand("select ld.Emp_id, e.Name,ld.Leave_Days,ld.from_date, ld.to_Date, ld.Leave_Deduction from Leave_Deduction ld , Employee e where ld.Emp_id = e.Emp_id and ld.Cancel_YN = 'N'", conn))
                 {
                     conn.Open();
 
@@ -413,7 +413,7 @@ namespace Hospital_Payroll.Database
 
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("update Leave_Deduction  set Leave_Days =@Leave_Days,	From_Date =@From_Date,	To_Date =@To_Date,	Leave_Deduction =@Leave_Deduction,	Total_Leave_Deduction =@Total_Leave_Deduction where Emp_id = @Emp_id;", conn))
+                using (SqlCommand cmd = new SqlCommand("update Leave_Deduction  set Emp_id = @Emp_id, Leave_Days =@Leave_Days,	From_Date =@From_Date,	To_Date =@To_Date,	Leave_Deduction =@Leave_Deduction,	Total_Leave_Deduction =@Total_Leave_Deduction where Emp_id = @Emp_id;", conn))
                 {
 
                     conn.Open();
@@ -431,6 +431,199 @@ namespace Hospital_Payroll.Database
                 }
             }
         }
+
+
+        public void Delete_LeaveDeduction(int id)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("update Leave_Deduction set Cancel_YN = 'Y' where Emp_id = @Emp_id", conn))
+                {
+
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@Emp_id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public List<Holidays> Holiday_List()
+        {
+            List<Holidays> DBase = new List<Holidays>();
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("select * from holiday h", conn))
+                {
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Holidays awm = new Holidays();
+
+                        awm.id = Convert.ToInt32(reader["id"]);
+                        awm.H_Date = Convert.ToString(reader["H_Date"]);
+                        awm.H_Reason = Convert.ToString(reader["H_Reason"]);
+
+                        DBase.Add(awm);
+                    }
+                }
+            }
+            return DBase;
+        }
+
+
+        public void Delete_Holiday(int id)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("delete from holiday where id = @id", conn))
+                {
+
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        public void InsertTax_slab(Tax_Slab ts)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("insert into tax_slab (ts_Year,	Floor_Amount,	Ceiling_Amount,	Tax_Amount,	Tax_Percent,	Cancel_YN) values (@ts_Year,	@Floor_Amount,	@Ceiling_Amount,	@Tax_Amount,	@Tax_Percent,	'N')", conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@ts_Year", ts.ts_Year);
+                    cmd.Parameters.AddWithValue("@Floor_Amount", ts.Floor_Amount);
+                    cmd.Parameters.AddWithValue("@Ceiling_Amount", ts.Ceiling_Amount);
+                    cmd.Parameters.AddWithValue("@Tax_Amount", ts.Tax_Amount);
+                    cmd.Parameters.AddWithValue("@Tax_Percent", ts.Tax_Percent);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+
+
+
+        public List<Tax_Slab> Tax_Slab_Data()
+        {
+            List<Tax_Slab> DBase = new List<Tax_Slab>();
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("select * from tax_slab where cancel_YN = 'N'", conn))
+                {
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Tax_Slab awm = new Tax_Slab();
+
+                        awm.Ts_id = Convert.ToInt32(reader["Ts_id"]);
+                        awm.ts_Year = Convert.ToString(reader["ts_Year"]);
+                        awm.Floor_Amount = Convert.ToString(reader["Floor_Amount"]);
+                        awm.Ceiling_Amount = Convert.ToString(reader["Ceiling_Amount"]);
+                        awm.Tax_Amount = Convert.ToString(reader["Tax_Amount"]);
+                        awm.Tax_Percent = Convert.ToString(reader["Tax_Percent"]);
+
+
+                        DBase.Add(awm);
+                    }
+                }
+            }
+            return DBase;
+        }
+
+
+
+        public void Update_TaxSlab(Tax_Slab ts)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("update tax_slab  set ts_Year =@ts_Year,	Floor_Amount =@Floor_Amount,	Ceiling_Amount =@Ceiling_Amount,	Tax_Amount =@Tax_Amount,	Tax_Percent =@Tax_Percent where ts_id = @ts_id", conn))
+                {
+
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@ts_id", ts.Ts_id);
+
+                    cmd.Parameters.AddWithValue("@ts_Year", ts.ts_Year);
+                    cmd.Parameters.AddWithValue("@Floor_Amount", ts.Floor_Amount);
+                    cmd.Parameters.AddWithValue("@Ceiling_Amount", ts.Ceiling_Amount);
+                    cmd.Parameters.AddWithValue("@Tax_Amount", ts.Tax_Amount);
+                    cmd.Parameters.AddWithValue("@Tax_Percent", ts.Tax_Percent);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+        public Tax_Slab taxslabdetailbyid(int id)
+        {
+            Tax_Slab updatetaxslab = new Tax_Slab();
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("select * from tax_slab where ts_id = @ts_id", conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@ts_id", id);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    reader.Read();
+
+                    updatetaxslab.Ts_id = Convert.ToInt32(reader["Ts_id"]);
+                    updatetaxslab.ts_Year = reader["ts_Year"].ToString();
+                    updatetaxslab.Floor_Amount = reader["Floor_Amount"].ToString();
+                    updatetaxslab.Ceiling_Amount = reader["Ceiling_Amount"].ToString();
+                    updatetaxslab.Tax_Amount = reader["Tax_Amount"].ToString();
+                    updatetaxslab.Tax_Percent = reader["Tax_Percent"].ToString();
+
+                }
+            }
+            return updatetaxslab;
+        }
+
+
+        public void Delete_tax_slab(int id)
+        {
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("update tax_slab  set Cancel_YN = 'Y' where ts_id = @ts_id", conn))
+                {
+
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@ts_id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
 
     }
 }

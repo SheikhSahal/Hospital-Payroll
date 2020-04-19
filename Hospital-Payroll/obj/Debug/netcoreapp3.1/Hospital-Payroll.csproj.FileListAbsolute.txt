@@ -98,9 +98,11 @@ C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Ho
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.TagHelpers.output.cache
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.RazorCoreGenerate.cache
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Delete_LeaveDeduction\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\EMP_List\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Holiday\Index.cshtml.g.cs
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Holiday_List\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\LeaveDeduction\Index.cshtml.g.cs
@@ -126,3 +128,6 @@ C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\st
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.dll
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.pdb
 C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Hospital-Payroll.genruntimeconfig.cache
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Tax_Slab\Index.cshtml.g.cs
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\TaxSlab_List\Index.cshtml.g.cs
+C:\Users\sahal.qasim.PREMIER\Desktop\Hospital-Payroll\obj\Debug\netcoreapp3.1\Razor\Views\Update_TaxSlab\Index.cshtml.g.cs

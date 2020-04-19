@@ -15,6 +15,8 @@ namespace Hospital_Payroll.Models
         public string Leave_Deduction { get; set; }
         public string Total_Leave_Deduction { get; set; }
 
+        public string Cancel_YN { get; set; }
+
 
     }
 }

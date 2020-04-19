@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Hospital_Payroll.Models;
 using Hospital_Payroll.Database;
+using Hospital_Payroll.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace Hospital_Payroll.Controllers
 {
-    public class LeaveDeduction_ListController : Controller
+    public class Holiday_ListController : Controller
     {
         DB db = new DB();
         public IActionResult Index()
@@ -18,14 +18,15 @@ namespace Hospital_Payroll.Controllers
 
             if (sessionlogin == "true")
             {
-                List<LeaveDeduction> leavededuction_list = db.Leave_Deduction_List();
-                ViewBag.leavelist = leavededuction_list;
-                return View();
+                List<Holidays> holi_list = db.Holiday_List();
+                ViewBag.holilist = holi_list;
             }
             else
             {
                 return RedirectToAction("Index", "login");
             }
+
+            return View();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Hospital_Payroll.Models
 {
     public class Holidays
     {
+        public int id { get; set; }
         public string H_Date { get; set; }
         public string H_Reason { get; set; }
     }

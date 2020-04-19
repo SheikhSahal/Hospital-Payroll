@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Hospital_Payroll.Controllers
 {
-    public class LeaveDeduction_ListController : Controller
+    public class TaxSlab_ListController : Controller
     {
+
         DB db = new DB();
         public IActionResult Index()
         {
@@ -18,8 +19,9 @@ namespace Hospital_Payroll.Controllers
 
             if (sessionlogin == "true")
             {
-                List<LeaveDeduction> leavededuction_list = db.Leave_Deduction_List();
-                ViewBag.leavelist = leavededuction_list;
+
+                List<Tax_Slab> txsl_list = db.Tax_Slab_Data();
+                ViewBag.tax_sl_list = txsl_list;
                 return View();
             }
             else

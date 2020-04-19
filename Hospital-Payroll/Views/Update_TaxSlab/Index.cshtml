@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    var tax_slab_Data = ViewBag.tax_sl_list as Hospital_Payroll.Models.Tax_Slab;
+    Layout = "Form_panel";
+}
+
+    <div class="page-header">
+        <h3 class="page-title">
+            TAX SLAB
+        </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">
+                        TAX SLAB
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <form class="forms-sample">
+
+
+                        <div class="col-md-6 form-center">
+
+
+
+                            <div class="form-group ts_Year">
+                                <label for="ts_Year">Year</label>
+                                <input type="number" class="form-control" id="ts_Year" placeholder="Year" value="@tax_slab_Data.ts_Year" maxlength="20">
+                                <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Year</span>
+                            </div>
+
+                            <div class="form-group Floor_Amount">
+                                <label for="Floor_Amount">Floor Amount</label>
+                                <input type="number" class="form-control" id="Floor_Amount" placeholder="Floor Amount" value="@tax_slab_Data.Floor_Amount" maxlength="20">
+                                <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Floor Amount</span>
+                            </div>
+
+                            <div class="form-group Ceiling_Amount">
+                                <label for="Ceiling_Amount">Ceiling Amount</label>
+                                <input type="number" class="form-control" id="Ceiling_Amount" placeholder="Ceiling Amount" maxlength="20" value="@tax_slab_Data.Ceiling_Amount">
+                                <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Ceiling Amount</span>
+                            </div>
+
+                            <div class="form-group Tax_Amount">
+                                <label for="Tax_Amount">Tax Amount</label>
+                                <input type="number" class="form-control" id="Tax_Amount" placeholder="Tax Amount" maxlength="20" value="@tax_slab_Data.Tax_Amount">
+                                <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Tax Amount</span>
+                            </div>
+
+                            <div class="form-group Tax_Percent">
+                                <label for="Tax_Percent">Tax Percent</label>
+                                <input type="number" class="form-control" id="Tax_Percent" placeholder="Tax Percent" maxlength="20" value="@tax_slab_Data.Tax_Percent">
+                                <span class="error"><span class="mdi mdi-alert-circle"></span> Enter the Tax Percent</span>
+                            </div>
+
+
+                            <button type="button" id="Save" class="btn btn-gradient-primary mr-2">Submit</button>
+                            <span class="text-success message">Record Saved Successfully...!</span>
+
+                        </div>
+
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <style>
+        .error {
+            color: red;
+            font-size: 10px;
+            display: none;
+        }
+
+        .valid {
+            color: red;
+            font-size: 10px;
+            display: none;
+        }
+
+        .message {
+            font-size: 10px;
+            display: none;
+        }
+
+        .form-center {
+            margin-left: 30%;
+        }
+
+        @@media only screen and (max-width: 600px) {
+            .form-center {
+                margin-left: 0;
+            }
+        }
+    </style>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+
+
+    $(document).ready(function () {
+
+
+        $("#Save").click(function () {
+            var isAllValid = true;
+
+            if (!($('#ts_Year').val().trim() != '')) {
+                isAllValid = false;
+                $('.ts_Year .error').css('display', 'block');
+            }
+            else {
+                $('.ts_Year .error').css('display', 'none');
+            }
+
+
+            if (!($('#Floor_Amount').val().trim() != '')) {
+                isAllValid = false;
+                $('.Floor_Amount .error').css('display', 'block');
+            }
+            else {
+                $('.Floor_Amount .error').css('display', 'none');
+            }
+
+
+            if (!($('#Ceiling_Amount').val().trim() != '')) {
+                isAllValid = false;
+                $('.Ceiling_Amount .error').css('display', 'block');
+            }
+            else {
+                $('.Ceiling_Amount .error').css('display', 'none');
+            }
+
+
+
+            if (!($('#Tax_Amount').val().trim() != '')) {
+                isAllValid = false;
+                $('.Tax_Amount .error').css('display', 'block');
+            }
+            else {
+                $('.Tax_Amount .error').css('display', 'none');
+            }
+
+
+            if (!($('#Tax_Percent').val().trim() != '')) {
+                isAllValid = false;
+                $('.Tax_Percent .error').css('display', 'block');
+            }
+            else {
+                $('.Tax_Percent .error').css('display', 'none');
+            }
+
+
+
+
+            if (isAllValid) {
+
+                var data = {
+                    ts_Year: $('#ts_Year').val(),
+                    Floor_Amount: $('#Floor_Amount').val(),
+                    Ceiling_Amount: $('#Ceiling_Amount').val(),
+                    Tax_Amount: $('#Tax_Amount').val(),
+                    Tax_Percent: $('#Tax_Percent').val(),
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Update_TaxSlab/Index',
+                    data: {
+                        'ts_Year': data.ts_Year,
+                        'Floor_Amount': data.Floor_Amount,
+                        'Ceiling_Amount': data.Ceiling_Amount,
+                        'Tax_Amount': data.Tax_Amount,
+                        'Tax_Percent': data.Tax_Percent
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('.message').delay(300).fadeIn();
+                            $('.message').delay(200).fadeOut();
+
+
+                             setTimeout(function () {
+                                var baseUrl="@Url.Action("Index", "TaxSlab_List")";
+                            window.location.href=baseUrl;
+                            }, 2000);
+                        }
+                    }
+
+                });
+            }
+
+        });
+
+
+    });
+    </script>
+

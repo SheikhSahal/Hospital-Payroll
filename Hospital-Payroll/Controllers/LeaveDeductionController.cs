@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Hospital_Payroll.Models;
 using Hospital_Payroll.Database;
+using Microsoft.AspNetCore.Http;
 
 namespace Hospital_Payroll.Controllers
 {
@@ -14,10 +15,18 @@ namespace Hospital_Payroll.Controllers
 
         public IActionResult Index()
         {
-            List<Employee_M> empid_Name = db.Leave_Deduction_id_Name();
-            ViewBag.Emp_id_Name = empid_Name;
+            string sessionlogin = HttpContext.Session.GetString("_login");
 
-            return View();
+            if (sessionlogin == "true")
+            {
+                List<Employee_M> empid_Name = db.Leave_Deduction_id_Name();
+                ViewBag.Emp_id_Name = empid_Name;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "login");
+            }
         }
 
 
