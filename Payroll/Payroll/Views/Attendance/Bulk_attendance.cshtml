@@ -1,0 +1,175 @@
+﻿@using Payroll.Models
+@model IEnumerable<Attendance>
+
+@{
+    ViewBag.Title = "Bulk_attendance";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="success-message">
+            @Html.Partial("~/Views/Shared/File_load_Success.cshtml")
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">Attendance</h4>
+            </div>
+        </div>
+
+        <form action="@Url.Action("Bulk_attendance","Attendance")" method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label class="col-form-label col-md-1">File input</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="file" name="excelfile">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Upload</button>
+                </div>
+            </div>
+            <div class="row" style="color:red;">
+                <div class="col-md-3">
+                    @ViewBag.error
+                </div>
+            </div>
+        </form>
+
+        <form>
+            @if (Model.Count() > 0)
+            {
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" id="submit_btn" class="btn btn-primary" style="float:right;">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+                <div class="row" id="excel_table">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-stripped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>S/No.</th>
+                                        <th>Emp id</th>
+                                        <th>Employee</th>
+                                        <th>Attendance Date</th>
+                                        <th>Time</th>
+                                        <th>Statue</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="details">
+                                    @{int index = 1;}
+                                    @foreach (var s in Model)
+                                    {
+                                        <tr>
+                                            <td>@index</td>
+                                            <td class="emp_id">@s.Employee_id</td>
+                                            <td>@s.Employee_name</td>
+                                            <td class="attendance_date">@s.Attendance_Date.ToString("MM-dd-yyyy")</td>
+                                            <td class="Time_in">@s.Time_IN</td>
+                                            <td>
+                                                @if (s.Status == "1")
+                                                {
+                                                    <span class="btn btn-light">Time In</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="btn btn-dark">Time Out</span>
+                                                }
+                                            </td>
+                                            <td class="status collapse">@s.Status</td>
+                                            @*<td class="attendance_date">@s.Attendance_Date.ToString("MM-dd-yyyy")</td>
+                                            <td class="Time_in">@s.Time_IN</td>
+                                            <td class="Time_out">@s.Time_Out</td>*@
+                                            @*<td>
+                                                @if (s.attendance_status == "Late")
+                                                {
+
+                                                    <button type="button" class="btn btn-danger">
+                                                        @s.attendance_status
+                                                    </button>
+
+
+                                                }
+                                                else
+                                                {
+                                                    <button type="button" class="btn btn-success">
+                                                        @s.attendance_status
+                                                    </button>
+                                                }
+                                            </td>*@
+
+                                        </tr>
+                                        index++;
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                                        }
+        </form>
+
+    </div>
+
+</div>
+<style>
+    .success-message {
+        display: none;
+    }
+</style>
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#submit_btn').click(function (e) {
+            e.preventDefault();
+            var list = [];
+            $('#submit_btn').prop("disabled", true);
+            $('#details > tr').each(function () {
+                var excelItem = {
+                    Emp_id: $(this).find(".emp_id").text(),
+                    Attendance_Date: $(this).find(".attendance_date").text(),
+                    Time_IN: $(this).find(".Time_in").text(),
+                    Status: $(this).find(".status").text(),
+                }
+
+                list.push(excelItem);
+                console.log(excelItem);
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '/Attendance/Excel_loader',
+                data: {
+                    'Attendance': list,
+                }
+                    ,
+                success: function (resp) {
+                    if (resp.status) {
+                        $('.success-message').delay(300).fadeIn();
+                        $('.success-message').delay(200).fadeOut();
+                        $('#submit_btn').prop("disabled", false);
+                        $('#details').empty();
+                        $('#excel_table').css('display', 'none');
+                        $('#submit_btn').css('display', 'none');
+
+                    }
+                    else {
+                        alert('error');
+                    }
+                }
+            });
+
+        })
+
+    });
+</script>

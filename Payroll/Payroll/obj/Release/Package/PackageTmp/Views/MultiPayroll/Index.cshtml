@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="success-message">
+            @Html.Partial("~/Views/Shared/Sucess_Alert.cshtml")
+        </div>
+        <div class="alert-message">
+            @Html.Partial("~/Views/Shared/Alert.cshtml")
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h4 class="page-title">Add Staff Salaries</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group Month">
+                                <label>Month</label>
+                                <input class="form-control" type="month" id="Month">
+                                <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-t-20 text-center">
+                        <button class="btn btn-primary submit-btn" id="Create_salary">Create Salary</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .success-message {
+        display: none;
+    }
+
+    span.error {
+        display: none;
+        color: #d93025;
+        font-size: 80%;
+        margin-top: 3px;
+    }
+
+    .alert-message {
+        display: none;
+    }
+</style>
+
+
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        $('#Create_salary').click(function (e) {
+            e.preventDefault();
+            var isAllValid = true;
+
+            if (!($('#Month').val().trim() != '')) {
+                isAllValid = false;
+                $('.Month .error').css('display', 'block');
+            }
+            else {
+                $('.Month .error').css('display', 'none');
+            }
+
+            if (isAllValid) {
+                $('#Create_salary').prop('disabled', true);
+
+                var data = {
+                    Month: $('#Month').val(),
+
+                }
+
+                debugger
+                $.ajax({
+                    type: 'POST',
+                    url: '/MultiPayroll/Index',
+                    data: {
+                        'Month': data.Month
+                    },
+                    success: function (resp) {
+                        if (resp.status == true) {
+                            $('.success-message').delay(1000).fadeIn();
+                            $('.success-message').delay(1000).fadeOut();
+                            $('#Create_salary').prop('disabled', false);
+                        }
+                        else {
+                            $('.alert-message').delay(1000).fadeIn();
+                            $('.alert-message').delay(1000).fadeOut();
+                            $('#Create_salary').prop('disabled', false);
+                        }
+                    },
+                    error: function (ex) {
+                        alert('error')
+                    }
+                });
+            }
+
+
+        });
+    });
+</script>

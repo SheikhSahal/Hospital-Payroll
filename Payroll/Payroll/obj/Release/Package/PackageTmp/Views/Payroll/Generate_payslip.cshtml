@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Generate_payslip";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="success-message">
+            @Html.Partial("~/Views/Shared/Sucess_Alert.cshtml")
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h4 class="page-title">Add Staff Salary</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <form>
+                    <div class="row">
+                        <!--<div class="col-sm-6">
+        <div class="form-group Employee_list">
+            <label>Select Staff</label>
+            <select class="select" id="Employee_list">
+                <option value="0">-Select-</option>-->
+                        @*@foreach (var s in ViewBag.Emplist as List<Payroll.Models.Employee>)
+        {
+            <option value="@s.Emp_id">@s.Name</option>
+        }*@
+                        <!--</select>
+            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Employee</span>
+        </div>
+    </div>-->
+                        <div class="col-sm-6">
+                            <div class="form-group Month">
+                                <label>Month</label>
+                                <input class="form-control" type="month" id="Month">
+                                <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Month</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="m-t-20 text-center">
+                                <button class="btn btn-primary submit-btn" id="Create_salary">Create Salary</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .success-message {
+        display: none;
+    }
+
+    span.error {
+        display: none;
+        color: #d93025;
+        font-size: 80%;
+        margin-top: 3px;
+    }
+</style>
+
+<script src="~/Content/assets/js/Jquery-offline.js"></script>
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    /*$('#Create_salary').attr('disabled', 'disabled');*/
+    $('#Create_salary').click(function (e) {
+        e.preventDefault();
+        var isAllValid = true;
+
+        if (!($('#Month').val().trim() != '')) {
+            isAllValid = false;
+            $('.Month .error').css('display', 'block');
+        }
+        else {
+            $('.Month .error').css('display', 'none');
+        }
+
+        if (isAllValid) {
+            $('#Create_salary').attr('disabled', 'disabled');
+
+            var data = {
+                Month: $('#Month').val(),
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/Payroll/Generate_payslip',
+                data: {
+                    'Month': data.Month
+                },
+                success: function (data) {
+                    for (i = 0; i < data.length; i++) {
+                        console.log(data[i].emp_id, data[i].payroll_date);
+                        console.log(data.length);
+                        window.open('http://localhost:59865/Payroll/Payslip?empid=' + data[i].emp_id + '&date=' + data[i].payroll_date, '_blank');
+                        debugger
+                    }
+                    //if (resp.status) {
+
+                    //    //$('.success-message').delay(1000).fadeIn();
+                    //    //$('.success-message').delay(1000).fadeOut();
+                    //    //$('#Create_salary').prop('disabled', false);
+                    //    //$('#Employee_list').val("0");
+                    //    //$('#Month ,#Total_Earning, #Current_Working_Hours, #Working_Days, #Working_Hours, #Holidays,#Absent,#OverTime_Amount').val('');
+                    //}
+                },
+                error: function (ex) {
+                    alert('error')
+                }
+            });
+        }
+
+
+    });
+</script>

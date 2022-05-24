@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">Attendance</h4>
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                <a href="@Url.Action("Add_Attendance","Attendance")" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Add Attendance</a>
+                <a href="@Url.Action("Bulk_attendance","Attendance")" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Bulk Attendance</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="datatable table table-stripped " id="attendance">
+                        <thead>
+                            <tr>
+                                <th>S/No.</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Year</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                                <th>Working Hours</th>
+                                @*<th></th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int index = 1;}
+                            @foreach (var s in ViewBag.attlist as List<Payroll.Models.Attendance>)
+                            {
+                                <tr>
+                                    <td>@index</td>
+                                    <td>@s.Ename</td>
+                                    <td>@s.Attendance_Date.ToString("dd/MM/yyyy")</td>
+                                    <td>@s.Att_Year</td>
+                                    <td>@s.Time_IN</td>
+                                    <td>@s.Time_Out</td>
+                                    <td>@s.DateDiff</td>
+                                    @*<td class="text-right">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="@Url.Action("Update_Attendance", "Attendance", new { id = s.id })"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                            </div>
+                                        </div>
+                                    </td>*@
+                                </tr>
+                                index++;
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

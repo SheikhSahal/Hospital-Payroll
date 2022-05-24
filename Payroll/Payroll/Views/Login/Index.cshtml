@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_login.cshtml";
+}
+
+<div class="error-message">
+    @Html.Partial("~/Views/Shared/Error_Alert.cshtml")
+</div>
+<form class="form-signin">
+    <div class="account-logo">
+        <a href="index-2.html"><img src="~/Content/assets/img/logo-dark.png" alt=""></a>
+    </div>
+    <div class="form-group email">
+        <label>Email</label>
+        <input type="text" autofocus="" class="form-control" id="email">
+        <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter E-mail</span>
+    </div>
+    <div class="form-group password">
+        <label>Password</label>
+        <input type="password" class="form-control" id="password">
+        <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Password</span>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary account-btn" id="login">Login</button>
+    </div>
+    @*<div class="text-center register-link">
+        Don’t have an account? <a href="register.html">Register Now</a>
+    </div>*@
+</form>
+
+<style>
+    span.error {
+        display: none;
+        color: #d93025;
+        font-size: 80%;
+        margin-top: 3px;
+    }
+     .error-message {
+        display: none;
+    }
+</style>
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    $(document).ready(function (e) {
+        
+        $('#login').click(function (e) {
+            e.preventDefault();
+            var isAllValid = true;
+
+            if (!($('#email').val().trim() != '')) {
+                isAllValid = false;
+                $('.email .error').css('display', 'block');
+            }
+            else {
+                $('.email .error').css('display', 'none');
+            }
+
+            if (!($('#password').val().trim() != '')) {
+                isAllValid = false;
+                $('.password .error').css('display', 'block');
+            }
+            else {
+                $('.password .error').css('display', 'none');
+            }
+
+            if (isAllValid) {
+                $('#submit').prop('disabled', true);
+
+                var data = {
+                    email: $('#email').val(),
+                    pass: $('#password').val()
+                }
+
+                debugger
+                $.ajax({
+                    type: 'POST',
+                    url: '/login/Index',
+                    data: {
+                        'email': data.email,
+                        'pass': data.pass,
+                    }
+                    ,
+                    success: function (resp) {
+                        if (resp.status == "done") {
+                            location.href = '@Url.Action("Index", "Dashboard")';
+                        }
+                        else {
+                            $('.error-message').delay(1000).fadeIn();
+                            $('.error-message').delay(1000).fadeOut();
+                        }
+                    }
+                });
+            }
+
+        });
+
+
+    });
+</script>
