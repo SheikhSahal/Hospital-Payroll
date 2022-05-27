@@ -34,7 +34,6 @@
                                 <th class="collapse">address</th>
                                 <th class="collapse">Phone</th>
                                 <th class="collapse">Email</th>
-                                <th class="collapse">Date_of_Birth</th>
                                 <th>Gender</th>
                                 <th>Designation</th>
                                 <th>EOBI</th>
@@ -117,8 +116,8 @@
                     success: function (resp) {
                         $.each(resp,function(i, item)
                         {
-                            console.log(item);
-                            $('#emp_details').append('<tr><td class="collapse">' + item.Emp_id + '</td>	<td>' + item.Name + '</td>	<td class="collapse">' + item.Father_Name + '</td>	<td>' + item.CNIC + '</td>	<td class="collapse">' + item.address + '</td>	<td class="collapse">' + item.Phone + '</td>	<td class="collapse">' + item.Email + '</td>	<td class="collapse">' + item.Date_of_Birth + '</td>	<td>' + item.Gender + '</td>	<td>' + item.Designation + '</td>	<td>' + item.EOBI + '</td> <td class="collapse">' + item.Job_type + '</td>	<td class="collapse">' + item.Leaves + '</td>	<td class="collapse">' + item.Adv_Staff + '</td>	<td class="collapse">' + item.I_tax + '</td>	<td class="collapse">' + item.get_present_day + '</td>	<td>' + item.total_no_days + '</td>	<td>' + item.Gross_Salary_after_subtrate + '</td> </tr>');
+                            $('#emp_details tbody').empty();
+                            $('#emp_details').append('<tr><td class="collapse">' + item.Emp_id + '</td>	<td>' + item.Name + '</td>	<td class="collapse">' + item.Father_Name + '</td>	<td>' + item.CNIC + '</td>	<td class="collapse">' + item.address + '</td>	<td class="collapse">' + item.Phone + '</td>	<td class="collapse">' + item.Email + '</td> <td>' + item.Gender + '</td>	<td>' + item.Designation + '</td>	<td>' + item.EOBI + '</td> <td class="collapse">' + item.Job_type + '</td>	<td class="collapse">' + item.Leaves + '</td>	<td class="collapse">' + item.Adv_Staff + '</td>	<td class="collapse">' + item.I_tax + '</td>	<td class="collapse">' + item.get_present_day + '</td>	<td>' + item.total_no_days + '</td>	<td>' + item.Gross_Salary_after_subtrate + '</td> </tr>');
                         })
                     },
                     error: function (ex) {

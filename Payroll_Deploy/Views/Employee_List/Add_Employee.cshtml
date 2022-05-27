@@ -1,0 +1,595 @@
+﻿
+@{
+    ViewBag.Title = "Add_Employee";
+}
+
+
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="success-message">
+                    @Html.Partial("~/Views/Shared/Sucess_Alert.cshtml")
+                </div>
+
+                <form action="#">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="card-title">Personal details</h4>
+                                <div class="form-group Employee_Name">
+                                    <label>Employee Name:</label>
+                                    <input type="text" class="form-control" id="Employee_Name">
+                                    <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Employee Name</span>
+                                </div>
+
+                                <div class="form-group Father_Name">
+                                    <label>Father Name:</label>
+                                    <input type="text" class="form-control" id="Father_Name">
+                                    <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Father Name</span>
+                                </div>
+
+                                <div class="form-group Address">
+                                    <label>Address:</label>
+                                    <input type="text" class="form-control" id="Address">
+                                    <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Address</span>
+                                </div>
+
+                                <div class="form-group CNIC">
+                                    <label>CNIC:</label>
+                                    <input type="number" class="form-control" id="CNIC">
+                                    <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter CNIC</span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group Phone">
+                                            <label>Phone:</label>
+                                            <input type="text" class="form-control" id="Phone">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Phone</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group Email">
+                                            <label>Email:</label>
+                                            <input type="text" class="form-control" id="Email">
+                                            <span class="Emailvalidate"><i class="fa fa-exclamation-circle"></i>&nbsp;E-Mail is not valid</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group DOB">
+                                            <label>Date of Birth:</label>
+                                            <input type="date" class="form-control" id="DOB">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Date of birth</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group Gender">
+                                            <label>Gender</label>
+                                            <select class="select" id="Gender">
+                                                <option value="0">Select</option>
+                                                <option value="M">Male</option>
+                                                <option value="F">Female</option>
+                                            </select>
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Gender</span>
+                                        </div>
+
+                                        @*<div class="form-group Gender">
+                                                <label>Gender:</label>
+                                                <input type="text" class="form-control" id="Gender">
+                                                <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Date of Gender</span>
+                                            </div>*@
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="card-title">Offical details</h4>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group Designation">
+                                            <label>Designation:</label>
+                                            <input type="text" class="form-control" id="Designation">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Designation</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group Job_type">
+                                            <label>Job type:</label>
+                                            <select class="select" id="Job_type">
+                                                <option value="0">Select</option>
+                                                <option value="C">Contract</option>
+                                                <option value="F">Full-Time</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group Time_In">
+                                            <label>Time In:</label>
+                                            <input type="time" class="form-control" id="Time_In">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Time In</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group Time_Out">
+                                            <label>Time Out:</label>
+                                            <input type="time" class="form-control" id="Time_Out">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Time Out</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group Grace_Time_In">
+                                            <label>Grace Time In:</label>
+                                            <input type="time" class="form-control" id="Grace_Time_In">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Time In</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group Grace_Time_Out">
+                                            <label>Grace Time Out:</label>
+                                            <input type="time" class="form-control" id="Grace_Time_Out">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Time Out</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group Adv_Staff">
+                                            <label>Advance Staff:</label>
+                                            <input type="text" class="form-control" id="Adv_Staff">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group I_Tax">
+                                            <label>I Tax:</label>
+                                            <input type="text" class="form-control" id="I_Tax">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group Telephone">
+                                            <label>Telephone:</label>
+                                            <input type="text" class="form-control" id="Telephone">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group EOBI">
+                                            <label>EOBI:</label>
+                                            <input type="text" class="form-control" id="EOBI">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group Overtime">
+                                            <label>Overtime:</label>
+                                            <input type="text" class="form-control" id="Overtime">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group Gross_salary">
+                                            <label>Salary:</label>
+                                            <input type="text" class="form-control" id="Gross_salary">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Salary</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group Leaves">
+                                            <label>Leaves:</label>
+                                            <input type="text" class="form-control" id="Leaves">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group Status">
+                                            <label>Status:</label>
+                                            <select class="select" id="Status">
+                                                <option value="0">Select</option>
+                                                <option value="Y">Active</option>
+                                                <option value="N">InActive</option>
+                                            </select>
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Status</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2">No. Days:</label>
+                                    <div class="col-md-6">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkbox" id="Monday"> Monday
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkbox" id="Tuesday"> Tuesday
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkbox" id="Wednesday"> Wednesday
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkbox" id="Thursday"> Thursday
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkbox" id="Friday"> Friday
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkbox" id="Saturday"> Saturday
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="checkbox" id="Sunday"> Sunday
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    span.error {
+        display: none;
+        color: #d93025;
+        font-size: 80%;
+        margin-top: 3px;
+    }
+
+    .Emailvalidate {
+        display: none;
+        color: #d93025;
+        font-size: 80%;
+        margin-top: 3px;
+    }
+</style>
+
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#submit').click(function (e) {
+            e.preventDefault();
+            var isAllValid = true;
+
+            if (!($('#Employee_Name').val().trim() != '')) {
+                isAllValid = false;
+                $('.Employee_Name .error').css('display', 'block');
+            }
+            else {
+                $('.Employee_Name .error').css('display', 'none');
+            }
+
+            if (!($('#Father_Name').val().trim() != '')) {
+                isAllValid = false;
+                $('.Father_Name .error').css('display', 'block');
+            }
+            else {
+                $('.Father_Name .error').css('display', 'none');
+            }
+
+
+            if (!($('#Address').val().trim() != '')) {
+                isAllValid = false;
+                $('.Address .error').css('display', 'block');
+            }
+            else {
+                $('.Address .error').css('display', 'none');
+            }
+
+            if (!($('#CNIC').val().trim() != '')) {
+                isAllValid = false;
+                $('.CNIC .error').css('display', 'block');
+            }
+            else {
+                $('.CNIC .error').css('display', 'none');
+            }
+
+            if (!($('#Phone').val().trim() != '')) {
+                isAllValid = false;
+                $('.Phone .error').css('display', 'block');
+            }
+            else {
+                $('.Phone .error').css('display', 'none');
+            }
+
+
+            if (!($('#DOB').val().trim() != '')) {
+                isAllValid = false;
+                $('.DOB .error').css('display', 'block');
+            }
+            else {
+                $('.DOB .error').css('display', 'none');
+            }
+
+            if (!($('#Gender').val().trim() != '0')) {
+                isAllValid = false;
+                $('.Gender .error').css('display', 'block');
+            }
+            else {
+                $('.Gender .error').css('display', 'none');
+            }
+
+            if ($('#Email').val().trim() != '') {
+                var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+                var emailval = $('#Email').val();
+                if (emailReg.test(emailval)) {
+                    $('.Email .Emailvalidate').css('display', 'none');
+                }
+                else {
+                    isAllValid = false;
+                    $('.Email .Emailvalidate').css('display', 'block');
+                }
+
+            }
+            else {
+                $('.Email .Emailvalidate').css('display', 'none');
+            }
+
+            if (!($('#Designation').val().trim() != '')) {
+                isAllValid = false;
+                $('.Designation .error').css('display', 'block');
+            }
+            else {
+                $('.Designation .error').css('display', 'none');
+            }
+
+
+            if (!($('#Time_In').val().trim() != '')) {
+                isAllValid = false;
+                $('.Time_In .error').css('display', 'block');
+            }
+            else {
+                $('.Time_In .error').css('display', 'none');
+            }
+
+
+            if (!($('#Time_Out').val().trim() != '')) {
+                isAllValid = false;
+                $('.Time_Out .error').css('display', 'block');
+            }
+            else {
+                $('.Time_Out .error').css('display', 'none');
+            }
+
+            if (!($('#Grace_Time_In').val().trim() != '')) {
+                isAllValid = false;
+                $('.Grace_Time_In .error').css('display', 'block');
+            }
+            else {
+                $('.Grace_Time_In .error').css('display', 'none');
+            }
+
+            if (!($('#Grace_Time_Out').val().trim() != '')) {
+                isAllValid = false;
+                $('.Grace_Time_Out .error').css('display', 'block');
+            }
+            else {
+                $('.Grace_Time_Out .error').css('display', 'none');
+            }
+
+            if (!($('#Gross_salary').val().trim() != '')) {
+                isAllValid = false;
+                $('.Gross_salary .error').css('display', 'block');
+            }
+            else {
+                $('.Gross_salary .error').css('display', 'none');
+            }
+
+            var Monday = '';
+            var tuesday = '';
+            var wednesday = '';
+            var thursday = '';
+            var friday = '';
+            var saturday = '';
+            var sunday = '';
+
+            if ($('#Monday').prop("checked") == true) {
+                Monday = 'Y';
+            }
+            else {
+                Monday = 'N';
+            }
+
+            if ($('#Tuesday').prop("checked") == true) {
+                tuesday = 'Y';
+            }
+            else {
+                tuesday = 'N';
+            }
+
+            if ($('#Wednesday').prop("checked") == true) {
+                wednesday = 'Y';
+            }
+            else {
+                wednesday = 'N';
+            }
+
+            if ($('#Thursday').prop("checked") == true) {
+                thursday = 'Y';
+            }
+            else {
+                thursday = 'N';
+            }
+
+            if ($('#Friday').prop("checked") == true) {
+                friday = 'Y';
+            }
+            else {
+                friday = 'N';
+            }
+
+            if ($('#Saturday').prop("checked") == true) {
+                saturday = 'Y';
+            }
+            else {
+                saturday = 'N';
+            }
+
+            if ($('#Sunday').prop("checked") == true) {
+                sunday = 'Y';
+            }
+            else {
+                sunday = 'N';
+            }
+
+            if (!($('#Status').val().trim() != '0')) {
+                isAllValid = false;
+                $('.Status .error').css('display', 'block');
+            }
+            else {
+                $('.Status .error').css('display', 'none');
+            }
+
+            if (isAllValid) {
+                $('#submit').prop('disabled', true);
+
+                var data = {
+                    Name: $('#Employee_Name').val(),
+                    Father_Name: $('#Father_Name').val(),
+                    CNIC: $('#CNIC').val(),
+                    address: $('#Address').val(),
+                    Phone: $('#Phone').val(),
+                    Email: $('#Email').val(),
+                    Date_of_Birth: $('#DOB').val(),
+                    Gender: $('#Gender').val(),
+                    Designation: $('#Designation').val(),
+                    Gross_Salary: $('#Gross_salary').val(),
+                    Time_In: $('#Time_In').val(),
+                    Time_Out: $('#Time_Out').val(),
+                    Grace_Time_IN: $('#Grace_Time_In').val(),
+                    Grace_Time_Out: $('#Grace_Time_Out').val(),
+                    Overtime_Rate: $('#Overtime').val(),
+                    Job_type: $('#Job_type').val(),
+                    Adv_Staff: $('#Adv_Staff').val(),
+                    I_Tax: $('#I_Tax').val(),
+                    Telephone: $('#Telephone').val(),
+                    EOBI: $('#EOBI').val(),
+                    Leaves: $('#Leaves').val(),
+                    Monday_WD: Monday,
+                    Tuesday_WD: tuesday,
+                    Wednesday_WD: wednesday,
+                    Thursday_WD: thursday,
+                    Friday_WD: friday,
+                    Saturday_WD: saturday,
+                    Sunday_WD: sunday,
+                    Status: $('#Status').val(),
+                }
+
+                debugger
+                $.ajax({
+                    type: 'POST',
+                    url: '/Employee_list/Add_Employee',
+                    data: {
+                        'Name': data.Name,
+                        'Father_Name': data.Father_Name,
+                        'CNIC': data.CNIC,
+                        'address': data.address,
+                        'Phone': data.Phone,
+                        'Email': data.Email,
+                        'Date_of_Birth': data.Date_of_Birth,
+                        'Gender': data.Gender,
+                        'Designation': data.Designation,
+                        'Gross_Salary': data.Gross_Salary,
+                        'Time_In': data.Time_In,
+                        'Time_Out': data.Time_Out,
+                        'Grace_Time_IN': data.Grace_Time_IN,
+                        'Grace_Time_Out': data.Grace_Time_Out,
+                        'Overtime_Rate': data.Overtime_Rate,
+                        'Job_type': data.Job_type,
+                        'Adv_Staff': data.Adv_Staff,
+                        'I_Tax': data.I_Tax,
+                        'Telephone': data.Telephone,
+                        'EOBI': data.EOBI,
+                        'Leaves': data.Leaves,
+                        'Monday_WD': data.Monday_WD,
+                        'Tuesday_WD': data.Tuesday_WD,
+                        'Wednesday_WD': data.Wednesday_WD,
+                        'Thursday_WD': data.Thursday_WD,
+                        'Friday_WD': data.Friday_WD,
+                        'Saturday_WD': data.Saturday_WD,
+                        'Sunday_WD': data.Sunday_WD,
+                        'Status': data.Status
+                    }
+                    ,
+                    success: function (resp) {
+                        if (resp.status) {
+                            $('.success-message').delay(1000).fadeIn();
+                            $('.success-message').delay(1000).fadeOut();
+                            $('#Employee_Name,	#Father_Name,	#Address,	#CNIC,	#Phone,	#Email,	#DOB,	#Designation,	#Time_In,	#Time_Out,	#Grace_Time_In,	#Grace_Time_Out,	#Overtime,	#Gross_salary, #Leaves').val('');
+                            $('#Job_type').val(0);
+                            $('#Gender').val(0);
+                            $('#Status').val(0);
+                            $("#Monday").prop("checked", false);
+                            $("#Tuesday").prop("checked", false);
+                            $("#Wednesday").prop("checked", false);
+                            $("#Thursday").prop("checked", false);
+                            $("#Friday").prop("checked", false);
+                            $("#Saturday").prop("checked", false);
+                            $("#Sunday").prop("checked", false);
+
+                            $('#submit').prop('disabled', false);
+
+                        }
+                    }
+                });
+            }
+
+
+        });
+
+
+    });
+</script>
+<style>
+    .success-message {
+        display: none;
+    }
+</style>

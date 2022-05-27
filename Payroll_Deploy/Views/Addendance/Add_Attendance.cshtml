@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "Add_Attendance";
+}
+
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="success-message">
+            @Html.Partial("~/Views/Shared/Sucess_Alert.cshtml")
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card-box">
+                    <h4 class="card-title">Attendance</h4>
+                    <form action="#">
+                        <div class="form-group row emp_id">
+                            <label class="col-md-3 col-form-label">Employee</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="emp_id">
+                                <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Employee</span>
+                            </div>
+                        </div>
+                        <div class="form-group row Attendance_Date">
+                            <label class="col-md-3 col-form-label">Select Date</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="Attendance_Date">
+                                <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Date</span>
+                            </div>
+                        </div>
+                        <div class="form-group row In_Time">
+                            <label class="col-md-3 col-form-label">Sign In Time</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="In_Time">
+                                <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Sign In Time</span>
+                            </div>
+                        </div>
+                        <div class="form-group row Out_Time">
+                            <label class="col-md-3 col-form-label">Sign Out Time</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="Out_Time">
+                                <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Out Time</span>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<style>
+    span.error {
+        display: none;
+        color: #d93025;
+        font-size: 80%;
+        margin-top: 3px;
+    }
+</style>
+
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#submit').click(function (e) {
+            e.preventDefault();
+            var isAllValid = true;
+
+            if (!($('#emp_id').val().trim() != '')) {
+                isAllValid = false;
+                $('.emp_id .error').css('display', 'block');
+            }
+            else {
+                $('.emp_id .error').css('display', 'none');
+            }
+
+            if (!($('#Attendance_Date').val().trim() != '')) {
+                isAllValid = false;
+                $('.Attendance_Date .error').css('display', 'block');
+            }
+            else {
+                $('.Attendance_Date .error').css('display', 'none');
+            }
+
+
+            if (!($('#In_Time').val().trim() != '')) {
+                isAllValid = false;
+                $('.In_Time .error').css('display', 'block');
+            }
+            else {
+                $('.In_Time .error').css('display', 'none');
+            }
+
+            if (!($('#Out_Time').val().trim() != '')) {
+                isAllValid = false;
+                $('.Out_Time .error').css('display', 'block');
+            }
+            else {
+                $('.Out_Time .error').css('display', 'none');
+            }
+
+
+            if (isAllValid) {
+                $('#submit').prop('disabled', true);
+
+                var data = {
+                    Name: $('#emp_id').val(),
+                    Father_Name: $('#Attendance_Date').val(),
+                    CNIC: $('#In_Time').val(),
+                    address: $('#Out_Time').val()
+                }
+
+                debugger
+                $.ajax({
+                    type: 'POST',
+                    url: '/Addendance/Add_Attendance',
+                    data: {
+                        'Emp_id': data.Emp_id,
+                        'Attendance_Date': data.Attendance_Date,
+                        'Time_IN': data.Time_IN,
+                        'Time_Out': data.Time_Out
+                    }
+                    ,
+                    success: function (resp) {
+                        if (resp.status) {
+                            $('.success-message').delay(1000).fadeIn();
+                            $('.success-message').delay(1000).fadeOut();
+                            $('#submit').prop('disabled', false);
+
+                        }
+                    }
+                });
+            }
+
+
+        });
+
+
+    });
+</script>
+<style>
+    .success-message {
+        display: none;
+    }
+</style>
+

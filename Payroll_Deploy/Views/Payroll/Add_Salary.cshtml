@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewBag.Title = "Add_Salary";
+}
+
+
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="success-message">
+            @Html.Partial("~/Views/Shared/Sucess_Alert.cshtml")
+        </div>
+        <div class="alert-message">
+            @Html.Partial("~/Views/Shared/Alert.cshtml")
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h4 class="page-title">Add Staff Salary</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group Employee_list">
+                                <label>Select Staff</label>
+                                <select class="select" id="Employee_list">
+                                    <option value="0">-Select-</option>
+                                    @foreach (var s in ViewBag.Emplist as List<Payroll.Models.Employee>)
+                                    {
+                                        <option value="@s.Emp_id">@s.Name</option>
+                                    }
+                                </select>
+                                <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Employee</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group Month">
+                                <label>Month</label>
+                                <input class="form-control" type="month" id="Month">
+                                <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Month</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Total Earning</label>
+                                <input class="form-control" type="text" id="Total_Earning" readonly="readonly">
+                            </div>
+                            <div class="form-group collapse">
+                                <label>Gross salary</label>
+                                <input class="form-control" type="text" id="Gross_salary" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4 class="text-primary">Earnings</h4>
+                            <div class="form-group">
+                                <label>Working Days</label>
+                                <input class="form-control" type="text" id="Working_Days" readonly="readonly">
+                            </div>
+                            @*<div class="form-group">
+                                <label>Working Hours</label>
+                                <input class="form-control" type="text" id="Working_Hours" readonly="readonly">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Current Working Hours</label>
+                                <input class="form-control" type="text" id="Current_Working_Hours" readonly="readonly">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Over Time</label>
+                                <input class="form-control" type="text" id="OverTime_Amount" readonly="readonly">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Holidays</label>
+                                <input class="form-control" type="text" id="Holidays" readonly="readonly">
+                            </div>*@
+                        </div>
+                        <div class="col-sm-6">
+                            <h4 class="text-primary">Deductions</h4>
+                            @*<div class="form-group">
+                                <label>Absent Days</label>
+                                <input class="form-control" type="text" id="Absent" readonly="readonly">
+                            </div>*@
+
+
+                            <div class="form-group">
+                                <label>Advance staff</label>
+                                <input class="form-control" type="text" id="Adv_staff" readonly="readonly">
+                            </div>
+
+                            <div class="form-group">
+                                <label>I.Tax</label>
+                                <input class="form-control" type="text" id="I_Tax" readonly="readonly">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Telephone</label>
+                                <input class="form-control" type="text" id="Telephone" readonly="readonly">
+                            </div>
+
+                            <div class="form-group">
+                                <label>EOBI</label>
+                                <input class="form-control" type="text" id="EOBI" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-t-20 text-center">
+                        <button class="btn btn-primary submit-btn" id="Create_salary">Create Salary</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .success-message {
+        display: none;
+    }
+
+    span.error {
+        display: none;
+        color: #d93025;
+        font-size: 80%;
+        margin-top: 3px;
+    }
+
+    .alert-message {
+        display: none;
+    }
+</style>
+
+
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#Employee_list').change(function () {
+            $('#Month ,#Total_Earning, #Gross_salary, #Deduction, #Working_Days, #Working_Hours, #Holidays,#Absent,#Late_Time_Abcent, #Adv_staff,#I_Tax, #Telephone,#EOBI').val('');
+        });
+
+        $('#Month').change(function () {
+            $('#Total_Earning').val('');
+            $('#Gross_salary').val('');
+            $('#Deduction').val('');
+            $('#Working_Days').val('');
+            $('#Working_Hours').val('');
+            $('#Holidays').val('');
+            $('#Absent').val('');
+            $('#Late_Time_Abcent').val('');
+            $('#Adv_staff').val('');
+            $('#I_Tax').val('');
+            $('#Telephone').val('');
+            $('#EOBI').val('');
+
+            $.ajax({
+                type: 'POST',
+                url: '/Payroll/Get_Salary_data',
+                data: {
+                    'id': $('#Employee_list').val(),
+                    'Month': $('#Month').val()
+                }
+                ,
+                success: function (resp) {
+                    console.log(resp);
+                    $('#Total_Earning').val(resp.Status.Gross_salary);
+                    //$('#Gross_salary').val(resp.Status.Gross_salary);
+                    $('#Current_Working_Hours').val(resp.Status.Current_Salary_Hours);
+                    $('#Working_Days').val(resp.Status.Working_days);
+                    $('#Working_Hours').val(resp.Status.Working_hours);
+                    $('#Holidays').val(resp.Status.Holidays);
+                    $('#Absent').val(resp.Status.Abcent);
+                    $('#OverTime_Amount').val(resp.Status.Overtime_Amount);
+                    $('#Adv_staff').val(resp.Status.Adv_Staff);
+                    $('#I_Tax').val(resp.Status.I_tax);
+                    $('#Telephone').val(resp.Status.Telephone);
+                    $('#EOBI').val(resp.Status.EOBI);
+                    
+                },
+                error: function (ex) {
+                    alert('error')
+                }
+            });
+
+        });
+
+
+        $('#Create_salary').click(function (e) {
+            e.preventDefault();
+            var isAllValid = true;
+
+            if ($('#Employee_list').val().trim() == 0) {
+                isAllValid = false;
+                $('.Employee_list .error').css('display', 'block');
+            }
+            else {
+                $('.Employee_list .error').css('display', 'none');
+            }
+
+            if (!($('#Month').val().trim() != '')) {
+                isAllValid = false;
+                $('.Month .error').css('display', 'block');
+            }
+            else {
+                $('.Month .error').css('display', 'none');
+            }
+
+            if (isAllValid) {
+                $('#Create_salary').prop('disabled', true);
+
+                var data = {
+                    id: $('#Employee_list').val(),
+                    Month: $('#Month').val(),
+
+                }
+
+                debugger
+                $.ajax({
+                    type: 'POST',
+                    url: '/Payroll/Add_Salary',
+                    data: {
+                        'id': data.id,
+                        'Month': data.Month
+                    },
+                    success: function (resp) {
+                        if (resp.status == true) {
+                            $('.success-message').delay(1000).fadeIn();
+                            $('.success-message').delay(1000).fadeOut();
+                            $('#Create_salary').prop('disabled', false);
+                            $('#Employee_list').val("0");
+                            $('#Month ,#Total_Earning, #Current_Working_Hours, #Working_Days, #Working_Hours, #Holidays,#Absent,#OverTime_Amount, #Adv_staff ,#I_Tax,#Telephone,#EOBI').val('');
+                        }
+                        else {
+                            $('.alert-message').delay(1000).fadeIn();
+                            $('.alert-message').delay(1000).fadeOut();
+                            $('#Create_salary').prop('disabled', false);
+                            $('#Employee_list').val("0");
+                            $('#Month ,#Total_Earning, #Current_Working_Hours, #Working_Days, #Working_Hours, #Holidays,#Absent,#OverTime_Amount, #Adv_staff ,#I_Tax,#Telephone,#EOBI').val('');
+                            
+
+                        }
+                    },
+                    error: function (ex) {
+                        alert('error')
+                    }
+                });
+            }
+
+
+        });
+    });
+</script>

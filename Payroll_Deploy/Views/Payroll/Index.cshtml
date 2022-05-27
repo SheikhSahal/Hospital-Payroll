@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">Employees Salary</h4>
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                <a href="@Url.Action("Add_Salary","Payroll")" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Run Payroll</a>
+                <a href="@Url.Action("Index","MultiPayroll")" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> All Emp Payroll</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="datatable table table-stripped ">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Employee</th>
+                                <th>CNIC</th>
+                                <th>Email</th>
+                                <th>Month</th>
+                                <th>Salary</th>
+                                <th>Payslip</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int index = 1;}
+                            @foreach (var s in ViewBag.payroll_data as List<Payroll.Models.Payroll_Data>)
+                            {
+                                <tr>
+                                    <td>@s.emp_id</td>
+                                    <td>@s.Name</td>
+                                    <td>@s.CNIC</td>
+                                    <td>@s.Email</td>
+                                    <td>@s.Month</td>
+                                    <td>@s.Gross_salary</td>
+                                    <td><a class="btn btn-sm btn-primary" href="@Url.Action("Payslip", "Payroll", new { empid = s.emp_id, date = s.date })">Generate Slip</a></td>  
+                                </tr>
+                                index++;
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="delete_employee" class="modal fade delete-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="~/Content/assets/img/sent.png" alt="delete" width="50" height="46" />
+                <h3>Are you sure want to delete this Employee?</h3>
+                <div class="m-t-20">
+                    <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                    <button type="button" id="alert_Delete_btn" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
