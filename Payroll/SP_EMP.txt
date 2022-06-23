@@ -1,0 +1,78 @@
+USE [Hosp_Payroll]
+GO
+/****** Object:  StoredProcedure [dbo].[getEmpSal]    Script Date: 6/22/2022 4:55:52 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[getEmpSal] @emp_id int, @Date nvarchar(30)
+AS
+begin
+DECLARE @Set_year as nvarchar(30), @Set_Month as nvarchar(30)
+
+set @Set_year = SUBSTRING(@Date, 1, 4);
+set @Set_Month = reverse(substring(reverse(@Date), 1, 2));
+
+select r.total_precent_days  , r.Adv_staff , r.EOBI , r.I_Tax , r.Telephone , r.Days , r.Overtime_day,
+r.Overtime_Rate ,
+round(Cast((((r.total_precent_days * r.per_day)+r.add_Salary)- r.deduction) as money),2)  Net_Salary ,
+ r.Leaves
+from (
+select f.total_precent_days , 
+case when ISNULL(f.Days,0) = 0 then 
+((f.Overtime_day * f.Overtime_Rate)) 
+else
+--Cast((f.Overtime_Rate / f.Days) * f.Overtime_day) as decimal(7,4))
+(f.Overtime_Rate / f.Days) * f.Overtime_day
+end add_Salary,
+f.Adv_staff, f.EOBI ,f.I_Tax , f.Telephone , f.Days , f.Overtime_day , f.Overtime_Rate, (f.Gross_Salary / f.DaysInMonth) per_day 
+, ( ISNULL(f.Adv_staff,0) + ISNULL(f.EOBI,0) + ISNULL(f.I_Tax,0) + ISNULL(f.Telephone,0)) deduction ,f.Leaves
+ from (
+ --3 use for temporary i will remove after this month
+select (t.No_days + t.Get_sunday + t.get_holiday + t.Leaves) total_precent_days,
+--t.DaysInMonth -(t.No_days+t.No_sundays) total_abcent_days,
+t.employee_salary - (ISNULL(t.Adv_staff,0) + ISNULL(t.I_Tax,0) + ISNULL(t.Telephone,0) + ISNULL(t.EOBI,0)) Net_Salary,
+t.Overtime_day, t.Overtime_Rate , t.Days,
+ISNULL(t.Adv_staff,0)Adv_staff, ISNULL(t.I_Tax,0)I_Tax , ISNULL(t.Telephone,0) Telephone, ISNULL(t.EOBI,0)EOBI,
+t.Gross_Salary , t.DaysInMonth , t.gross_salary01 , t.Leaves
+ from (
+select count(e.att_date) No_days , dbo.[getSundaysandSaturdays](@Set_year,@Set_Month) No_sundays,
+(select e.Gross_Salary from Employee e where e.Emp_id =@emp_id) employee_salary,
+(select ISNULL(e.Adv_staff,0)Adv_staff from Employee e where e.Emp_id =@emp_id)Adv_staff,
+(select ISNULL(e.I_Tax,0) from Employee e where e.Emp_id =@emp_id)I_Tax,
+(select ISNULL(e.Telephone,0) from Employee e where e.Emp_id =@emp_id)Telephone,
+(select ISNULL(e.EOBI,0)EOBI from Employee e where e.Emp_id =@emp_id)EOBI,
+(select ISNULL(e.Overtime_Rate,0)Overtime_Rate from Employee e where e.Emp_id =@emp_id)Overtime_Rate,
+(select ISNULL(e.Overtime_day,0)Overtime_day from Employee e where e.Emp_id =@emp_id)Overtime_day,
+(select ISNULL(e.Days,0)Days from Employee e where e.Emp_id =@emp_id)Days,
+(select ISNULL(e.Gross_Salary,0)Gross_Salary from Employee e where e.Emp_id = @emp_id)Gross_Salary,
+(select ISNULL(e.Gross_Salary01,0)Gross_Salary from Employee e where e.Emp_id = @emp_id)gross_salary01,
+(SELECT DAY(EOMONTH(CONCAT(@Set_year,@Set_Month,'01'))))DaysInMonth,
+(SELECT dbo.f_count_sundays(@Set_year,@Set_Month)) Get_sunday,
+(select count(*) holiday_count from Holiday h where convert(varchar(7), h.H_Date, 126) = @Date) get_holiday,
+(select e.Leaves from Employee e where e.Emp_id = @emp_id) Leaves
+from (
+select ats.Emp_id emp_id, count(ats.Attendance_Date) att_date
+from attendance_sheet ats
+where convert(varchar(7), ats.Attendance_Date, 126) =  @Date
+and ats.Emp_id = @emp_id
+group by ats.Emp_id, ats.Attendance_Date)
+e) t ) f) r;
+/*
+select t.No_days + t.No_sundays total_no_working_days_per_month ,
+(select e.Gross_Salary G_Salary from Employee e where e.Emp_id = @emp_id) e_salary,
+(SELECT DAY(EOMONTH(CONCAT(@Set_year,@Set_Month,'01'))) - t.No_sundays) - t.No_days abcent,
+(select sum(p.Current_Abcent) total_emp_abcent_emp from Payroll p
+where p.Emp_id = @emp_id)total_emp_abcent,
+(select e.Leaves from Employee e where e.Emp_id = @emp_id) total_leave
+from (
+select count(e.att_date) No_days , dbo.[getSundaysandSaturdays](@Set_year,@Set_Month) No_sundays
+from (
+select ats.Emp_id emp_id, count(ats.Attendance_Date) att_date
+from attendance_sheet ats
+where convert(varchar(7), ats.Attendance_Date, 126) = @Date
+and ats.Emp_id = @emp_id
+group by ats.Emp_id, ats.Attendance_Date)
+e) t;*/
+end;

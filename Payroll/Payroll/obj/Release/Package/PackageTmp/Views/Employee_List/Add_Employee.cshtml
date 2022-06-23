@@ -186,8 +186,27 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group Overtime">
-                                            <label>Overtime:</label>
+                                            <label>Overtime Rate:</label>
                                             <input type="text" class="form-control" id="Overtime">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group Overtime">
+                                            <label>Overtime Day:</label>
+                                            <input type="text" class="form-control" id="Overtime_day">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group Overtime">
+                                            <label>Days:</label>
+                                            <input type="text" class="form-control" id="Days">
                                         </div>
                                     </div>
 
@@ -198,11 +217,10 @@
                                             <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Salary</span>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="row">
-
-
                                     <div class="col-md-6">
                                         <div class="form-group Leaves">
                                             <label>Leaves:</label>
@@ -507,6 +525,8 @@
                     Grace_Time_IN: $('#Grace_Time_In').val(),
                     Grace_Time_Out: $('#Grace_Time_Out').val(),
                     Overtime_Rate: $('#Overtime').val(),
+                    Overtime_day: $('#Overtime_day').val(),
+                    Days: $('#Days').val(),
                     Job_type: $('#Job_type').val(),
                     Adv_Staff: $('#Adv_Staff').val(),
                     I_Tax: $('#I_Tax').val(),
@@ -543,6 +563,8 @@
                         'Grace_Time_IN': data.Grace_Time_IN,
                         'Grace_Time_Out': data.Grace_Time_Out,
                         'Overtime_Rate': data.Overtime_Rate,
+                        'Overtime_day': data.Overtime_day,
+                        'Days': data.Days,
                         'Job_type': data.Job_type,
                         'Adv_Staff': data.Adv_Staff,
                         'I_Tax': data.I_Tax,

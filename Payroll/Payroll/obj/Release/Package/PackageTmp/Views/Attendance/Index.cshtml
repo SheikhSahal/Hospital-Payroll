@@ -22,12 +22,13 @@
                         <thead>
                             <tr>
                                 <th>S/No.</th>
+                                <th>Emp id</th>
                                 <th>Name</th>
                                 <th>Date</th>
-                                <th>Year</th>
-                                <th>Time In</th>
+                                <th>Day Attendance</th>
+                                @*<th>Time In</th>
                                 <th>Time Out</th>
-                                <th>Working Hours</th>
+                                <th>Working Hours</th>*@
                                 @*<th></th>*@
                             </tr>
                         </thead>
@@ -37,12 +38,13 @@
                             {
                                 <tr>
                                     <td>@index</td>
+                                    <td>@s.Emp_id</td>
                                     <td>@s.Ename</td>
                                     <td>@s.Attendance_Date.ToString("dd/MM/yyyy")</td>
                                     <td>@s.Att_Year</td>
-                                    <td>@s.Time_IN</td>
+                                    @*<td>@s.Time_IN</td>
                                     <td>@s.Time_Out</td>
-                                    <td>@s.DateDiff</td>
+                                    <td>@s.DateDiff</td>*@
                                     @*<td class="text-right">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

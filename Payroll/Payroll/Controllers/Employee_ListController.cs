@@ -47,6 +47,8 @@ namespace Payroll.Controllers
         public ActionResult Add_Employee(Employee e)
         {
             bool status = false;
+            Employee emp = db.Max_Empid();
+            e.Emp_id = emp.Emp_id;
             db.InsertBatchHeader(e);
             al.Document = e.Name;
             al.User_id = Convert.ToString(Session["User_id"]);

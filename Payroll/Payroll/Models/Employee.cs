@@ -34,6 +34,7 @@ namespace Payroll.Models
         public string Status { get; set; }
         public string Job_type { get; set; }
         public string Leaves { get; set; }
+        public string T_Leaves { get; set; }
 
         public string Adv_Staff { get; set; }
         public string I_tax { get; set; }
@@ -42,6 +43,8 @@ namespace Payroll.Models
         public string get_present_day { get; set; }
         public string total_no_days { get; set; }
         public string Gross_Salary_after_subtrate { get; set; }
+        public string Overtime_day { get; set; }
+        public string Days { get; set; }
 
         public int Working_Days { get; set; }
         public string Attendance_status { get; set; }

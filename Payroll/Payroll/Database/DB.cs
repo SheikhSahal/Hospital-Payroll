@@ -17,11 +17,12 @@ namespace Payroll.Database
         {
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("insert into Employee (Name,	Father_Name,	CNIC,	address,	Phone,	Email,	Date_of_Birth,	Gender,	Designation,	Gross_Salary,	Time_In,	Time_Out, Grace_Time_IN, Grace_Time_Out,	Overtime_Rate,	Monday_WD,	Tuesday_WD,	Wednesday_WD,	Thursday_WD,	Friday_WD,	Saturday_WD,	Sunday_WD , Status,Job_type,Leaves, Adv_staff, I_Tax, Telephone, EOBI )  values(@Name,	@Father_Name,	@CNIC,	@address,	@Phone,	@Email,	@Date_of_Birth,	@Gender,	@Designation,	@Gross_Salary,	@Time_In,	@Time_Out,@Grace_Time_IN, @Grace_Time_Out,	@Overtime_Rate,	@Monday_WD,	@Tuesday_WD,	@Wednesday_WD,	@Thursday_WD,	@Friday_WD,	@Saturday_WD,	@Sunday_WD, @Status,@Job_type,@Leaves, @Adv_staff, @I_Tax, @Telephone, @EOBI )", conn))
+                using (SqlCommand cmd = new SqlCommand("insert into Employee (Emp_id, Name,	Father_Name,	CNIC,	address,	Phone,	Email,	Date_of_Birth,	Gender,	Designation,	Gross_Salary,	Time_In,	Time_Out, Grace_Time_IN, Grace_Time_Out,	Overtime_Rate,	Monday_WD,	Tuesday_WD,	Wednesday_WD,	Thursday_WD,	Friday_WD,	Saturday_WD,	Sunday_WD , Status,Job_type,Leaves, Adv_staff, I_Tax, Telephone, EOBI , Overtime_day ,  Days)  values(@Emp_id, @Name,	@Father_Name,	@CNIC,	@address,	@Phone,	@Email,	@Date_of_Birth,	@Gender,	@Designation,	@Gross_Salary,	@Time_In,	@Time_Out,@Grace_Time_IN, @Grace_Time_Out,	@Overtime_Rate,	@Monday_WD,	@Tuesday_WD,	@Wednesday_WD,	@Thursday_WD,	@Friday_WD,	@Saturday_WD,	@Sunday_WD, @Status,@Job_type,@Leaves, @Adv_staff, @I_Tax, @Telephone, @EOBI , @Overtime_day ,  @Days )", conn))
                 {
 
                     conn.Open();
 
+                    cmd.Parameters.AddWithValue("@Emp_id", e.Emp_id);
                     cmd.Parameters.AddWithValue("@Name", e.Name);
                     cmd.Parameters.AddWithValue("@Father_Name", e.Father_Name);
                     cmd.Parameters.AddWithValue("@CNIC", e.CNIC);
@@ -51,6 +52,24 @@ namespace Payroll.Database
                     else
                     {
                         cmd.Parameters.AddWithValue("@Overtime_Rate", DBNull.Value);
+                    }
+
+                    if (e.Overtime_day != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Overtime_day", e.Overtime_day);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Overtime_day", DBNull.Value);
+                    }
+
+                    if (e.Days != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Days", e.Days);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Days", DBNull.Value);
                     }
 
                     cmd.Parameters.AddWithValue("@Monday_WD", e.Monday_WD);
@@ -121,7 +140,6 @@ namespace Payroll.Database
 
         }
 
-
         public List<Employee> Employee_list()
         {
             List<Employee> DBase = new List<Employee>();
@@ -137,55 +155,12 @@ namespace Payroll.Database
                         Employee emp = new Employee();
 
                         emp.Emp_id = Convert.ToInt32(reader["Emp_id"]);
+
                         emp.Name = Convert.ToString(reader["Name"]);
-                        emp.Father_Name = reader["Father_Name"].ToString();
-
-
-                        if (reader["CNIC"] != DBNull.Value)
-                        {
-                            emp.CNIC = reader["CNIC"].ToString();
-                        }
-
-                        if (reader["address"] != DBNull.Value)
-                        {
-                            emp.address = reader["address"].ToString();
-                        }
-
-                        if (reader["Phone"] != DBNull.Value)
-                        {
-                            emp.Phone = reader["Phone"].ToString();
-                        }
-
-                        if (reader["Email"] != DBNull.Value)
-                        {
-                            emp.Email = reader["Email"].ToString();
-                        }
-
-                        if (reader["Date_of_Birth"] != DBNull.Value)
-                        {
-                            emp.Date_of_Birth = Convert.ToDateTime(reader["Date_of_Birth"]);
-                        }
-
-                        emp.Gender = reader["Gender"].ToString();
-                        emp.Designation = reader["Designation"].ToString();
-                        emp.Gross_Salary = reader["Gross_Salary"].ToString();
-                        emp.Time_In = reader["Time_In"].ToString();
-                        emp.Time_Out = reader["Time_Out"].ToString();
-                        emp.Grace_Time_IN = reader["Grace_Time_IN"].ToString();
-                        emp.Grace_Time_Out = reader["Grace_Time_Out"].ToString();
-                        if (reader["Overtime_Rate"] != DBNull.Value)
-                        {
-                            emp.Overtime_Rate = reader["Overtime_Rate"].ToString();
-                        }
-                        emp.Monday_WD = reader["Monday_WD"].ToString();
-                        emp.Tuesday_WD = reader["Tuesday_WD"].ToString();
-                        emp.Wednesday_WD = reader["Wednesday_WD"].ToString();
-                        emp.Thursday_WD = reader["Thursday_WD"].ToString();
-                        emp.Friday_WD = reader["Friday_WD"].ToString();
-                        emp.Saturday_WD = reader["Saturday_WD"].ToString();
-                        emp.Sunday_WD = reader["Sunday_WD"].ToString();
-                        emp.Status = reader["Status"].ToString();
-
+                        emp.Father_Name = Convert.ToString(reader["Father_Name"]);
+                        emp.CNIC = Convert.ToString(reader["CNIC"]);
+                        emp.Phone = Convert.ToString(reader["Phone"]);
+                        emp.Gender = Convert.ToString(reader["Gender"]);
 
                         DBase.Add(emp);
 
@@ -194,6 +169,7 @@ namespace Payroll.Database
             }
             return DBase;
         }
+
 
 
         public List<Employee> New_Employee_list()
@@ -327,6 +303,16 @@ namespace Payroll.Database
                     {
                         emp.Overtime_Rate = reader["Overtime_Rate"].ToString();
                     }
+
+                    if (reader["Overtime_day"] != DBNull.Value)
+                    {
+                        emp.Overtime_day = reader["Overtime_day"].ToString();
+                    }
+
+                    if (reader["Days"] != DBNull.Value)
+                    {
+                        emp.Days = reader["Days"].ToString();
+                    }
                     emp.Monday_WD = reader["Monday_WD"].ToString();
                     emp.Tuesday_WD = reader["Tuesday_WD"].ToString();
                     emp.Wednesday_WD = reader["Wednesday_WD"].ToString();
@@ -342,6 +328,11 @@ namespace Payroll.Database
                     if (reader["Leaves"] != DBNull.Value)
                     {
                         emp.Leaves = reader["Leaves"].ToString();
+                    }
+
+                    if (reader["total_leaves"] != DBNull.Value)
+                    {
+                        emp.T_Leaves = reader["total_leaves"].ToString();
                     }
 
 
@@ -375,7 +366,7 @@ namespace Payroll.Database
         {
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("update Employee set Name=@Name,	Father_Name=@Father_Name,	CNIC=@CNIC,	address=@address,	Phone=@Phone,	Email=@Email,	Date_of_Birth=@Date_of_Birth,	Gender=@Gender,	Designation=@Designation,	Gross_Salary=@Gross_Salary,	Time_In=@Time_In,	Time_Out=@Time_Out,	Grace_Time_IN=@Grace_Time_IN, Grace_Time_Out=@Grace_Time_Out, Overtime_Rate=@Overtime_Rate,	Monday_WD=@Monday_WD,	Tuesday_WD=@Tuesday_WD,	Wednesday_WD=@Wednesday_WD,	Thursday_WD=@Thursday_WD,	Friday_WD=@Friday_WD,	Saturday_WD=@Saturday_WD,	Sunday_WD=@Sunday_WD, Status = @Status,Leaves = @Leaves,Job_type = @Job_type, Adv_staff= @Adv_staff,I_Tax= @I_Tax,Telephone =@Telephone,EOBI= @EOBI where Emp_id = @emp_id", conn))
+                using (SqlCommand cmd = new SqlCommand("update Employee set Name=@Name,	Father_Name=@Father_Name,	CNIC=@CNIC,	address=@address,	Phone=@Phone,	Email=@Email,	Date_of_Birth=@Date_of_Birth,	Gender=@Gender,	Designation=@Designation,	Gross_Salary=@Gross_Salary,	Time_In=@Time_In,	Time_Out=@Time_Out,	Grace_Time_IN=@Grace_Time_IN, Grace_Time_Out=@Grace_Time_Out, Overtime_Rate=@Overtime_Rate,	Monday_WD=@Monday_WD,	Tuesday_WD=@Tuesday_WD,	Wednesday_WD=@Wednesday_WD,	Thursday_WD=@Thursday_WD,	Friday_WD=@Friday_WD,	Saturday_WD=@Saturday_WD,	Sunday_WD=@Sunday_WD, Status = @Status,Leaves = @Leaves, total_leaves = @total_leaves,Job_type = @Job_type, Adv_staff= @Adv_staff,I_Tax= @I_Tax,Telephone =@Telephone,EOBI= @EOBI,Overtime_day = @Overtime_day, Days= @Days  where Emp_id = @emp_id", conn))
                 {
                     conn.Open();
                     cmd.Parameters.AddWithValue("@emp_id", e.Emp_id);
@@ -391,6 +382,24 @@ namespace Payroll.Database
                     else
                     {
                         cmd.Parameters.AddWithValue("@Email", DBNull.Value);
+                    }
+
+                    if (e.Overtime_day != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Overtime_day", e.Overtime_day);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Overtime_day", DBNull.Value);
+                    }
+
+                    if (e.Days != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Days", e.Days);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Days", DBNull.Value);
                     }
                     cmd.Parameters.AddWithValue("@Date_of_Birth", e.Date_of_Birth);
                     cmd.Parameters.AddWithValue("@Gender", e.Gender);
@@ -424,6 +433,16 @@ namespace Payroll.Database
                     {
                         cmd.Parameters.AddWithValue("@Leaves", DBNull.Value);
                     }
+
+                    if (e.T_Leaves != null)
+                    {
+                        cmd.Parameters.AddWithValue("@total_leaves", e.T_Leaves);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@total_leaves", DBNull.Value);
+                    }
+
                     if (e.Job_type != null)
                     {
                         cmd.Parameters.AddWithValue("@Job_type", e.Job_type);
@@ -561,6 +580,39 @@ namespace Payroll.Database
                         emp.Time_IN = Convert.ToString(reader["Time_IN"]);
                         emp.Time_Out = Convert.ToString(reader["Time_out"]);
                         emp.DateDiff = Convert.ToString(reader["working_hours"]);
+
+                        DBase.Add(emp);
+
+                    }
+                }
+            }
+            return DBase;
+        }
+
+
+        public List<Attendance> Attendance_sheet()
+        {
+            List<Attendance> DBase = new List<Attendance>();
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("att_list", conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Attendance emp = new Attendance();
+
+                        //emp.id = Convert.ToInt32(reader["id"]);
+                        emp.Emp_id = Convert.ToInt32(reader["Emp_id"]);
+                        emp.Ename = Convert.ToString(reader["Name"]);
+                        emp.Attendance_Date = Convert.ToDateTime(reader["Attendance_Date"]);
+                        emp.Att_Year = Convert.ToString(reader["day_att"]);
+                        //emp.Time_IN = Convert.ToString(reader["Time_IN"]);
+                        //emp.Time_Out = Convert.ToString(reader["Time_out"]);
+                        //emp.DateDiff = Convert.ToString(reader["working_hours"]);
 
                         DBase.Add(emp);
 
@@ -799,9 +851,24 @@ namespace Payroll.Database
                             emp.Working_days = Convert.ToInt32(reader["total_precent_days"]);
                         }
 
-                        if (reader["total_abcent_days"] != DBNull.Value)
+                        if (reader["Overtime_Rate"] != DBNull.Value)
                         {
-                            emp.Abcent = Convert.ToInt32(reader["total_abcent_days"]);
+                            emp.Overtime_rate = Convert.ToInt32(reader["Overtime_Rate"]);
+                        }
+
+                        if (reader["Days"] != DBNull.Value)
+                        {
+                            emp.Days = Convert.ToInt32(reader["Days"]);
+                        }
+
+                        if (reader["Overtime_day"] != DBNull.Value)
+                        {
+                            emp.Overtime_days = Convert.ToInt32(reader["Overtime_day"]);
+                        }
+
+                        if (reader["leaves"] != DBNull.Value)
+                        {
+                            emp.Leaves = reader["leaves"].ToString();
                         }
 
                         if (reader["Net_Salary"] != DBNull.Value)
@@ -847,7 +914,7 @@ namespace Payroll.Database
         {
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("insert into Payroll (Emp_id,	Pyoll_Date,	Working_Days,	Working_Hours,	Holidays,	Current_Abcent,	Current_Salary_Hours,Over_time_Hours,Overtime_amount,Gross_Salary , Adv_staff, I_Tax , Telephone, EOBI)  values (@Emp_id,	@Pyoll_Date,	@Working_Days,	@Working_Hours,	@Holidays,	@Current_Abcent,	@Current_Salary_Hours,@Over_time_Hours,@Overtime_amount,@Gross_Salary , @Adv_staff, @I_Tax , @Telephone, @EOBI)", conn))
+                using (SqlCommand cmd = new SqlCommand("insert into Payroll (Emp_id,	Pyoll_Date,	Working_Days,	Working_Hours,	Holidays,	Current_Abcent,	Leaves,Gross_Salary , Adv_staff, I_Tax , Telephone, EOBI, Overtime_day, Overtime_Rate, Days)  values (@Emp_id,	@Pyoll_Date,	@Working_Days,	@Working_Hours,	@Holidays,	@Current_Abcent,	@Leaves,@Gross_Salary , @Adv_staff, @I_Tax , @Telephone, @EOBI, @Overtime_day, @Overtime_Rate, @Days)", conn))
                 {
 
                     conn.Open();
@@ -858,14 +925,22 @@ namespace Payroll.Database
                     cmd.Parameters.AddWithValue("@Working_Hours", pd.Working_hours);
                     cmd.Parameters.AddWithValue("@Holidays", pd.Holidays);
                     cmd.Parameters.AddWithValue("@Current_Abcent", pd.Abcent);
-                    cmd.Parameters.AddWithValue("@Current_Salary_Hours", pd.Current_Salary_Hours);
-                    cmd.Parameters.AddWithValue("@Over_time_Hours", pd.Overtime_Time_hours);
-                    cmd.Parameters.AddWithValue("@Overtime_amount", pd.Overtime_Amount);
+                    if (pd.Leaves != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Leaves", pd.Leaves);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Leaves", "0");
+                    }
                     cmd.Parameters.AddWithValue("@Gross_Salary", pd.Gross_salary);
                     cmd.Parameters.AddWithValue("@Adv_staff", pd.Adv_Staff);
                     cmd.Parameters.AddWithValue("@I_Tax", pd.I_tax);
                     cmd.Parameters.AddWithValue("@Telephone", pd.Telephone);
                     cmd.Parameters.AddWithValue("@EOBI", pd.EOBI);
+                    cmd.Parameters.AddWithValue("@Overtime_day", pd.Overtime_days);
+                    cmd.Parameters.AddWithValue("@Overtime_Rate", pd.Overtime_rate);
+                    cmd.Parameters.AddWithValue("@Days", pd.Days);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -938,6 +1013,34 @@ namespace Payroll.Database
             return employee;
         }
 
+
+        public Employee Max_Empid()
+        {
+            Employee employee = new Employee();
+
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("select max(e.Emp_id) +1 emp_id from Employee e", conn))
+                {
+
+                    conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        if (reader["emp_id"] != DBNull.Value)
+                        {
+                            employee.Emp_id = Convert.ToInt32(reader["emp_id"]);
+                        }
+                    }
+
+
+                }
+            }
+            return employee;
+        }
+
         public Payroll_Data Check_Payslip_data(int emp_id, string Monthwithdate)
         {
             Payroll_Data employee = new Payroll_Data();
@@ -974,7 +1077,7 @@ namespace Payroll.Database
 
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("select e.Emp_id, e.Name, e.Email,e.Designation,e.Phone,p.Pyoll_Date,p.Working_Days, p.Holidays, p.Current_Abcent , p.Current_Salary_Hours, p.Over_time_Hours, p.Overtime_amount , p.Gross_Salary , p.Adv_Staff , p.I_Tax , p.Telephone , p.EOBI  from payroll p , Employee e   where p.Emp_id = e.Emp_id  and e.Emp_id = @emp_id and e.Status = 'Y' and  convert(varchar(7), p.Pyoll_Date, 126) = convert(varchar(7), @P_Date, 126)", conn))
+                using (SqlCommand cmd = new SqlCommand("select e.Emp_id, e.Name, e.Gross_Salary basic_sal , e.Email,e.Designation,e.Phone,p.Pyoll_Date,p.Working_Days, p.Holidays, p.Current_Abcent ,  p.Overtime_day, p.Overtime_Rate , p.Gross_Salary , p.Days, p.Adv_Staff , p.I_Tax , p.Telephone , p.EOBI  from payroll p , Employee e   where p.Emp_id = e.Emp_id  and e.Emp_id = @emp_id and e.Status = 'Y' and  convert(varchar(7), p.Pyoll_Date, 126) = convert(varchar(7), @P_Date, 126)", conn))
                 {
 
                     conn.Open();
@@ -998,6 +1101,11 @@ namespace Payroll.Database
                         {
                             employee.Email = Convert.ToString(reader["Email"]);
                         }
+
+                        if (reader["basic_sal"] != DBNull.Value)
+                        {
+                            employee.basic_sal = Convert.ToString(reader["basic_sal"]);
+                        }
                         if (reader["Designation"] != DBNull.Value)
                         {
                             employee.Designation = Convert.ToString(reader["Designation"]);
@@ -1020,25 +1128,27 @@ namespace Payroll.Database
                             employee.Holidays = Convert.ToInt32(reader["Holidays"]);
                         }
 
+                        if (reader["Overtime_day"] != DBNull.Value)
+                        {
+                            employee.Overtime_days = Convert.ToInt32(reader["Overtime_day"]);
+                        }
+
+                        if (reader["Overtime_Rate"] != DBNull.Value)
+                        {
+                            employee.Overtime_rate = Convert.ToInt32(reader["Overtime_Rate"]);
+                        }
+
+                        if (reader["Days"] != DBNull.Value)
+                        {
+                            employee.Days = Convert.ToInt32(reader["Days"]);
+                        }
+
                         if (reader["Current_Abcent"] != DBNull.Value)
                         {
                             employee.Abcent = Convert.ToInt32(reader["Current_Abcent"]);
                         }
 
-                        if (reader["Current_Salary_Hours"] != DBNull.Value)
-                        {
-                            employee.Current_Salary_Hours = Convert.ToInt32(reader["Current_Salary_Hours"]);
-                        }
-
-                        if (reader["Over_time_Hours"] != DBNull.Value)
-                        {
-                            employee.Overtime_Time_hours= Convert.ToInt32(reader["Over_time_Hours"]);
-                        }
-
-                        if (reader["Overtime_amount"] != DBNull.Value)
-                        {
-                            employee.Overtime_Amount = Convert.ToInt32(reader["Overtime_amount"]);
-                        }
+                        
 
                         if (reader["Gross_Salary"] != DBNull.Value)
                         {
@@ -1214,6 +1324,9 @@ namespace Payroll.Database
             }
 
         }
+
+
+
 
         public void Activity_log(Activity_log al)
         {

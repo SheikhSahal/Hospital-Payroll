@@ -23,7 +23,7 @@ namespace Payroll.Controllers
             }
             else
             {
-                List<Attendance> attlist = db.Attendance_sheet_List();
+                List<Attendance> attlist = db.Attendance_sheet();
                 ViewBag.attlist = attlist;
                 return View();
             }

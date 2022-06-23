@@ -65,6 +65,21 @@
                                 <label>Working Days</label>
                                 <input class="form-control" type="text" id="Working_Days" readonly="readonly">
                             </div>
+
+                            <div class="form-group">
+                                <label>Overtime Rate</label>
+                                <input class="form-control" type="text" id="Overtime_Rate" readonly="readonly">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Overtime Day</label>
+                                <input class="form-control" type="text" id="Overtime_Day" readonly="readonly">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Days</label>
+                                <input class="form-control" type="text" id="Days" readonly="readonly">
+                            </div>
                             @*<div class="form-group">
                                 <label>Working Hours</label>
                                 <input class="form-control" type="text" id="Working_Hours" readonly="readonly">
@@ -147,7 +162,7 @@
     $(document).ready(function () {
 
         $('#Employee_list').change(function () {
-            $('#Month ,#Total_Earning, #Gross_salary, #Deduction, #Working_Days, #Working_Hours, #Holidays,#Absent,#Late_Time_Abcent, #Adv_staff,#I_Tax, #Telephone,#EOBI').val('');
+            $('#Month ,#Total_Earning, #Gross_salary, #Deduction, #Working_Days, #Working_Hours, #Holidays,#Absent,#Late_Time_Abcent, #Adv_staff,#I_Tax, #Telephone,#EOBI, #Overtime_Rate, #Overtime_Day, #Days').val('');
         });
 
         $('#Month').change(function () {
@@ -163,6 +178,9 @@
             $('#I_Tax').val('');
             $('#Telephone').val('');
             $('#EOBI').val('');
+            $('#Overtime_Rate').val('');
+            $('#Overtime_Day').val('');
+            $('#Days').val('');
 
             $.ajax({
                 type: 'POST',
@@ -186,6 +204,9 @@
                     $('#I_Tax').val(resp.Status.I_tax);
                     $('#Telephone').val(resp.Status.Telephone);
                     $('#EOBI').val(resp.Status.EOBI);
+                    $('#Overtime_Rate').val(resp.Status.Overtime_rate);
+                    $('#Overtime_Day').val(resp.Status.Overtime_days);
+                    $('#Days').val(resp.Status.Days);
                     
                 },
                 error: function (ex) {

@@ -31,7 +31,8 @@ namespace Payroll.Controllers
                 Payroll_Data empdata = db.Payroll_Data(id, Month);
 
                 empdata.emp_id = id;
-                empdata.date = DateTime.Now.Date;
+                DateTime get_date = Convert.ToDateTime(Month + "-28");
+                empdata.date = get_date;
 
                 if (valid_salary.Count_emp != 1)
                 {
