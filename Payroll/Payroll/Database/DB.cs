@@ -510,6 +510,24 @@ namespace Payroll.Database
             }
         }
 
+
+
+
+        public void DeletePayroll(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("delete from Payroll where id = @emp_id", conn))
+                {
+                    conn.Open();
+
+                    cmd.Parameters.AddWithValue("@emp_id", id);
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
+
         public void InsertAttendance(Attendance a)
         {
             using (SqlConnection conn = new SqlConnection(connectString))
@@ -753,6 +771,28 @@ namespace Payroll.Database
         }
 
 
+
+
+        public Employee Validate_Leaves(int id, string Month)
+        {
+            Employee emp = new Employee();
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("select sum(ISNULL(p.leaves,0)) emp_count_leave from Payroll p  where p.Emp_id = @emp_id and year(p.Pyoll_Date) = @Year", conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@emp_id", id);
+                    cmd.Parameters.AddWithValue("@Year", Month);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+
+                    reader.Read();
+                    emp.Leaves = Convert.ToString(reader["emp_count_leave"]);
+                }
+            }
+            return emp;
+        }
+
         public Attendance Attendance_sheet_List_Detail(int id)
         {
             Attendance emp = new Attendance();
@@ -804,7 +844,7 @@ namespace Payroll.Database
             List<Payroll_Data> DBase = new List<Payroll_Data>();
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("select e.emp_id, e.Name, p.pyoll_date ,  e.CNIC , e.Email , format(p.pyoll_date,'MMMM,yyyy') Month , p.Gross_salary from payroll p , Employee e where p.emp_id = e.Emp_id", conn))
+                using (SqlCommand cmd = new SqlCommand("select p.id,e.emp_id, e.Name, p.pyoll_date ,  e.CNIC , e.Email , format(p.pyoll_date,'MMMM,yyyy') Month , p.Gross_salary from payroll p , Employee e where p.emp_id = e.Emp_id", conn))
                 {
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -813,6 +853,7 @@ namespace Payroll.Database
                     {
                         Payroll_Data emp = new Payroll_Data();
 
+                        emp.id = Convert.ToInt32(reader["id"]);
                         emp.emp_id = Convert.ToInt32(reader["emp_id"]);
                         emp.Name = Convert.ToString(reader["Name"]);
                         emp.date = Convert.ToDateTime(reader["pyoll_date"]);

@@ -288,6 +288,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Connection_string.cs" />
     <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\BackupController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\Employee_ListController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -349,6 +350,7 @@
     <Content Include="Views\Shared\Alert.cshtml" />
     <Content Include="Views\Excel_Export\Index.cshtml" />
     <Content Include="Views\MultiPayroll\Index.cshtml" />
+    <Content Include="Views\Backup\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -358,6 +360,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Backu\" />
     <Folder Include="Content\Files\" />
   </ItemGroup>
   <PropertyGroup>

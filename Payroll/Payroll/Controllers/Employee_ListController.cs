@@ -34,6 +34,7 @@ namespace Payroll.Controllers
 
             if (Session["Username"] == null)
             {
+
                 return RedirectToAction("Index", "Login");
             }
             else
@@ -64,6 +65,11 @@ namespace Payroll.Controllers
         {
             Employee emplist = db.Employee_Detail(id);
             ViewBag.emplist = emplist;
+
+            string CurrentYear = DateTime.Now.Year.ToString();
+
+            Employee validate_leaves = db.Validate_Leaves(id,CurrentYear);
+            ViewBag.valid_leaves = validate_leaves; 
             return View();
         }
 

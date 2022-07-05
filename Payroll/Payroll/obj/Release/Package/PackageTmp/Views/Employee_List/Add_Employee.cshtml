@@ -227,6 +227,16 @@
                                             <input type="text" class="form-control" id="Leaves">
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group Leaves">
+                                            <label>Total Leaves:</label>
+                                            <input type="text" class="form-control" id="T_Leaves">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group Status">
                                             <label>Status:</label>
@@ -239,50 +249,49 @@
                                         </div>
                                     </div>
                                 </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-2">No. Days:</label>
+                                        <div class="col-md-6">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="checkbox" id="Monday"> Monday
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="checkbox" id="Tuesday"> Tuesday
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="checkbox" id="Wednesday"> Wednesday
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="checkbox" id="Thursday"> Thursday
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="checkbox" id="Friday"> Friday
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="checkbox" id="Saturday"> Saturday
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="checkbox" id="Sunday"> Sunday
+                                                </label>
+                                            </div>
+                                        </div>
 
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-2">No. Days:</label>
-                                    <div class="col-md-6">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="checkbox" id="Monday"> Monday
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="checkbox" id="Tuesday"> Tuesday
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="checkbox" id="Wednesday"> Wednesday
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="checkbox" id="Thursday"> Thursday
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="checkbox" id="Friday"> Friday
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="checkbox" id="Saturday"> Saturday
-                                            </label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="checkbox" id="Sunday"> Sunday
-                                            </label>
-                                        </div>
                                     </div>
 
                                 </div>
-
-                            </div>
                         </div>
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary" id="submit">Submit</button>
@@ -533,6 +542,7 @@
                     Telephone: $('#Telephone').val(),
                     EOBI: $('#EOBI').val(),
                     Leaves: $('#Leaves').val(),
+                    T_Leaves: $('#T_Leaves').val(),
                     Monday_WD: Monday,
                     Tuesday_WD: tuesday,
                     Wednesday_WD: wednesday,
@@ -571,6 +581,7 @@
                         'Telephone': data.Telephone,
                         'EOBI': data.EOBI,
                         'Leaves': data.Leaves,
+                        'T_Leaves': data.T_Leaves,
                         'Monday_WD': data.Monday_WD,
                         'Tuesday_WD': data.Tuesday_WD,
                         'Wednesday_WD': data.Wednesday_WD,

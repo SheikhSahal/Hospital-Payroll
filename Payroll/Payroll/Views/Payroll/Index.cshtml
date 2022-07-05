@@ -17,6 +17,10 @@
         </div>
 
         <div class="row">
+            <input id="myInput" type="text" placeholder="Search..">
+        </div>
+
+        <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
                     <table class="datatable table table-stripped ">
@@ -29,13 +33,17 @@
                                 <th>Month</th>
                                 <th>Salary</th>
                                 <th>Payslip</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="myTable">
                             @{int index = 1;}
                             @foreach (var s in ViewBag.payroll_data as List<Payroll.Models.Payroll_Data>)
                             {
                                 <tr>
+                                    <td class="collapse">
+                                        <input type="hidden" class="emp-id" value="@s.id" />
+                                    </td>
                                     <td>@s.emp_id</td>
                                     <td>@s.Name</td>
                                     <td>@s.CNIC</td>
@@ -43,6 +51,14 @@
                                     <td>@s.Month</td>
                                     <td>@s.Gross_salary</td>
                                     <td><a class="btn btn-sm btn-primary" href="@Url.Action("Payslip", "Payroll", new { empid = s.emp_id, date = s.date })">Generate Slip</a></td>  
+                                    <td>
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item delete_bf_alert" href="#" data-toggle="modal" data-target="#delete_employee"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 index++;
                             }
@@ -59,12 +75,13 @@
     </div>
 
 </div>
+
 <div id="delete_employee" class="modal fade delete-modal" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body text-center">
                 <img src="~/Content/assets/img/sent.png" alt="delete" width="50" height="46" />
-                <h3>Are you sure want to delete this Employee?</h3>
+                <h3>Are you sure want to delete this Record?</h3>
                 <div class="m-t-20">
                     <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
                     <button type="button" id="alert_Delete_btn" class="btn btn-danger">Delete</button>
@@ -73,3 +90,30 @@
         </div>
     </div>
 </div>
+
+
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        var UrlAction = "";
+        $('.delete_bf_alert').click(function () {
+            var row = $(this).parent().parent().parent().parent("tr");
+            var rowtwo = row.find('.emp-id').val();
+            UrlAction = rowtwo;
+        });
+
+        $('#alert_Delete_btn').click(function () {
+            window.location.href = '/Payroll/Delete_Payroll/' + UrlAction;
+        });
+
+    });
+</script>

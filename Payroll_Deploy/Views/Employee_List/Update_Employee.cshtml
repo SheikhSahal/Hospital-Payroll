@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Update_Employee";
     var data = ViewBag.emplist as Payroll.Models.Employee;
+    var validate_emp = ViewBag.valid_leaves as Payroll.Models.Employee;
 }
 <div class="page-wrapper">
     <div class="content">
@@ -208,8 +209,27 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group Overtime">
-                                            <label>Overtime:</label>
+                                            <label>Overtime Rate:</label>
                                             <input type="text" class="form-control" id="Overtime" value="@data.Overtime_Rate">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group Overtime">
+                                            <label>Overtime Day:</label>
+                                            <input type="text" class="form-control" id="Overtime_day" value="@data.Overtime_day">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group Overtime">
+                                            <label>Days:</label>
+                                            <input type="text" class="form-control" id="Days" value="@data.Days">
                                         </div>
                                     </div>
 
@@ -220,15 +240,29 @@
                                             <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Salary</span>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <div class="row">
+
                                     <div class="col-md-6">
                                         <div class="form-group Leaves">
                                             <label>Leaves:</label>
                                             <input type="text" class="form-control" id="Leaves" value="@data.Leaves">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Your leaves are not greater than Total leaves</span>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Total Leaves:</label>
+                                            <input type="text" class="form-control" id="T_Leaves" value="@data.T_Leaves">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group Status">
                                             <label>Status:</label>
@@ -249,6 +283,9 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-6">
+                                            <input type="hidden" id="validate_leaves" value="@validate_emp.Leaves" />
+                                    </div>
                                 </div>
 
                                 <div class="form-group row">
@@ -362,7 +399,7 @@
 
                                     </div>
 
-
+                                    
                                 </div>
 
                             </div>
@@ -588,6 +625,20 @@
                 $('.Status .error').css('display', 'none');
             }
 
+            var leaves = $('#Leaves').val();
+            var validate_leaves = $('#validate_leaves').val();
+            var total_leaves = $('#T_Leaves').val();
+            var get_leaves = parseInt(leaves)+ parseInt(validate_leaves);
+
+            if (get_leaves >= total_leaves) {
+                isAllValid = false;
+                $('.Leaves .error').css('display', 'block');
+            }else
+            {
+                $('.Leaves .error').css('display', 'none');
+            }
+            
+
             if (isAllValid) {
                 $('#submit').prop('disabled', true);
 
@@ -607,8 +658,11 @@
                     Time_Out: $('#Time_Out').val(),
                     Grace_Time_IN: $('#Grace_Time_In').val(),
                     Grace_Time_Out: $('#Grace_Time_Out').val(),
+                    Overtime_day: $('#Overtime_day').val(),
                     Overtime_Rate: $('#Overtime').val(),
+                    Days: $('#Days').val(),
                     Leaves:$('#Leaves').val(),
+                    T_Leaves :$('#T_Leaves').val(),
                     Job_type: $('#Job_type').val(),
                     Adv_Staff: $('#Adv_Staff').val(),
                     I_Tax: $('#I_Tax').val(),
@@ -645,7 +699,10 @@
                         'Grace_Time_IN': data.Grace_Time_IN,
                         'Grace_Time_Out': data.Grace_Time_Out,
                         'Overtime_Rate': data.Overtime_Rate,
+                        'Overtime_day': data.Overtime_day,
+                        'Days': data.Days,
                         'Leaves': data.Leaves,
+                        'T_Leaves' : data.T_Leaves,
                         'Job_type': data.Job_type,
                         'Adv_Staff': data.Adv_Staff,
                         'I_Tax': data.I_Tax,

@@ -62,6 +62,6 @@ E:\Payroll\Payroll\Payroll\bin\System.Web.Webpages.Deployment.xml
 E:\Payroll\Payroll\Payroll\bin\System.Web.Webpages.Razor.xml
 E:\Payroll\Payroll\Payroll\bin\System.Web.Helpers.xml
 E:\Payroll\Payroll\Payroll\bin\System.Web.Mvc.xml
-E:\Payroll\Payroll\Payroll\obj\Debug\Payroll.csprojResolveAssemblyReference.cache
 E:\Payroll\Payroll\Payroll\obj\Debug\Payroll.dll
 E:\Payroll\Payroll\Payroll\obj\Debug\Payroll.pdb
+E:\Payroll\Payroll\Payroll\obj\Debug\Payroll.csprojResolveAssemblyReference.cache

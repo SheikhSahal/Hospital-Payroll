@@ -122,5 +122,10 @@ namespace Payroll.Controllers
         }
 
 
+        public ActionResult Delete_Payroll(int id)
+        {
+            db.DeletePayroll(id);
+            return RedirectToAction("Index","Payroll");
+        }
     }
 }

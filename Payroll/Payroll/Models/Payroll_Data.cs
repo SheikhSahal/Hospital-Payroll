@@ -7,6 +7,7 @@ namespace Payroll.Models
 {
     public class Payroll_Data
     {
+        public int id { get; set; }
         public int emp_id { get; set; }
         public DateTime date { get; set; }
 

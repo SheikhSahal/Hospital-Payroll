@@ -70,7 +70,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/10/2022 12:33:53</publishTime>
     </File>
     <File Include="bin/Payroll.dll">
-      <publishTime>06/01/2022 14:18:16</publishTime>
+      <publishTime>07/05/2022 15:01:32</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>02/10/2022 12:33:53</publishTime>
@@ -486,17 +486,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Attendance/Update_Attendance.cshtml">
       <publishTime>04/20/2022 17:34:34</publishTime>
     </File>
+    <File Include="Views/Backup/Index.cshtml">
+      <publishTime>07/05/2022 14:47:46</publishTime>
+    </File>
     <File Include="Views/Dashboard/Index.cshtml">
       <publishTime>02/10/2022 12:33:52</publishTime>
     </File>
     <File Include="Views/Employee_List/Add_Employee.cshtml">
-      <publishTime>05/30/2022 20:22:45</publishTime>
+      <publishTime>06/22/2022 15:22:31</publishTime>
     </File>
     <File Include="Views/Employee_List/Index.cshtml">
-      <publishTime>05/16/2022 13:57:59</publishTime>
+      <publishTime>07/05/2022 13:30:54</publishTime>
     </File>
     <File Include="Views/Employee_List/Update_Employee.cshtml">
-      <publishTime>05/30/2022 20:35:39</publishTime>
+      <publishTime>06/29/2022 17:58:07</publishTime>
     </File>
     <File Include="Views/Error/Index.cshtml">
       <publishTime>02/10/2022 12:33:52</publishTime>
@@ -505,7 +508,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/27/2022 18:05:08</publishTime>
     </File>
     <File Include="Views/Holidays/add_holiday.cshtml">
-      <publishTime>04/20/2022 17:35:29</publishTime>
+      <publishTime>06/02/2022 13:19:39</publishTime>
     </File>
     <File Include="Views/Holidays/Index.cshtml">
       <publishTime>04/20/2022 17:35:37</publishTime>
@@ -526,7 +529,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/20/2022 17:36:13</publishTime>
     </File>
     <File Include="Views/Payroll/Index.cshtml">
-      <publishTime>05/23/2022 17:30:09</publishTime>
+      <publishTime>07/05/2022 13:30:54</publishTime>
     </File>
     <File Include="Views/Payroll/Payslip.cshtml">
       <publishTime>06/01/2022 12:55:14</publishTime>
@@ -547,7 +550,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/16/2022 20:21:30</publishTime>
     </File>
     <File Include="Views/Shared/Side_Panel.cshtml">
-      <publishTime>05/30/2022 18:42:38</publishTime>
+      <publishTime>07/05/2022 14:51:03</publishTime>
     </File>
     <File Include="Views/Shared/Sucess_Alert.cshtml">
       <publishTime>02/10/2022 12:33:52</publishTime>

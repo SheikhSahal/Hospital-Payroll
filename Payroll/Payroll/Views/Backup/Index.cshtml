@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            
+                <div class="col-sm-4 col-4">
+                    <h4 class="page-title">Take Backup</h4>
+                </div>
+
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                @using (Html.BeginForm("Index", "Backup", FormMethod.Post))
+                {
+                    <input type="submit" value="Click here to take a Backukp"  class="btn btn-primary float-right btn-rounded"/>
+                    @*<a href="@Url.Action("Add_Employee","Employee_list")" class="btn btn-primary float-right btn-rounded"><i class="fa fa-window-restore"></i> Click here to take a Backup</a>*@
+                }
+                
+            </div>
+
+
+            
+        </div>
+
+    </div>
+
+</div>
+
