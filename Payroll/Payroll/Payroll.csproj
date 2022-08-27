@@ -297,6 +297,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MultiPayrollController.cs" />
     <Compile Include="Controllers\PayrollController.cs" />
+    <Compile Include="Controllers\Update_EMPController.cs" />
     <Compile Include="Database\DB.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -351,6 +352,7 @@
     <Content Include="Views\Excel_Export\Index.cshtml" />
     <Content Include="Views\MultiPayroll\Index.cshtml" />
     <Content Include="Views\Backup\Index.cshtml" />
+    <Content Include="Views\Update_EMP\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -170,7 +170,77 @@ namespace Payroll.Database
             return DBase;
         }
 
+        public List<Employee> Get_list()
+        {
+            List<Employee> DBase = new List<Employee>();
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("select e.Emp_id ,e.Name , e.Adv_staff , e.I_Tax , e.Telephone , e.EOBI , e.Overtime_Rate , e.Overtime_day ,e.Days , e.Gross_Salary, e.Leaves ,e.Total_Leaves from Employee e", conn))
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
 
+                    while (reader.Read())
+                    {
+                        Employee emp = new Employee();
+
+                        emp.Emp_id = Convert.ToInt32(reader["Emp_id"]);
+
+                        emp.Name = Convert.ToString(reader["Name"]);
+
+                        if (reader["Adv_staff"] != DBNull.Value)
+                        {
+                            emp.Adv_Staff = reader["Adv_staff"].ToString();
+                        }
+
+                        if (reader["I_Tax"] != DBNull.Value)
+                        {
+                            emp.I_tax = reader["I_Tax"].ToString();
+                        }
+                        if (reader["Telephone"] != DBNull.Value)
+                        {
+                            emp.Telephone = reader["Telephone"].ToString();
+                        }
+                        if (reader["EOBI"] != DBNull.Value)
+                        {
+                            emp.EOBI = reader["EOBI"].ToString();
+                        }
+                        if (reader["Overtime_Rate"] != DBNull.Value)
+                        {
+                            emp.Overtime_Rate = reader["Overtime_Rate"].ToString();
+                        }
+
+                        if (reader["Overtime_day"] != DBNull.Value)
+                        {
+                            emp.Overtime_day = reader["Overtime_day"].ToString();
+                        }
+
+                        if (reader["Days"] != DBNull.Value)
+                        {
+                            emp.Days = reader["Days"].ToString();
+                        }
+
+                        if (reader["Gross_Salary"] != DBNull.Value)
+                        {
+                            emp.Gross_Salary = reader["Gross_Salary"].ToString();
+                        }
+
+                        if (reader["Leaves"] != DBNull.Value)
+                        {
+                            emp.Leaves = reader["Leaves"].ToString();
+                        }
+                        if (reader["Total_Leaves"] != DBNull.Value)
+                        {
+                            emp.Leaves = reader["Total_Leaves"].ToString();
+                        }
+                        
+                        DBase.Add(emp);
+
+                    }
+                }
+            }
+            return DBase;
+        }
 
         public List<Employee> New_Employee_list()
         {

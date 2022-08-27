@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">Update Employee Salary</h4>
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                <a href="@Url.Action("Add_Attendance","Attendance")" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Submit</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="datatable table table-stripped " id="attendance">
+                        <thead>
+                            <tr>
+                                <th>Emp id</th>
+                                <th>Name</th>
+                                <th>Adv. Staff</th>
+                                <th>I Tax</th>
+                                <th>Telephone</th>
+                                <th>EOBI</th>
+                                <th>Overtime Rate</th>
+                                <th>Overtime Day</th>
+                                <th>Days</th>
+                                <th>Gross Salary</th>
+                                <th>Leaves</th>
+                                <th>Total leaves</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var s in ViewBag.getlist as List<Payroll.Models.Employee>)
+                            {
+                                <tr>
+                                    <td>@s.Emp_id</td>
+                                    <td>@s.Name</td>
+                                    <td>
+                                                <input type="text" class="Adv_Staff" id="Adv_Staff" value="@s.Adv_Staff">                            
+                                    </td>
+                                    <td>
+                                        <input type="text" class="I_tax" id="I_tax" value="@s.I_tax">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="Telephone" id="Telephone" value="@s.Telephone">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="EOBI" id="EOBI" value="@s.EOBI">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="Overtime_Rate" id="Overtime_Rate" value="@s.Overtime_Rate">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="Overtime_day" id="Overtime_day" value="@s.Overtime_day">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="Days" id="Days" value="@s.Days">
+                                    
+                                    </td>
+                                    <td>
+                                        <input type="text" class="Gross_Salary" id="Gross_Salary" value="@s.Gross_Salary">
+                                    
+                                    </td>
+                                    <td>
+                                        <input type="text" class="Leaves" id="Leaves" value="@s.Leaves">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="T_Leaves" id="T_Leaves" value="@s.T_Leaves">
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+    input {
+  width: 120%;
+}
+</style>
+
+
