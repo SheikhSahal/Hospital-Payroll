@@ -11,14 +11,14 @@
                 <h4 class="page-title">Update Employee Salary</h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="@Url.Action("Add_Attendance","Attendance")" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Submit</a>
+                <a href="#" id="submit" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Submit</a>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="datatable table table-stripped " id="attendance">
+                    <table class="table table-stripped " id="attendance">
                         <thead>
                             <tr>
                                 <th>Emp id</th>
@@ -35,7 +35,7 @@
                                 <th>Total leaves</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="details">
                             @foreach (var s in ViewBag.getlist as List<Payroll.Models.Employee>)
                             {
                                 <tr>
@@ -95,3 +95,19 @@
 </style>
 
 
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#submit').click(function () {
+            list = [];
+            $('#details tr').each(function (index, ele) {
+                var order = {
+                    Adv_Staff: $('.Adv_Staff').val()
+                }
+                JSON.stringify(order)
+                list.push(order);
+            })
+            console.log(list);
+        })
+    });
+</script>
