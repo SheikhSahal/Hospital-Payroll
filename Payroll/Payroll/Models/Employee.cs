@@ -16,6 +16,7 @@ namespace Payroll.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime Date_of_Birth { get; set; }
+        public DateTime Date_of_Joining { get; set; }
         public string Gender { get; set; }
         public string Designation { get; set; }
         public string Gross_Salary { get; set; }

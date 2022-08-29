@@ -97,6 +97,15 @@
 
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group DOJ">
+                                            <label>Date of Joining:</label>
+                                            <input type="date" class="form-control" id="DOJ" value="@data.Date_of_Joining.ToString("yyyy-MM-dd")">
+                                            <span class="error"><i class="fa fa-exclamation-circle"></i>&nbsp; Enter Date of Joining</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <h4 class="card-title">Offical details</h4>
@@ -478,7 +487,15 @@
                 $('.Phone .error').css('display', 'none');
             }
 
+            
 
+            if (!($('#DOJ').val().trim() != '')) {
+                isAllValid = false;
+                $('.DOJ .error').css('display', 'block');
+            }
+            else {
+                $('.DOJ .error').css('display', 'none');
+            }
             if (!($('#DOB').val().trim() != '')) {
                 isAllValid = false;
                 $('.DOB .error').css('display', 'block');
@@ -651,6 +668,7 @@
                     Phone: $('#Phone').val(),
                     Email: $('#Email').val(),
                     Date_of_Birth: $('#DOB').val(),
+                    Date_of_Joining: $('#DOJ').val(),
                     Gender: $('#Gender').val(),
                     Designation: $('#Designation').val(),
                     Gross_Salary: $('#Gross_salary').val(),
@@ -691,6 +709,7 @@
                         'Phone': data.Phone,
                         'Email': data.Email,
                         'Date_of_Birth': data.Date_of_Birth,
+                        'Date_of_Joining': data.Date_of_Joining,
                         'Gender': data.Gender,
                         'Designation': data.Designation,
                         'Gross_Salary': data.Gross_Salary,

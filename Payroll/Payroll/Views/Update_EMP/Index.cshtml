@@ -11,10 +11,19 @@
                 <h4 class="page-title">Update Employee Salary</h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="#" id="submit" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Submit</a>
+                <div class="success-message">
+                    @Html.Partial("~/Views/Shared/Sucess_Alert.cshtml")
+                </div>
+                @*<a href="#" id="submit" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Submit</a>*@
+                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
             </div>
         </div>
 
+        <div class="col-md-2">
+        <div class="row">
+            <input id="myInput" type="text" placeholder="Search..">
+        </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -39,7 +48,7 @@
                             @foreach (var s in ViewBag.getlist as List<Payroll.Models.Employee>)
                             {
                                 <tr>
-                                    <td>@s.Emp_id</td>
+                                    <td class="empid">@s.Emp_id</td>
                                     <td>@s.Name</td>
                                     <td>
                                                 <input type="text" class="Adv_Staff" id="Adv_Staff" value="@s.Adv_Staff">                            
@@ -92,22 +101,72 @@
     input {
   width: 120%;
 }
+        .success-message {
+        display: none;
+    }
 </style>
 
 
 <script src="~/Content/assets/js/Jquery3.6.1.js"></script>
 <script>
     $(document).ready(function () {
-        $('#submit').click(function () {
+
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#details tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        $('#submit').click(function (e) {
+            e.preventDefault();
             list = [];
             $('#details tr').each(function (index, ele) {
                 var order = {
-                    Adv_Staff: $('.Adv_Staff').val()
+                    Emp_id: $('.empid', this).text(),
+                    Adv_Staff: $('.Adv_Staff', this).val(),
+                    I_tax: $('.I_tax', this).val(),
+                    Telephone: $('.Telephone', this).val(),
+                    EOBI: $('.EOBI', this).val(),
+                    Overtime_Rate: $('.Overtime_Rate', this).val(),
+                    Overtime_day: $('.Overtime_day', this).val(),
+                    Days: $('.Days', this).val(),
+                    Gross_Salary: $('.Gross_Salary', this).val(),
+                    Leaves: $('.Leaves', this).val(),
+                    T_Leaves: $('.T_Leaves', this).val()
                 }
                 JSON.stringify(order)
                 list.push(order);
-            })
-            console.log(list);
+            });
+
+            var datas = {
+                Employee: list
+            }
+
+            $('#submit').prop('disabled', true);
+
+            $.ajax({
+                type: 'POST',
+                url: '/Update_EMP/Save',
+                dataType: 'JSON',
+                data: { Employee: datas.Employee },
+                success: function (resp) {
+                    if (resp.status) {
+                        $('.success-message').delay(1000).fadeIn();
+                        $('.success-message').delay(1000).fadeOut();
+                        $('#submit').prop('disabled', false);
+
+                    }
+                    else {
+                        alert('Error');
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    $('#submit').text('Save');
+                }
+            });
+            
         })
     });
 </script>

@@ -17,7 +17,7 @@ namespace Payroll.Database
         {
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("insert into Employee (Emp_id, Name,	Father_Name,	CNIC,	address,	Phone,	Email,	Date_of_Birth,	Gender,	Designation,	Gross_Salary,	Time_In,	Time_Out, Grace_Time_IN, Grace_Time_Out,	Overtime_Rate,	Monday_WD,	Tuesday_WD,	Wednesday_WD,	Thursday_WD,	Friday_WD,	Saturday_WD,	Sunday_WD , Status,Job_type,Leaves, Adv_staff, I_Tax, Telephone, EOBI , Overtime_day ,  Days)  values(@Emp_id, @Name,	@Father_Name,	@CNIC,	@address,	@Phone,	@Email,	@Date_of_Birth,	@Gender,	@Designation,	@Gross_Salary,	@Time_In,	@Time_Out,@Grace_Time_IN, @Grace_Time_Out,	@Overtime_Rate,	@Monday_WD,	@Tuesday_WD,	@Wednesday_WD,	@Thursday_WD,	@Friday_WD,	@Saturday_WD,	@Sunday_WD, @Status,@Job_type,@Leaves, @Adv_staff, @I_Tax, @Telephone, @EOBI , @Overtime_day ,  @Days )", conn))
+                using (SqlCommand cmd = new SqlCommand("insert into Employee (Emp_id, Name,	Father_Name,	CNIC,	address,	Phone,	Email,	Date_of_Birth,	Date_joining,Gender,	Designation,	Gross_Salary,	Time_In,	Time_Out, Grace_Time_IN, Grace_Time_Out,	Overtime_Rate,	Monday_WD,	Tuesday_WD,	Wednesday_WD,	Thursday_WD,	Friday_WD,	Saturday_WD,	Sunday_WD , Status,Job_type,Leaves, Adv_staff, I_Tax, Telephone, EOBI , Overtime_day ,  Days)  values(@Emp_id, @Name,	@Father_Name,	@CNIC,	@address,	@Phone,	@Email,	@Date_of_Birth,@Date_joining,	@Gender,	@Designation,	@Gross_Salary,	@Time_In,	@Time_Out,@Grace_Time_IN, @Grace_Time_Out,	@Overtime_Rate,	@Monday_WD,	@Tuesday_WD,	@Wednesday_WD,	@Thursday_WD,	@Friday_WD,	@Saturday_WD,	@Sunday_WD, @Status,@Job_type,@Leaves, @Adv_staff, @I_Tax, @Telephone, @EOBI , @Overtime_day ,  @Days )", conn))
                 {
 
                     conn.Open();
@@ -38,6 +38,8 @@ namespace Payroll.Database
                         cmd.Parameters.AddWithValue("@Email", DBNull.Value);
                     }
                     cmd.Parameters.AddWithValue("@Date_of_Birth", e.Date_of_Birth);
+                    cmd.Parameters.AddWithValue("@Date_joining", e.Date_of_Joining);
+                    
                     cmd.Parameters.AddWithValue("@Gender", e.Gender);
                     cmd.Parameters.AddWithValue("@Designation", e.Designation);
                     cmd.Parameters.AddWithValue("@Gross_Salary", e.Gross_Salary);
@@ -231,7 +233,7 @@ namespace Payroll.Database
                         }
                         if (reader["Total_Leaves"] != DBNull.Value)
                         {
-                            emp.Leaves = reader["Total_Leaves"].ToString();
+                            emp.T_Leaves = reader["Total_Leaves"].ToString();
                         }
                         
                         DBase.Add(emp);
@@ -342,6 +344,10 @@ namespace Payroll.Database
                         emp.CNIC = reader["CNIC"].ToString();
                     }
 
+                    if (reader["Date_joining"] != DBNull.Value)
+                    {
+                        emp.Date_of_Joining = Convert.ToDateTime(reader["Date_joining"]);
+                    }
                     if (reader["address"] != DBNull.Value)
                     {
                         emp.address = reader["address"].ToString();
@@ -432,11 +438,13 @@ namespace Payroll.Database
             return emp;
         }
 
+
+
         public void Update_Employees(Employee e)
         {
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("update Employee set Name=@Name,	Father_Name=@Father_Name,	CNIC=@CNIC,	address=@address,	Phone=@Phone,	Email=@Email,	Date_of_Birth=@Date_of_Birth,	Gender=@Gender,	Designation=@Designation,	Gross_Salary=@Gross_Salary,	Time_In=@Time_In,	Time_Out=@Time_Out,	Grace_Time_IN=@Grace_Time_IN, Grace_Time_Out=@Grace_Time_Out, Overtime_Rate=@Overtime_Rate,	Monday_WD=@Monday_WD,	Tuesday_WD=@Tuesday_WD,	Wednesday_WD=@Wednesday_WD,	Thursday_WD=@Thursday_WD,	Friday_WD=@Friday_WD,	Saturday_WD=@Saturday_WD,	Sunday_WD=@Sunday_WD, Status = @Status,Leaves = @Leaves, total_leaves = @total_leaves,Job_type = @Job_type, Adv_staff= @Adv_staff,I_Tax= @I_Tax,Telephone =@Telephone,EOBI= @EOBI,Overtime_day = @Overtime_day, Days= @Days  where Emp_id = @emp_id", conn))
+                using (SqlCommand cmd = new SqlCommand("update Employee set Name=@Name,	Father_Name=@Father_Name,	CNIC=@CNIC,	address=@address,	Phone=@Phone,	Email=@Email,	Date_of_Birth=@Date_of_Birth,	Date_joining=@Date_joining,Gender=@Gender,	Designation=@Designation,	Gross_Salary=@Gross_Salary,	Time_In=@Time_In,	Time_Out=@Time_Out,	Grace_Time_IN=@Grace_Time_IN, Grace_Time_Out=@Grace_Time_Out, Overtime_Rate=@Overtime_Rate,	Monday_WD=@Monday_WD,	Tuesday_WD=@Tuesday_WD,	Wednesday_WD=@Wednesday_WD,	Thursday_WD=@Thursday_WD,	Friday_WD=@Friday_WD,	Saturday_WD=@Saturday_WD,	Sunday_WD=@Sunday_WD, Status = @Status,Leaves = @Leaves, total_leaves = @total_leaves,Job_type = @Job_type, Adv_staff= @Adv_staff,I_Tax= @I_Tax,Telephone =@Telephone,EOBI= @EOBI,Overtime_day = @Overtime_day, Days= @Days  where Emp_id = @emp_id", conn))
                 {
                     conn.Open();
                     cmd.Parameters.AddWithValue("@emp_id", e.Emp_id);
@@ -445,6 +453,15 @@ namespace Payroll.Database
                     cmd.Parameters.AddWithValue("@CNIC", e.CNIC);
                     cmd.Parameters.AddWithValue("@address", e.address);
                     cmd.Parameters.AddWithValue("@Phone", e.Phone);
+                    
+                    if (e.Date_of_Joining != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Date_joining", e.Date_of_Joining);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Date_joining", DBNull.Value);
+                    }
                     if (e.Email != null)
                     {
                         cmd.Parameters.AddWithValue("@Email", e.Email);
@@ -564,6 +581,114 @@ namespace Payroll.Database
             }
         }
 
+        public void Update_Employees_Sal(Employee e)
+        {
+            using (SqlConnection conn = new SqlConnection(connectString))
+            {
+                using (SqlCommand cmd = new SqlCommand("update Employee set Adv_staff =@Adv_staff ,	I_Tax=@I_Tax,	Telephone=@Telephone,	EOBI=@EOBI,	Overtime_Rate =@Overtime_Rate ,	Overtime_day =@Overtime_day ,	Days  =@Days  ,	Gross_Salary =@Gross_Salary ,	Leaves =@Leaves ,	Total_Leaves=@Total_Leaves where Emp_id = @Emp_id", conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@emp_id", e.Emp_id);
+
+                    if (e.Overtime_day != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Overtime_day", e.Overtime_day);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Overtime_day", DBNull.Value);
+                    }
+
+                    if (e.Days != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Days", e.Days);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Days", DBNull.Value);
+                    }
+
+                    if (e.Gross_Salary != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Gross_Salary", e.Gross_Salary);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Gross_Salary", DBNull.Value);
+                    }
+                    
+
+                    if (e.Overtime_Rate != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Overtime_Rate", e.Overtime_Rate);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Overtime_Rate", DBNull.Value);
+                    }
+                    
+                    if (e.Leaves != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Leaves", e.Leaves);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Leaves", DBNull.Value);
+                    }
+
+                    if (e.T_Leaves != null)
+                    {
+
+                        cmd.Parameters.AddWithValue("@Total_Leaves",Convert.ToInt32(e.T_Leaves));
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Total_Leaves", DBNull.Value);
+                    }
+
+                    
+                    if (e.Adv_Staff != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Adv_Staff", e.Adv_Staff);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Adv_Staff", DBNull.Value);
+                    }
+
+
+                    if (e.I_tax != null)
+                    {
+                        cmd.Parameters.AddWithValue("@I_tax", e.I_tax);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@I_tax", DBNull.Value);
+                    }
+
+                    if (e.Telephone != null)
+                    {
+                        cmd.Parameters.AddWithValue("@Telephone", e.Telephone);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Telephone", DBNull.Value);
+                    }
+
+                    if (e.EOBI != null)
+                    {
+                        cmd.Parameters.AddWithValue("@EOBI", e.EOBI);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@EOBI", DBNull.Value);
+                    }
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
 
         public void DeleteEmployee(int id)
         {

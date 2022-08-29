@@ -18,5 +18,18 @@ namespace Payroll.Controllers
             ViewBag.getlist = upd_Emp;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Save(EMPDataSet EMP)
+        {
+            bool status = false;
+            foreach(var s in EMP.Employee)
+            {
+                db.Update_Employees_Sal(s);
+            }
+            
+            status = true;
+            return new JsonResult { Data = new { status = status } };
+        }
     }
 }
