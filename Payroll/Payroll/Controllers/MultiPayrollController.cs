@@ -28,11 +28,11 @@ namespace Payroll.Controllers
             {
                 int id = s.Emp_id;
                 Payroll_Data valid_salary = db.Check_Payslip_data(id, Month);
-                Payroll_Data empdata = db.Payroll_Data(id, Month);
+                Fn_Payroll_Model empdata = db.Payroll_Data(id, Month);
 
-                empdata.emp_id = id;
+                empdata.Emp_id = id;
                 DateTime get_date = Convert.ToDateTime(Month + "-28");
-                empdata.date = get_date;
+                empdata.Payroll_date = get_date;
 
                 if (valid_salary.Count_emp != 1)
                 {

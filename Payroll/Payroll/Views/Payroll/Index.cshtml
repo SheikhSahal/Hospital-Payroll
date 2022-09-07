@@ -29,7 +29,7 @@
                                 <th>ID</th>
                                 <th>Employee</th>
                                 <th>CNIC</th>
-                                <th>Email</th>
+                                @*<th>Email</th>*@
                                 <th>Month</th>
                                 <th>Salary</th>
                                 <th>Payslip</th>
@@ -47,7 +47,7 @@
                                     <td>@s.emp_id</td>
                                     <td>@s.Name</td>
                                     <td>@s.CNIC</td>
-                                    <td>@s.Email</td>
+                                    @*<td>@s.Email</td>*@
                                     <td>@s.Month</td>
                                     <td>@s.Gross_salary</td>
                                     <td><a class="btn btn-sm btn-primary" href="@Url.Action("Payslip", "Payroll", new { empid = s.emp_id, date = s.date })">Generate Slip</a></td>  

@@ -33,7 +33,6 @@ namespace Payroll.Controllers
             }
         }
 
-
         public ActionResult Add_Salary()
         {
 
@@ -54,10 +53,10 @@ namespace Payroll.Controllers
         public ActionResult Add_Salary(int id, string Month)
         {
             bool status = false;
-            Payroll_Data empdata = db.Payroll_Data(id, Month);
-            empdata.emp_id = id;
+            Fn_Payroll_Model empdata = db.Payroll_Data(id, Month);
+            empdata.Emp_id = id;
             DateTime get_date = Convert.ToDateTime(Month + "-28");
-            empdata.date = get_date;
+            empdata.Payroll_date = get_date;
 
 
             Payroll_Data valid_salary = db.Check_Payslip_data(id,Month);
@@ -82,7 +81,7 @@ namespace Payroll.Controllers
 
         public ActionResult Get_Salary_data(int id, string Month)
         {
-            Payroll_Data empdata = db.Payroll_Data(id,Month);
+            Fn_Payroll_Model empdata = db.Payroll_Data(id,Month);
             return new JsonResult { Data = new { Status = empdata } };
         }
 
@@ -109,10 +108,10 @@ namespace Payroll.Controllers
             List<Employee> Empdata = db.DropdownEmployee_list();
             foreach(var emp in Empdata)
             {
-                Payroll_Data empdata = db.Payroll_Data(emp.Emp_id, Month);
-                empdata.emp_id = emp.Emp_id;
+                Fn_Payroll_Model empdata = db.Payroll_Data(emp.Emp_id, Month);
+                empdata.Emp_id = emp.Emp_id;
                 DateTime get_date = Convert.ToDateTime(Month + "-28");
-                empdata.date = get_date;
+                empdata.Payroll_date = get_date;
                 db.InsertPayroll(empdata);
             }
 

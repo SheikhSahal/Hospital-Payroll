@@ -1,0 +1,14 @@
+-------Get Employee Monthly Hours
+select dbo.EMP_Perhours_Sal(94,'H',dbo.EMP_Monthly_hours(2022,06,94),'2022-06')
+
+--------- Get Employee Hours Sal give in hospital
+select dbo.EMP_Perhours_Sal(94,'H',dbo.Get_EMP_workingTotalhours('2022-06',94),'2022-06')
+
+------------ Get late Hours Salary-----------------------
+select dbo.EMP_Perhours_Sal(94,'H',dbo.fn_EMP_Month_Late_Hours('2022-06',94),'2022-06')
+
+----------------Overtime hours salary
+select dbo.EMP_Perhours_Sal(94,'H',dbo.fn_EMP_Month_Overtime_Hours('2022-06',94),'2022-06')
+----------------leaves hours salary
+select dbo.EMP_Perhours_Sal(94,'H',dbo.EMP_Month_Leaves_count('2022-06',94) * dbo.EMP_Working_Hours_perDay(94),'2022-06')
+

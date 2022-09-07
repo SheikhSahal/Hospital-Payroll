@@ -62,7 +62,7 @@
                         <div class="col-sm-6">
                             <h4 class="text-primary">Earnings</h4>
                             <div class="form-group">
-                                <label>Working Days</label>
+                                <label>Working Earning</label>
                                 <input class="form-control" type="text" id="Working_Days" readonly="readonly">
                             </div>
 
@@ -72,14 +72,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Overtime Day</label>
-                                <input class="form-control" type="text" id="Overtime_Day" readonly="readonly">
+                                <label>Holidays</label>
+                                <input class="form-control" type="text" id="Holidays" readonly="readonly">
                             </div>
 
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <label>Days</label>
                                 <input class="form-control" type="text" id="Days" readonly="readonly">
-                            </div>
+                            </div>*@
                             @*<div class="form-group">
                                 <label>Working Hours</label>
                                 <input class="form-control" type="text" id="Working_Hours" readonly="readonly">
@@ -106,7 +106,10 @@
                                 <label>Absent Days</label>
                                 <input class="form-control" type="text" id="Absent" readonly="readonly">
                             </div>*@
-
+                            <div class="form-group">
+                                <label>Leave</label>
+                                <input class="form-control" type="text" id="Leave" readonly="readonly">
+                            </div>
 
                             <div class="form-group">
                                 <label>Advance staff</label>
@@ -192,21 +195,21 @@
                 ,
                 success: function (resp) {
                     console.log(resp);
-                    $('#Total_Earning').val(resp.Status.Gross_salary);
+                    $('#Total_Earning').val(resp.Status.Total_Gross);
                     //$('#Gross_salary').val(resp.Status.Gross_salary);
-                    $('#Current_Working_Hours').val(resp.Status.Current_Salary_Hours);
-                    $('#Working_Days').val(resp.Status.Working_days);
-                    $('#Working_Hours').val(resp.Status.Working_hours);
-                    $('#Holidays').val(resp.Status.Holidays);
-                    $('#Absent').val(resp.Status.Abcent);
+                    //$('#Current_Working_Hours').val(resp.Status.Total_Gross);
+                    $('#Working_Days').val(resp.Status.Total_Gross);
+                    //$('#Working_Hours').val(resp.Status.Working_hours);
+                    $('#Holidays').val(resp.Status.Holidays_Hours_Salary);
+                    //$('#Absent').val(resp.Status.Abcent);
                     $('#OverTime_Amount').val(resp.Status.Overtime_Amount);
                     $('#Adv_staff').val(resp.Status.Adv_Staff);
                     $('#I_Tax').val(resp.Status.I_tax);
                     $('#Telephone').val(resp.Status.Telephone);
                     $('#EOBI').val(resp.Status.EOBI);
-                    $('#Overtime_Rate').val(resp.Status.Overtime_rate);
-                    $('#Overtime_Day').val(resp.Status.Overtime_days);
-                    $('#Days').val(resp.Status.Days);
+                    $('#Overtime_Rate').val(resp.Status.Overtime_Hour_Salary);
+                    $('#Leave').val(resp.Status.Leave_Hours_Salary);
+                    //$('#Days').val(resp.Status.Days);
                     
                 },
                 error: function (ex) {

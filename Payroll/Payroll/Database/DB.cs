@@ -1034,12 +1034,43 @@ namespace Payroll.Database
         }
 
 
+        //public List<Payroll_Data> Payroll_list()
+        //{
+        //    List<Payroll_Data> DBase = new List<Payroll_Data>();
+        //    using (SqlConnection conn = new SqlConnection(connectString))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("select p.id,e.emp_id, e.Name, p.pyoll_date ,  e.CNIC , e.Email , format(p.pyoll_date,'MMMM,yyyy') Month , p.Gross_salary from payroll p , Employee e where p.emp_id = e.Emp_id", conn))
+        //        {
+        //            conn.Open();
+        //            SqlDataReader reader = cmd.ExecuteReader();
+
+        //            while (reader.Read())
+        //            {
+        //                Payroll_Data emp = new Payroll_Data();
+
+        //                emp.id = Convert.ToInt32(reader["id"]);
+        //                emp.emp_id = Convert.ToInt32(reader["emp_id"]);
+        //                emp.Name = Convert.ToString(reader["Name"]);
+        //                emp.date = Convert.ToDateTime(reader["pyoll_date"]);
+        //                emp.CNIC = Convert.ToString(reader["CNIC"]);
+        //                emp.Email = Convert.ToString(reader["Email"]);
+        //                emp.Month = Convert.ToString(reader["Month"]);
+        //                emp.Gross_salary = Convert.ToInt32(reader["Gross_salary"]);
+
+        //                DBase.Add(emp);
+
+        //            }
+        //        }
+        //    }
+        //    return DBase;
+        //}
+
         public List<Payroll_Data> Payroll_list()
         {
             List<Payroll_Data> DBase = new List<Payroll_Data>();
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("select p.id,e.emp_id, e.Name, p.pyoll_date ,  e.CNIC , e.Email , format(p.pyoll_date,'MMMM,yyyy') Month , p.Gross_salary from payroll p , Employee e where p.emp_id = e.Emp_id", conn))
+                using (SqlCommand cmd = new SqlCommand("select p.id,e.emp_id, e.Name, p.Payroll_date pyoll_date ,  e.CNIC , format(p.Payroll_date,'MMMM,yyyy') Month , CAST(p.Total_gross as decimal(10,2)) Gross_salary from Employee_Salary p , Employee e where p.emp_id = e.Emp_id", conn))
                 {
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -1053,7 +1084,7 @@ namespace Payroll.Database
                         emp.Name = Convert.ToString(reader["Name"]);
                         emp.date = Convert.ToDateTime(reader["pyoll_date"]);
                         emp.CNIC = Convert.ToString(reader["CNIC"]);
-                        emp.Email = Convert.ToString(reader["Email"]);
+                        //emp.Email = Convert.ToString(reader["Email"]);
                         emp.Month = Convert.ToString(reader["Month"]);
                         emp.Gross_salary = Convert.ToInt32(reader["Gross_salary"]);
 
@@ -1065,118 +1096,199 @@ namespace Payroll.Database
             return DBase;
         }
 
-        public Payroll_Data Payroll_Data(int id,string Monthyear)
+        //public Payroll_Data Payroll_Data(int id,string Monthyear)
+        //{
+        //    Payroll_Data emp = new Payroll_Data();
+        //    using (SqlConnection conn = new SqlConnection(connectString))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("getEmpSal", conn))
+        //        {
+        //            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //            conn.Open();
+        //            cmd.Parameters.AddWithValue("@emp_id", id);
+        //            cmd.Parameters.AddWithValue("@Date", Monthyear);
+        //            SqlDataReader reader = cmd.ExecuteReader();
+
+
+        //            if (reader.Read())
+        //            {
+
+        //                if (reader["total_precent_days"] != DBNull.Value)
+        //                {
+        //                    emp.Working_days = Convert.ToInt32(reader["total_precent_days"]);
+        //                }
+
+        //                if (reader["Overtime_Rate"] != DBNull.Value)
+        //                {
+        //                    emp.Overtime_rate = Convert.ToInt32(reader["Overtime_Rate"]);
+        //                }
+
+        //                if (reader["Days"] != DBNull.Value)
+        //                {
+        //                    emp.Days = Convert.ToInt32(reader["Days"]);
+        //                }
+
+        //                if (reader["Overtime_day"] != DBNull.Value)
+        //                {
+        //                    emp.Overtime_days = Convert.ToInt32(reader["Overtime_day"]);
+        //                }
+
+        //                if (reader["leaves"] != DBNull.Value)
+        //                {
+        //                    emp.Leaves = reader["leaves"].ToString();
+        //                }
+
+        //                if (reader["Net_Salary"] != DBNull.Value)
+        //                {
+        //                    emp.Gross_salary = Convert.ToInt32(reader["Net_Salary"]);
+        //                }
+
+        //                if (reader["Adv_staff"] != DBNull.Value)
+        //                {
+        //                    emp.Adv_Staff = Convert.ToInt32(reader["Adv_staff"]);
+        //                }
+        //                if (reader["I_tax"] != DBNull.Value)
+        //                {
+        //                    emp.I_tax = Convert.ToInt32(reader["I_tax"]);
+        //                }
+
+        //                if (reader["Telephone"] != DBNull.Value)
+        //                {
+        //                    emp.Telephone = Convert.ToInt32(reader["Telephone"]);
+        //                }
+        //                if (reader["EOBI"] != DBNull.Value)
+        //                {
+        //                    emp.EOBI = Convert.ToInt32(reader["EOBI"]);
+        //                }
+
+        //                //emp.Working_days = Convert.ToInt32(reader["working_days"]);
+        //                //emp.Working_hours = Convert.ToInt32(reader["working_hours"]);
+        //                //emp.Holidays = Convert.ToInt32(reader["Holiday"]);
+        //                //emp.Abcent = Convert.ToInt32(reader["Current_abcent"]);
+        //                //emp.Current_Salary_Hours = Convert.ToInt32(reader["Current_Salary_hours"]);
+        //                //emp.Overtime_Time_hours = Convert.ToInt32(reader["Over_time_hours"]);
+        //                //emp.Overtime_Amount = Convert.ToInt32(reader["Overtime_amount"]);
+        //                //emp.Gross_salary = Convert.ToInt32(reader["Gross_salary"]);
+
+        //            };
+        //        }
+        //    }
+        //    return emp;
+        //}
+
+
+        public Fn_Payroll_Model Payroll_Data(int id, string Monthyear)
         {
-            Payroll_Data emp = new Payroll_Data();
+            Fn_Payroll_Model emp = new Fn_Payroll_Model();
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("getEmpSal", conn))
+                using (SqlCommand cmd = new SqlCommand("fn_employees_sal", conn))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     conn.Open();
-                    cmd.Parameters.AddWithValue("@emp_id", id);
                     cmd.Parameters.AddWithValue("@Date", Monthyear);
+                    cmd.Parameters.AddWithValue("@EmpID", id);
+                    
                     SqlDataReader reader = cmd.ExecuteReader();
-
-
                     if (reader.Read())
                     {
 
-                        if (reader["total_precent_days"] != DBNull.Value)
+                        if (reader["Total_Monthly_Salary"] != DBNull.Value)
                         {
-                            emp.Working_days = Convert.ToInt32(reader["total_precent_days"]);
+                            emp.Total_Monthly_Salary = Convert.ToInt32(reader["Total_Monthly_Salary"]);
                         }
 
-                        if (reader["Overtime_Rate"] != DBNull.Value)
+                        if (reader["Employee_Get_salary_perM"] != DBNull.Value)
                         {
-                            emp.Overtime_rate = Convert.ToInt32(reader["Overtime_Rate"]);
+                            emp.Employee_Get_salary_perM = Convert.ToDouble(reader["Employee_Get_salary_perM"]);
                         }
 
-                        if (reader["Days"] != DBNull.Value)
+                        if (reader["Late_Hour_Salary"] != DBNull.Value)
                         {
-                            emp.Days = Convert.ToInt32(reader["Days"]);
+                            emp.Late_Hour_Salary = Convert.ToDouble(reader["Late_Hour_Salary"]);
                         }
 
-                        if (reader["Overtime_day"] != DBNull.Value)
+                        if (reader["Overtime_Hour_Salary"] != DBNull.Value)
                         {
-                            emp.Overtime_days = Convert.ToInt32(reader["Overtime_day"]);
+                            emp.Overtime_Hour_Salary = Convert.ToDouble(reader["Overtime_Hour_Salary"]);
                         }
 
-                        if (reader["leaves"] != DBNull.Value)
+                        if (reader["Leave_days"] != DBNull.Value)
                         {
-                            emp.Leaves = reader["leaves"].ToString();
+                            emp.Leave_days = Convert.ToDouble( reader["Leave_days"]);
                         }
 
-                        if (reader["Net_Salary"] != DBNull.Value)
+                        if (reader["Leave_Hours_Salary"] != DBNull.Value)
                         {
-                            emp.Gross_salary = Convert.ToInt32(reader["Net_Salary"]);
+                            emp.Leave_Hours_Salary = Convert.ToDouble(reader["Leave_Hours_Salary"]);
                         }
 
-                        if (reader["Adv_staff"] != DBNull.Value)
+                        if (reader["Holiday_Days"] != DBNull.Value)
                         {
-                            emp.Adv_Staff = Convert.ToInt32(reader["Adv_staff"]);
+                            emp.Holiday_Days = Convert.ToDouble(reader["Holiday_Days"]);
                         }
-                        if (reader["I_tax"] != DBNull.Value)
+                        if (reader["Holidays_Hour_Salary"] != DBNull.Value)
                         {
-                            emp.I_tax = Convert.ToInt32(reader["I_tax"]);
+                            emp.Holidays_Hours_Salary = Convert.ToDouble(reader["Holidays_Hour_Salary"]);
+                        }
+                        if (reader["Total_Gross"] != DBNull.Value)
+                        {
+                            emp.Total_Gross = Convert.ToDouble(reader["Total_Gross"]);
                         }
 
-                        if (reader["Telephone"] != DBNull.Value)
-                        {
-                            emp.Telephone = Convert.ToInt32(reader["Telephone"]);
-                        }
-                        if (reader["EOBI"] != DBNull.Value)
-                        {
-                            emp.EOBI = Convert.ToInt32(reader["EOBI"]);
-                        }
+                        //if (reader["Adv_staff"] != DBNull.Value)
+                        //{
+                        //    emp.Adv_Staff = Convert.ToInt32(reader["Adv_staff"]);
+                        //}
+                        //if (reader["I_tax"] != DBNull.Value)
+                        //{
+                        //    emp.I_tax = Convert.ToInt32(reader["I_tax"]);
+                        //}
+
+                        //if (reader["Telephone"] != DBNull.Value)
+                        //{
+                        //    emp.Telephone = Convert.ToInt32(reader["Telephone"]);
+                        //}
+                        //if (reader["EOBI"] != DBNull.Value)
+                        //{
+                        //    emp.EOBI = Convert.ToInt32(reader["EOBI"]);
+                        //}
+
                         
-                        //emp.Working_days = Convert.ToInt32(reader["working_days"]);
-                        //emp.Working_hours = Convert.ToInt32(reader["working_hours"]);
-                        //emp.Holidays = Convert.ToInt32(reader["Holiday"]);
-                        //emp.Abcent = Convert.ToInt32(reader["Current_abcent"]);
-                        //emp.Current_Salary_Hours = Convert.ToInt32(reader["Current_Salary_hours"]);
-                        //emp.Overtime_Time_hours = Convert.ToInt32(reader["Over_time_hours"]);
-                        //emp.Overtime_Amount = Convert.ToInt32(reader["Overtime_amount"]);
-                        //emp.Gross_salary = Convert.ToInt32(reader["Gross_salary"]);
-
                     };
                 }
             }
             return emp;
         }
 
-
-        public void InsertPayroll(Payroll_Data pd)
+        public void InsertPayroll(Fn_Payroll_Model pd)
         {
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("insert into Payroll (Emp_id,	Pyoll_Date,	Working_Days,	Working_Hours,	Holidays,	Current_Abcent,	Leaves,Gross_Salary , Adv_staff, I_Tax , Telephone, EOBI, Overtime_day, Overtime_Rate, Days)  values (@Emp_id,	@Pyoll_Date,	@Working_Days,	@Working_Hours,	@Holidays,	@Current_Abcent,	@Leaves,@Gross_Salary , @Adv_staff, @I_Tax , @Telephone, @EOBI, @Overtime_day, @Overtime_Rate, @Days)", conn))
+                using (SqlCommand cmd = new SqlCommand("insert into Employee_Salary(Emp_id,	Payroll_date,	Total_Monthly_Salary,	Employee_Get_salary_perM,	Late_Hour_Salary,	Overtime_Hour_Salary,	Leave_days,	Leave_Hours_Salary,	Holiday_Days,	Holidays_Hours_Salary,	Total_Gross)values(@Emp_id,	@Payroll_date,	@Total_Monthly_Salary,	@Employee_Get_salary_perM,	@Late_Hour_Salary,	@Overtime_Hour_Salary,	@Leave_days,	@Leave_Hours_Salary,	@Holiday_Days,	@Holidays_Hours_Salary,	@Total_Gross)", conn))
                 {
 
                     conn.Open();
 
-                    cmd.Parameters.AddWithValue("@Emp_id", pd.emp_id);
-                    cmd.Parameters.AddWithValue("@Pyoll_Date", pd.date);
-                    cmd.Parameters.AddWithValue("@Working_Days", pd.Working_days);
-                    cmd.Parameters.AddWithValue("@Working_Hours", pd.Working_hours);
-                    cmd.Parameters.AddWithValue("@Holidays", pd.Holidays);
-                    cmd.Parameters.AddWithValue("@Current_Abcent", pd.Abcent);
-                    if (pd.Leaves != null)
-                    {
-                        cmd.Parameters.AddWithValue("@Leaves", pd.Leaves);
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@Leaves", "0");
-                    }
-                    cmd.Parameters.AddWithValue("@Gross_Salary", pd.Gross_salary);
-                    cmd.Parameters.AddWithValue("@Adv_staff", pd.Adv_Staff);
-                    cmd.Parameters.AddWithValue("@I_Tax", pd.I_tax);
-                    cmd.Parameters.AddWithValue("@Telephone", pd.Telephone);
-                    cmd.Parameters.AddWithValue("@EOBI", pd.EOBI);
-                    cmd.Parameters.AddWithValue("@Overtime_day", pd.Overtime_days);
-                    cmd.Parameters.AddWithValue("@Overtime_Rate", pd.Overtime_rate);
-                    cmd.Parameters.AddWithValue("@Days", pd.Days);
+                    cmd.Parameters.AddWithValue("@Emp_id", pd.Emp_id);
+                    cmd.Parameters.AddWithValue("@Payroll_date", pd.Payroll_date);
+                    cmd.Parameters.AddWithValue("@Total_Monthly_Salary", pd.Total_Monthly_Salary);
+                    cmd.Parameters.AddWithValue("@Employee_Get_salary_perM", pd.Employee_Get_salary_perM);
+                    cmd.Parameters.AddWithValue("@Late_Hour_Salary", pd.Late_Hour_Salary);
+                    cmd.Parameters.AddWithValue("@Overtime_Hour_Salary", pd.Overtime_Hour_Salary);
+                    cmd.Parameters.AddWithValue("@Leave_days", pd.Leave_days);
+                    cmd.Parameters.AddWithValue("@Leave_Hours_Salary", pd.Leave_Hours_Salary);
+                    cmd.Parameters.AddWithValue("@Holiday_Days", pd.Holiday_Days);
+                    cmd.Parameters.AddWithValue("@Holidays_Hours_Salary", pd.Holidays_Hours_Salary);
+                    cmd.Parameters.AddWithValue("@Total_Gross", pd.Total_Gross);
+
+                    //cmd.Parameters.AddWithValue("@Adv_staff", pd.Adv_Staff);
+                    //cmd.Parameters.AddWithValue("@I_Tax", pd.I_tax);
+                    //cmd.Parameters.AddWithValue("@Telephone", pd.Telephone);
+                    //cmd.Parameters.AddWithValue("@EOBI", pd.EOBI);
+                    //cmd.Parameters.AddWithValue("@Overtime_day", pd.Overtime_days);
+                    //cmd.Parameters.AddWithValue("@Overtime_Rate", pd.Overtime_rate);
+                    //cmd.Parameters.AddWithValue("@Days", pd.Days);
                     cmd.ExecuteNonQuery();
                 }
             }

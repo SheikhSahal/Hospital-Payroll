@@ -309,6 +309,7 @@
     <Compile Include="Models\EMPDataSet.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Excel_loader.cs" />
+    <Compile Include="Models\Fn_Payroll_Model.cs" />
     <Compile Include="Models\Holidays.cs" />
     <Compile Include="Models\Payroll_Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
