@@ -1419,13 +1419,125 @@ namespace Payroll.Database
             return employee;
         }
 
-        public Payroll_Data Payslip_data(int emp_id, DateTime Month)
+        //public Payroll_Data Payslip_data(int emp_id, DateTime Month)
+        //{
+        //    Payroll_Data employee = new Payroll_Data();
+
+        //    using (SqlConnection conn = new SqlConnection(connectString))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("select e.Emp_id, e.Name, e.Gross_Salary basic_sal , e.Email,e.Designation,e.Phone,p.Pyoll_Date,p.Working_Days, p.Holidays, p.Current_Abcent ,  p.Overtime_day, p.Overtime_Rate , p.Gross_Salary , p.Days, p.Adv_Staff , p.I_Tax , p.Telephone , p.EOBI  from payroll p , Employee e   where p.Emp_id = e.Emp_id  and e.Emp_id = @emp_id and e.Status = 'Y' and  convert(varchar(7), p.Pyoll_Date, 126) = convert(varchar(7), @P_Date, 126)", conn))
+        //        {
+
+        //            conn.Open();
+
+        //            cmd.Parameters.AddWithValue("@emp_id", emp_id);
+        //            cmd.Parameters.AddWithValue("@P_Date", Month);
+
+        //            SqlDataReader reader = cmd.ExecuteReader();
+
+        //            if (reader.Read())
+        //            {
+        //                if (reader["Emp_id"] != DBNull.Value)
+        //                {
+        //                    employee.emp_id = Convert.ToInt32(reader["Emp_id"]);
+        //                }
+        //                if (reader["Name"] != DBNull.Value)
+        //                {
+        //                    employee.Name = Convert.ToString(reader["Name"]);
+        //                }
+        //                if (reader["Email"] != DBNull.Value)
+        //                {
+        //                    employee.Email = Convert.ToString(reader["Email"]);
+        //                }
+
+        //                if (reader["basic_sal"] != DBNull.Value)
+        //                {
+        //                    employee.basic_sal = Convert.ToString(reader["basic_sal"]);
+        //                }
+        //                if (reader["Designation"] != DBNull.Value)
+        //                {
+        //                    employee.Designation = Convert.ToString(reader["Designation"]);
+        //                }
+        //                if (reader["Phone"] != DBNull.Value)
+        //                {
+        //                    employee.Phone = Convert.ToString(reader["Phone"]);
+        //                }
+        //                if (reader["Pyoll_Date"] != DBNull.Value)
+        //                {
+        //                    employee.date= Convert.ToDateTime(reader["Pyoll_Date"]);
+        //                }
+        //                if (reader["Working_Days"] != DBNull.Value)
+        //                {
+        //                    employee.Working_days = Convert.ToInt32(reader["Working_Days"]);
+        //                }
+
+        //                if (reader["Holidays"] != DBNull.Value)
+        //                {
+        //                    employee.Holidays = Convert.ToInt32(reader["Holidays"]);
+        //                }
+
+        //                if (reader["Overtime_day"] != DBNull.Value)
+        //                {
+        //                    employee.Overtime_days = Convert.ToInt32(reader["Overtime_day"]);
+        //                }
+
+        //                if (reader["Overtime_Rate"] != DBNull.Value)
+        //                {
+        //                    employee.Overtime_rate = Convert.ToInt32(reader["Overtime_Rate"]);
+        //                }
+
+        //                if (reader["Days"] != DBNull.Value)
+        //                {
+        //                    employee.Days = Convert.ToInt32(reader["Days"]);
+        //                }
+
+        //                if (reader["Current_Abcent"] != DBNull.Value)
+        //                {
+        //                    employee.Abcent = Convert.ToInt32(reader["Current_Abcent"]);
+        //                }
+
+
+
+        //                if (reader["Gross_Salary"] != DBNull.Value)
+        //                {
+        //                    employee.Gross_salary = Convert.ToInt32(reader["Gross_Salary"]);
+        //                }
+
+        //                if (reader["Adv_Staff"] != DBNull.Value)
+        //                {
+        //                    employee.Adv_Staff = Convert.ToInt32(reader["Adv_Staff"]);
+        //                }
+
+        //                if (reader["I_Tax"] != DBNull.Value)
+        //                {
+        //                    employee.I_tax = Convert.ToInt32(reader["I_Tax"]);
+        //                }
+
+        //                if (reader["Telephone"] != DBNull.Value)
+        //                {
+        //                    employee.Telephone = Convert.ToInt32(reader["Telephone"]);
+        //                }
+
+        //                if (reader["EOBI"] != DBNull.Value)
+        //                {
+        //                    employee.EOBI = Convert.ToInt32(reader["EOBI"]);
+        //                }
+        //            }
+
+
+        //        }
+        //    }
+        //    return employee;
+        //}
+
+
+        public Fn_Payroll_Model Payslip_data(int emp_id, DateTime Month)
         {
-            Payroll_Data employee = new Payroll_Data();
+            Fn_Payroll_Model employee = new Fn_Payroll_Model();
 
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("select e.Emp_id, e.Name, e.Gross_Salary basic_sal , e.Email,e.Designation,e.Phone,p.Pyoll_Date,p.Working_Days, p.Holidays, p.Current_Abcent ,  p.Overtime_day, p.Overtime_Rate , p.Gross_Salary , p.Days, p.Adv_Staff , p.I_Tax , p.Telephone , p.EOBI  from payroll p , Employee e   where p.Emp_id = e.Emp_id  and e.Emp_id = @emp_id and e.Status = 'Y' and  convert(varchar(7), p.Pyoll_Date, 126) = convert(varchar(7), @P_Date, 126)", conn))
+                using (SqlCommand cmd = new SqlCommand("select e.Emp_id, e.Name, e.Gross_Salary basic_sal , e.Email,e.Designation,e.Phone,  p.Payroll_date, dbo.FormatCurrency(p.Employee_Get_Salary_perM) Employee_Get_Salary_perM,  dbo.FormatCurrency(p.Overtime_Hour_Salary) Overtime_Hour_Salary, p.Leave_days,  dbo.FormatCurrency(p.Leave_Hours_Salary) Leave_Hours_Salary, p.Holiday_Days,  dbo.FormatCurrency(p.Holidays_Hours_Salary) Holidays_Hours_Salary,  dbo.FormatCurrency(p.Total_Gross) Gross_Salary from  Employee_Salary p , Employee e    where p.Emp_id = e.Emp_id   and e.Emp_id = @emp_id  and e.Status = 'Y'  and  convert(varchar(7), p.Payroll_date, 126) = convert(varchar(7), @P_Date, 126)", conn))
                 {
 
                     conn.Open();
@@ -1439,20 +1551,19 @@ namespace Payroll.Database
                     {
                         if (reader["Emp_id"] != DBNull.Value)
                         {
-                            employee.emp_id = Convert.ToInt32(reader["Emp_id"]);
+                            employee.Emp_id = Convert.ToInt32(reader["Emp_id"]);
                         }
                         if (reader["Name"] != DBNull.Value)
                         {
                             employee.Name = Convert.ToString(reader["Name"]);
                         }
+                        if (reader["basic_sal"] != DBNull.Value)
+                        {
+                            employee.Total_Monthly_Salary = Convert.ToDouble(reader["basic_sal"]);
+                        }
                         if (reader["Email"] != DBNull.Value)
                         {
                             employee.Email = Convert.ToString(reader["Email"]);
-                        }
-
-                        if (reader["basic_sal"] != DBNull.Value)
-                        {
-                            employee.basic_sal = Convert.ToString(reader["basic_sal"]);
                         }
                         if (reader["Designation"] != DBNull.Value)
                         {
@@ -1462,66 +1573,66 @@ namespace Payroll.Database
                         {
                             employee.Phone = Convert.ToString(reader["Phone"]);
                         }
-                        if (reader["Pyoll_Date"] != DBNull.Value)
+                        if (reader["Payroll_date"] != DBNull.Value)
                         {
-                            employee.date= Convert.ToDateTime(reader["Pyoll_Date"]);
+                            employee.Payroll_date = Convert.ToDateTime( reader["Payroll_date"]);
                         }
-                        if (reader["Working_Days"] != DBNull.Value)
-                        {
-                            employee.Working_days = Convert.ToInt32(reader["Working_Days"]);
-                        }
-
-                        if (reader["Holidays"] != DBNull.Value)
-                        {
-                            employee.Holidays = Convert.ToInt32(reader["Holidays"]);
-                        }
-
-                        if (reader["Overtime_day"] != DBNull.Value)
-                        {
-                            employee.Overtime_days = Convert.ToInt32(reader["Overtime_day"]);
-                        }
-
-                        if (reader["Overtime_Rate"] != DBNull.Value)
-                        {
-                            employee.Overtime_rate = Convert.ToInt32(reader["Overtime_Rate"]);
-                        }
-
-                        if (reader["Days"] != DBNull.Value)
-                        {
-                            employee.Days = Convert.ToInt32(reader["Days"]);
-                        }
-
-                        if (reader["Current_Abcent"] != DBNull.Value)
-                        {
-                            employee.Abcent = Convert.ToInt32(reader["Current_Abcent"]);
-                        }
-
                         
+                        if (reader["Employee_Get_Salary_perM"] != DBNull.Value)
+                        {
+                            employee.Employee_Get_salary_perM = Convert.ToDouble(reader["Employee_Get_Salary_perM"]);
+                        }
+                        if (reader["Leave_Hours_Salary"] != DBNull.Value)
+                        {
+                            employee.Late_Hour_Salary = Convert.ToDouble(reader["Leave_Hours_Salary"]);
+                        }
+                        if (reader["Overtime_Hour_Salary"] != DBNull.Value)
+                        {
+                            employee.Overtime_Hour_Salary = Convert.ToDouble (reader["Overtime_Hour_Salary"]);
+                        }
+
+                        if (reader["Leave_days"] != DBNull.Value)
+                        {
+                            employee.Leave_days = Convert.ToInt32(reader["Leave_days"]);
+                        }
+
+                        if (reader["Leave_Hours_Salary"] != DBNull.Value)
+                        {
+                            employee.Leave_Hours_Salary = Convert.ToDouble(reader["Leave_Hours_Salary"]);
+                        }
+
+                        if (reader["Holiday_Days"] != DBNull.Value)
+                        {
+                            employee.Holiday_Days = Convert.ToDouble(reader["Holiday_Days"]);
+                        }
+                        if (reader["Holidays_Hours_Salary"] != DBNull.Value)
+                        {
+                            employee.Holidays_Hours_Salary = Convert.ToDouble(reader["Holidays_Hours_Salary"]);
+                        }
 
                         if (reader["Gross_Salary"] != DBNull.Value)
                         {
-                            employee.Gross_salary = Convert.ToInt32(reader["Gross_Salary"]);
+                            employee.Total_Gross = Convert.ToDouble(reader["Gross_Salary"]);
                         }
+                        //if (reader["Adv_Staff"] != DBNull.Value)
+                        //{
+                        //    employee.Adv_Staff = Convert.ToInt32(reader["Adv_Staff"]);
+                        //}
 
-                        if (reader["Adv_Staff"] != DBNull.Value)
-                        {
-                            employee.Adv_Staff = Convert.ToInt32(reader["Adv_Staff"]);
-                        }
+                        //if (reader["I_Tax"] != DBNull.Value)
+                        //{
+                        //    employee.I_tax = Convert.ToInt32(reader["I_Tax"]);
+                        //}
 
-                        if (reader["I_Tax"] != DBNull.Value)
-                        {
-                            employee.I_tax = Convert.ToInt32(reader["I_Tax"]);
-                        }
+                        //if (reader["Telephone"] != DBNull.Value)
+                        //{
+                        //    employee.Telephone = Convert.ToInt32(reader["Telephone"]);
+                        //}
 
-                        if (reader["Telephone"] != DBNull.Value)
-                        {
-                            employee.Telephone = Convert.ToInt32(reader["Telephone"]);
-                        }
-
-                        if (reader["EOBI"] != DBNull.Value)
-                        {
-                            employee.EOBI = Convert.ToInt32(reader["EOBI"]);
-                        }
+                        //if (reader["EOBI"] != DBNull.Value)
+                        //{
+                        //    employee.EOBI = Convert.ToInt32(reader["EOBI"]);
+                        //}
                     }
 
 
@@ -1529,7 +1640,6 @@ namespace Payroll.Database
             }
             return employee;
         }
-
 
         public List<Payroll_Data> Bulk_Payslip_data(DateTime Month)
         {

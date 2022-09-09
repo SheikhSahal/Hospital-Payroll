@@ -89,7 +89,7 @@ namespace Payroll.Controllers
         public ActionResult Payslip(int empid , DateTime date)
         {
             string datevalid = date.ToString("dd-MM-yyyy");
-            Payroll_Data payslipdata = db.Payslip_data(empid,date);
+            Fn_Payroll_Model payslipdata = db.Payslip_data(empid,date);
             ViewBag.payslip_data = payslipdata;
             return View();
         }

@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Payslip";
-    var Data = ViewBag.payslip_data as Payroll.Models.Payroll_Data;
+    var Data = ViewBag.payslip_data as Payroll.Models.Fn_Payroll_Model;
     Layout = "~/Views/Shared/Payslip.cshtml";
 }
 
@@ -23,21 +23,21 @@
         <div class="row" id="payslip">
             <div class="col-md-12">
                 <div class="card-box">
-                    <h4 class="payslip-title"><strong> Payslip for the month of @Data.date.ToString("MMMM, yyyy") </strong></h4>
+                    <h4 class="payslip-title"><strong> Payslip for the month of @Data.Payroll_date.ToString("MMMM, yyyy") </strong></h4>
                     <div class="row">
                         <div class="col-sm-6 m-b-20">
                             <img src="assets/img/logo-dark.png" class="inv-logo" alt="">
                             <ul class="list-unstyled mb-0">
                                 <li><strong>Payroll</strong> </li>
-                                <li><strong>@Data.Email</strong></li>
-                                <li><strong>@Data.Designation</strong></li>
+                                @*<li><strong>@Data.Email</strong></li>
+                                <li><strong>@Data.Designation</strong></li>*@
                             </ul>
                         </div>
                         <div class="col-sm-6 m-b-20">
                             <div class="invoice-details">
-                                <h3 class="text-uppercase"><strong>Employee ID # @Data.emp_id</strong> </h3>
+                                <h3 class="text-uppercase"><strong>Employee ID # @Data.Emp_id</strong> </h3>
                                 <ul class="list-unstyled">
-                                    <li><strong>Salary Month: <span>@Data.date.ToString("MMMM, yyyy")</span></strong> </li>
+                                    <li><strong>Salary Month: <span>@Data.Payroll_date.ToString("MMMM, yyyy")</span></strong> </li>
                                 </ul>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                                 </li>
                                 <li><strong>@Data.Email</strong> </li>
                                 <li><strong>@Data.Designation</strong> </li>
-                                <li style="font-size:15px; font-weight:bold;">Basic Salary: @Data.basic_sal</li>
+                                <li style="font-size:15px; font-weight:bold;">Basic Salary: <strong id="Total_Month"></strong> </li>
                             </ul>
                         </div>
                     </div>
@@ -61,16 +61,21 @@
                                 <table class="table table-bordered">
                                     <tbody style="font-weight:bold;">
                                         <tr>
-                                            <td><strong>Working Days</strong> <span class="float-right">@Data.Working_days</span></td>
+                                            <td><strong>Overtime Earning</strong> 
+                                            <span class="float-right" id="overtime_sal">@*@Data.Overtime_Hour_Salary*@
+                                            </span></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Overtime Rate</strong> <span class="float-right">@Data.Overtime_rate</span></td>
+                                            <td><strong>Leaves</strong> 
+                                            <span class="float-right" id="Leave"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Overtime day</strong> <span class="float-right">@Data.Overtime_days</span></td>
+                                            <td><strong>Holidays</strong>
+                                             <span class="float-right" id="holidays"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Days</strong> <span class="float-right">@Data.Days</span></td>
+                                            <td><strong>Earning</strong> 
+                                            <span class="float-right" id="earning"></span></td>
                                         </tr>
                                         @*<tr>
                                             <td><strong>Working Hours</strong> <span class="float-right">@Data.Current_Salary_Hours</span></td>
@@ -98,6 +103,10 @@
                                             <td><strong>Abcent Days</strong> <span class="float-right">@Data.Abcent</span></td>
                                         </tr>*@
                                         <tr>
+                                            <td><strong>Late Deduction</strong> 
+                                            <span class="float-right" id="late_d"></span></td>
+                                        </tr>
+                                        @*<tr>
                                             <td><strong>Advance Tax</strong> <span class="float-right">@Data.Adv_Staff</span></td>
                                         </tr>
                                         <tr>
@@ -108,7 +117,7 @@
                                         </tr>
                                         <tr>
                                             <td><strong>EOBI</strong> <span class="float-right">@Data.EOBI</span></td>
-                                        </tr>
+                                        </tr>*@
                                         @*<tr>
             <td><strong>Provident Fund</strong> <span class="float-right">$0</span></td>
         </tr>
@@ -126,7 +135,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <p style="font-size:30px;"><strong>Net Salary: @Data.Gross_salary</strong> 
+                            <p style="font-size:30px;">Net Salary:<strong id="net-sal"></strong> 
                             @*(Fifty nine thousand six hundred and ninety eight only.)*@
                             </p>
                         </div>
@@ -139,7 +148,24 @@
 
 
 
+<script src="~/Content/assets/js/Jquery3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
 
+        addcomval('overtime_sal',@Data.Overtime_Hour_Salary);
+        addcomval('Leave',@Data.Leave_Hours_Salary);
+        addcomval('holidays',@Data.Holidays_Hours_Salary);
+        addcomval('earning',@Data.Employee_Get_salary_perM);
+        addcomval('late_d',@Data.Late_Hour_Salary);
+        addcomval('net-sal',@Data.Total_Gross);
+        addcomval('Total_Month',@Data.Total_Monthly_Salary);
+
+        function addcomval(id,val){
+            var a = val;
+            $('#'+id).text(a.toLocaleString())
+        }
+    });
+</script>
 
 <style>
 
