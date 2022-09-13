@@ -106,18 +106,22 @@
                                             <td><strong>Late Deduction</strong> 
                                             <span class="float-right" id="late_d"></span></td>
                                         </tr>
-                                        @*<tr>
-                                            <td><strong>Advance Tax</strong> <span class="float-right">@Data.Adv_Staff</span></td>
+                                        <tr>
+                                            <td><strong>Advance Tax</strong> 
+                                            <span class="float-right" id="adv_staff"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>I.Tax</strong> <span class="float-right">@Data.I_tax</span></td>
+                                            <td><strong>I.Tax</strong> 
+                                            <span class="float-right" id="I_tax"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Telephone</strong> <span class="float-right">@Data.Telephone</span></td>
+                                            <td><strong>Telephone</strong> 
+                                            <span class="float-right" id="Telephone"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>EOBI</strong> <span class="float-right">@Data.EOBI</span></td>
-                                        </tr>*@
+                                            <td><strong>EOBI</strong> 
+                                            <span class="float-right" id="EOBI"></span></td>
+                                        </tr>
                                         @*<tr>
             <td><strong>Provident Fund</strong> <span class="float-right">$0</span></td>
         </tr>
@@ -159,6 +163,10 @@
         addcomval('late_d',@Data.Late_Hour_Salary);
         addcomval('net-sal',@Data.Total_Gross);
         addcomval('Total_Month',@Data.Total_Monthly_Salary);
+        addcomval('adv_staff',@Data.Adv_Staff);
+        addcomval('I_tax',@Data.I_tax);
+        addcomval('Telephone',@Data.Telephone);
+        addcomval('EOBI',@Data.EOBI);
 
         function addcomval(id,val){
             var a = val;

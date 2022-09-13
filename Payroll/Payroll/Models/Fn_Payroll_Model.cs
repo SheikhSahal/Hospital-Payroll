@@ -22,6 +22,10 @@ namespace Payroll.Models
         public double Holiday_Days { get; set; }
         public double Holidays_Hours_Salary { get; set; }
         public double Total_Gross { get; set; }
-
+        public int Adv_Staff { get; set; }
+        public int I_tax { get; set; }
+        public int Telephone { get; set; }
+        public int EOBI { get; set; }
+        public int Remaining_leaves { get; set; }
     }
 }

@@ -1236,25 +1236,30 @@ namespace Payroll.Database
                             emp.Total_Gross = Convert.ToDouble(reader["Total_Gross"]);
                         }
 
-                        //if (reader["Adv_staff"] != DBNull.Value)
-                        //{
-                        //    emp.Adv_Staff = Convert.ToInt32(reader["Adv_staff"]);
-                        //}
-                        //if (reader["I_tax"] != DBNull.Value)
-                        //{
-                        //    emp.I_tax = Convert.ToInt32(reader["I_tax"]);
-                        //}
+                        if (reader["Remaining_leaves"] != DBNull.Value)
+                        {
+                            emp.Remaining_leaves = Convert.ToInt32(reader["Remaining_leaves"]);
+                        }
 
-                        //if (reader["Telephone"] != DBNull.Value)
-                        //{
-                        //    emp.Telephone = Convert.ToInt32(reader["Telephone"]);
-                        //}
-                        //if (reader["EOBI"] != DBNull.Value)
-                        //{
-                        //    emp.EOBI = Convert.ToInt32(reader["EOBI"]);
-                        //}
+                        if (reader["Adv_staff"] != DBNull.Value)
+                        {
+                            emp.Adv_Staff = Convert.ToInt32(reader["Adv_staff"]);
+                        }
+                        if (reader["I_tax"] != DBNull.Value)
+                        {
+                            emp.I_tax = Convert.ToInt32(reader["I_Tax"]);
+                        }
 
-                        
+                        if (reader["Telephone"] != DBNull.Value)
+                        {
+                            emp.Telephone = Convert.ToInt32(reader["Telephone"]);
+                        }
+                        if (reader["EOBI"] != DBNull.Value)
+                        {
+                            emp.EOBI = Convert.ToInt32(reader["EOBI"]);
+                        }
+
+
                     };
                 }
             }
@@ -1265,7 +1270,7 @@ namespace Payroll.Database
         {
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("insert into Employee_Salary(Emp_id,	Payroll_date,	Total_Monthly_Salary,	Employee_Get_salary_perM,	Late_Hour_Salary,	Overtime_Hour_Salary,	Leave_days,	Leave_Hours_Salary,	Holiday_Days,	Holidays_Hours_Salary,	Total_Gross)values(@Emp_id,	@Payroll_date,	@Total_Monthly_Salary,	@Employee_Get_salary_perM,	@Late_Hour_Salary,	@Overtime_Hour_Salary,	@Leave_days,	@Leave_Hours_Salary,	@Holiday_Days,	@Holidays_Hours_Salary,	@Total_Gross)", conn))
+                using (SqlCommand cmd = new SqlCommand("insert into Employee_Salary(Emp_id,	Payroll_date,	Total_Monthly_Salary,	Employee_Get_salary_perM,	Late_Hour_Salary,	Overtime_Hour_Salary,	Leave_days,	Leave_Hours_Salary,	Holiday_Days,	Holidays_Hours_Salary,	Adv_staff,EOBI,I_Tax, Telephone ,Total_Gross, Remaining_leaves)values(@Emp_id,	@Payroll_date,	@Total_Monthly_Salary,	@Employee_Get_salary_perM,	@Late_Hour_Salary,	@Overtime_Hour_Salary,	@Leave_days,	@Leave_Hours_Salary,	@Holiday_Days,	@Holidays_Hours_Salary,@Adv_staff,@EOBI,@I_Tax, @Telephone ,@Total_Gross,@Remaining_leaves)", conn))
                 {
 
                     conn.Open();
@@ -1281,11 +1286,12 @@ namespace Payroll.Database
                     cmd.Parameters.AddWithValue("@Holiday_Days", pd.Holiday_Days);
                     cmd.Parameters.AddWithValue("@Holidays_Hours_Salary", pd.Holidays_Hours_Salary);
                     cmd.Parameters.AddWithValue("@Total_Gross", pd.Total_Gross);
-
-                    //cmd.Parameters.AddWithValue("@Adv_staff", pd.Adv_Staff);
-                    //cmd.Parameters.AddWithValue("@I_Tax", pd.I_tax);
-                    //cmd.Parameters.AddWithValue("@Telephone", pd.Telephone);
-                    //cmd.Parameters.AddWithValue("@EOBI", pd.EOBI);
+                    cmd.Parameters.AddWithValue("@Adv_staff", pd.Adv_Staff);
+                    cmd.Parameters.AddWithValue("@I_Tax", pd.I_tax);
+                    cmd.Parameters.AddWithValue("@Telephone", pd.Telephone);
+                    cmd.Parameters.AddWithValue("@EOBI", pd.EOBI);
+                    cmd.Parameters.AddWithValue("@Remaining_leaves", pd.Remaining_leaves);
+                    
                     //cmd.Parameters.AddWithValue("@Overtime_day", pd.Overtime_days);
                     //cmd.Parameters.AddWithValue("@Overtime_Rate", pd.Overtime_rate);
                     //cmd.Parameters.AddWithValue("@Days", pd.Days);
@@ -1537,7 +1543,7 @@ namespace Payroll.Database
 
             using (SqlConnection conn = new SqlConnection(connectString))
             {
-                using (SqlCommand cmd = new SqlCommand("select e.Emp_id, e.Name, e.Gross_Salary basic_sal , e.Email,e.Designation,e.Phone,  p.Payroll_date, dbo.FormatCurrency(p.Employee_Get_Salary_perM) Employee_Get_Salary_perM,  dbo.FormatCurrency(p.Overtime_Hour_Salary) Overtime_Hour_Salary, p.Leave_days,  dbo.FormatCurrency(p.Leave_Hours_Salary) Leave_Hours_Salary, p.Holiday_Days,  dbo.FormatCurrency(p.Holidays_Hours_Salary) Holidays_Hours_Salary,  dbo.FormatCurrency(p.Total_Gross) Gross_Salary from  Employee_Salary p , Employee e    where p.Emp_id = e.Emp_id   and e.Emp_id = @emp_id  and e.Status = 'Y'  and  convert(varchar(7), p.Payroll_date, 126) = convert(varchar(7), @P_Date, 126)", conn))
+                using (SqlCommand cmd = new SqlCommand("select e.Emp_id, e.Name, e.Gross_Salary basic_sal , e.Email,e.Designation, e.Phone,  p.Payroll_date, dbo.FormatCurrency(p.Employee_Get_Salary_perM) Employee_Get_Salary_perM,  p.Late_Hour_Salary ,dbo.FormatCurrency(p.Overtime_Hour_Salary) Overtime_Hour_Salary,  p.Leave_days,  dbo.FormatCurrency(p.Leave_Hours_Salary) Leave_Hours_Salary,  p.Holiday_Days,  dbo.FormatCurrency(p.Holidays_Hours_Salary) Holidays_Hours_Salary,  e.Adv_staff , e.Telephone , e.I_Tax , e.EOBI, dbo.FormatCurrency(p.Total_Gross) Gross_Salary  from  Employee_Salary p , Employee e    where p.Emp_id = e.Emp_id   and e.Emp_id = @emp_id  and e.Status = 'Y'  and  convert(varchar(7), p.Payroll_date, 126) = convert(varchar(7), @P_Date, 126)", conn))
                 {
 
                     conn.Open();
@@ -1584,7 +1590,7 @@ namespace Payroll.Database
                         }
                         if (reader["Leave_Hours_Salary"] != DBNull.Value)
                         {
-                            employee.Late_Hour_Salary = Convert.ToDouble(reader["Leave_Hours_Salary"]);
+                            employee.Leave_Hours_Salary = Convert.ToDouble(reader["Leave_Hours_Salary"]);
                         }
                         if (reader["Overtime_Hour_Salary"] != DBNull.Value)
                         {
@@ -1596,9 +1602,9 @@ namespace Payroll.Database
                             employee.Leave_days = Convert.ToInt32(reader["Leave_days"]);
                         }
 
-                        if (reader["Leave_Hours_Salary"] != DBNull.Value)
+                        if (reader["Late_Hour_Salary"] != DBNull.Value)
                         {
-                            employee.Leave_Hours_Salary = Convert.ToDouble(reader["Leave_Hours_Salary"]);
+                            employee.Late_Hour_Salary = Convert.ToDouble(reader["Late_Hour_Salary"]);
                         }
 
                         if (reader["Holiday_Days"] != DBNull.Value)
@@ -1614,25 +1620,25 @@ namespace Payroll.Database
                         {
                             employee.Total_Gross = Convert.ToDouble(reader["Gross_Salary"]);
                         }
-                        //if (reader["Adv_Staff"] != DBNull.Value)
-                        //{
-                        //    employee.Adv_Staff = Convert.ToInt32(reader["Adv_Staff"]);
-                        //}
+                        if (reader["Adv_staff"] != DBNull.Value)
+                        {
+                            employee.Adv_Staff = Convert.ToInt32(reader["Adv_staff"]);
+                        }
 
-                        //if (reader["I_Tax"] != DBNull.Value)
-                        //{
-                        //    employee.I_tax = Convert.ToInt32(reader["I_Tax"]);
-                        //}
+                        if (reader["I_Tax"] != DBNull.Value)
+                        {
+                            employee.I_tax = Convert.ToInt32(reader["I_Tax"]);
+                        }
 
-                        //if (reader["Telephone"] != DBNull.Value)
-                        //{
-                        //    employee.Telephone = Convert.ToInt32(reader["Telephone"]);
-                        //}
+                        if (reader["Telephone"] != DBNull.Value)
+                        {
+                            employee.Telephone = Convert.ToInt32(reader["Telephone"]);
+                        }
 
-                        //if (reader["EOBI"] != DBNull.Value)
-                        //{
-                        //    employee.EOBI = Convert.ToInt32(reader["EOBI"]);
-                        //}
+                        if (reader["EOBI"] != DBNull.Value)
+                        {
+                            employee.EOBI = Convert.ToInt32(reader["EOBI"]);
+                        }
                     }
 
 
